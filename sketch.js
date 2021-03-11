@@ -1,7 +1,7 @@
 let song, amplitude;
 
 function preload() {
-  song = loadSound('addons/sound.mp3');
+  song = loadSound('./addons/sound.mp3');
 }
 
 function setup() {
@@ -12,8 +12,9 @@ function setup() {
 function draw() {
   background('black');
   let level = amplitude.getLevel();
+  let diameter = (level*400) + 10;
   fill('red');
-  ellipse(width/2, height/2, level*400, level*400);
+  ellipse(displayWidth/2, displayHeight/2, diameter, diameter);
 }
 
 function mousePressed() {
