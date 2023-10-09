@@ -7,7 +7,7 @@ format: card
 ---
 ---
 > Instructor: **Noam Nisan, Shimon Schocken**  
-> Platform: **Coursera**
+> Platform: **Coursera**  
 > Status: **Baking...**
 
 ---
@@ -25,7 +25,7 @@ And we only need the **NAND** gate to build everything else as it is a universal
 
 And the NAND gate is represented as:
 
-![NAND](../Images/nand.png)
+![NAND](/assets/img/nand.png)
 
 ## Basic Logic Gates
 
@@ -38,11 +38,11 @@ To start with, let's build a **NOT** gate first which negates the input. It has 
 | 0 | 1 |
 | 1 | 0 |
 
-![NOT Gate](../Images/not.png)
+![NOT Gate](/assets/img/not.png)
 
 The NOT gate used further is represented as:
 
-![Basic NOT](../Images/basic-not.png)
+![Basic NOT](/assets/img/basic-not.png)
 
 ### AND Gate
 
@@ -55,11 +55,11 @@ Next is the **AND** gate which returns 1 when both its inputs are 1, and 0 other
 | 1 | 0 | 0 |
 | 1 | 1 | 1 |
 
-![AND Gate](../Images/and.png)
+![AND Gate](/assets/img/and.png)
 
 The AND gate used further is represented as:
 
-![Basic AND](../Images/basic-and.png)
+![Basic AND](/assets/img/basic-and.png)
 
 ### OR Gate
 
@@ -72,11 +72,11 @@ The **OR** gate returns 1 when at least one of its inputs is 1, and 0 otherwise.
 | 1 | 0 | 1 |
 | 1 | 1 | 1 |
 
-![OR Gate](../Images/or.png)
+![OR Gate](/assets/img/or.png)
 
 The OR gate used further is represented as:
 
-![Basic OR](../Images/basic-or.png)
+![Basic OR](/assets/img/basic-or.png)
 
 ### XOR Gate
 
@@ -89,11 +89,11 @@ Another elementary gate is the **XOR** gate which returns 1 when its two inputs 
 | 1 | 0 | 1 |
 | 1 | 1 | 0 |
 
-![XOR](../Images/xor.png)
+![XOR](/assets/img/xor.png)
 
 The XOR gate used further is represented as:
 
-![Basic XOR](../Images/basic-xor.png)
+![Basic XOR](/assets/img/basic-xor.png)
 
 ### MUX
 
@@ -112,11 +112,11 @@ Now we can build a **multiplexor (MUX)**. It is a three-input gate that uses one
 
 It can built using 1 NOT, 2 AND and 1 OR gate.
 
-![MUX](../Images/mux.png)
+![MUX](/assets/img/mux.png)
 
 The MUX gate diagram used further is represented as:
 
-![Basic MUX](../Images/basic-mux.png)
+![Basic MUX](/assets/img/basic-mux.png)
 
 ### DMUX
 
@@ -131,11 +131,11 @@ After the MUX, we need a **demultiplexor (DMUX)**. It performs the opposite func
 
 It can be built using 1 NOT and 2 AND gates.
 
-![DMUX](../Images/dmux.png)
+![DMUX](/assets/img/dmux.png)
 
 The DMUX gate diagram used further is represented as:
 
-![Basic DMUX](../Images/basic-dmux.png)
+![Basic DMUX](/assets/img/basic-dmux.png)
 
 ## Multi-Bit versions of logic gates
 
@@ -146,19 +146,19 @@ Computer hardware is typically designed to operate on multi-bit arrays called
 
 An n-bit Not gate applies the Boolean operation **Not** to every one of the bits in its n-bit input bus. This is how a **16-bit NOT** gate can be implemented which takes a 16-bit input and produces a 16-bit output.
 
-![NOT16](../Images/not16.png)
+![NOT16](/assets/img/not16.png)
 
 ### AND16
 
 An n-bit And gate applies the Boolean operation **And** to every one of the n bit-pairs arrayed in its two n-bit input buses. This is how a **16-bit AND** gate can be implemented which takes 2 16-bit inputs and produces a 16-bit output.
 
-![AND16](../Images/and16.png)
+![AND16](/assets/img/and16.png)
 
 ### OR16
 
 An n-bit Or gate applies the Boolean operation **Or** to every one of the n bit-pairs arrayed in its two n-bit input buses. This is how a **16-bit OR** gate can be implemented which takes 2 16-bit inputs and produces a 16-bit output.
 
-![OR16](../Images/or16.png)
+![OR16](/assets/img/or16.png)
 
 ### MUX16
 
@@ -172,13 +172,13 @@ Many 2-way logic gates that accept two inputs have natural generalization to mul
 
 An $n$-way OR gate outputs 1 when at least one of its $n$-bit inputs is 1, and 0 otherwise. We need an **8-Way OR** gate which takes an 8-bit input and produce a 1-bit output which is the OR of all individual input bits. It can be implemented as:
 
-![OR8Way](../Images/or8way.png)
+![OR8Way](/assets/img/or8way.png)
 
 ### MUX 4Way16
 
 An $m$-way $n$-bit multiplexor selects one of $m$ $n$-bit input buses and outputs it to a single $n$-bit output bus. The selection is specified by a set of $k$ control bits, where $k = \log_{2}{m}$. This gate takes 4 16-bit inputs and a 2-bit selection and produces 1-bit output (choosing 1 of 4 inputs based on selection bit).
 
-![MUX 4Way16](../Images/mux4way16.png)
+![MUX 4Way16](/assets/img/mux4way16.png)
 
 The truth table would be:
 
@@ -193,14 +193,14 @@ The truth table would be:
 
 This gate takes 8 16-bit inputs and a 3-bit selection and produces 1-bit output (choosing 1 of 8 inputs based on selection bit).
 
-![MUX 8Way16](../Images/mux8way16.png)
+![MUX 8Way16](/assets/img/mux8way16.png)
 
 ### DMUX 4Way
 
 An $m$-way $n$-bit demultiplexor
 channels a single $n$-bit input into one of $m$ possible $n$-bit outputs. The selection is specified by a set of $k$ control bits, where $k = \log_{2}{m}$. This gate takes 1 input and a 2-bit selection and produces 4 outputs (routing the input to 1 of 4 outputs based on selection bit).
 
-![DMUX 4Way](../Images/dmux4way.png)
+![DMUX 4Way](/assets/img/dmux4way.png)
 
 The truth table would be:
 
@@ -215,7 +215,7 @@ The truth table would be:
 
 This gate takes 1 input and a 3-bit selection and produces 8 outputs (routing the input to 1 of 8 outputs based on selection bit).
 
-![DMUX 8Way](../Images/dmux8way.png)
+![DMUX 8Way](/assets/img/dmux8way.png)
 
 ## Adders
 
@@ -234,7 +234,7 @@ A Half-Adder is designed to add two bits. It takes 2 inputs and produces 2 outpu
 
 It can be implemented using a XOR and an AND gate.
 
-![Half-Adder](../Images/halfadder.png)
+![Half-Adder](/assets/img/halfadder.png)
 
 ### Full-Adder
 
@@ -253,7 +253,7 @@ A Full-Adder is designed to add three bits. It takes 3 inputs and produces 2 out
 
 It can be implemented using the previous Half-Adder and an OR gate.
 
-![Full-Adder](../Images/fulladder.png)
+![Full-Adder](/assets/img/fulladder.png)
 
 ### Adder
 

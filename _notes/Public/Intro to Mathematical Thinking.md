@@ -7,7 +7,7 @@ format: card
 ---
 ---
 > Instructor: **Keith Devlin**  
-> Platform: **Coursera**
+> Platform: **Coursera**  
 > Status: **Completed**
 
 ---
