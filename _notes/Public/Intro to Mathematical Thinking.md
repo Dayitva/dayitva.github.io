@@ -1,28 +1,27 @@
 ---
 title: Intro to Mathematical Thinking
 feed: show
-date: 01-10-2023
+date: 10-10-2023
 permalink: /mathematical-thinking
 format: card
 ---
----
+<!-- ---
 > Instructor: **Keith Devlin**  
-> Platform: **Coursera**  
 > Status: **Completed**
 
----
+--- -->
 
-The course is about thinking, not learning new mathematical techniques.
+A course about thinking, and not learning new mathematical techniques.
 
 Normal language (eg. English) is riddled with inconsistencies. However, mathematical language needs to be precise. Hence, almost all key statements of mathematics are a positive or negative form version of one of these four linguistic forms:
 
 1. Object *a* has property **P**
 *3 is a prime number*
-2. Every object of type **T** has property **P**
+1. Every object of type **T** has property **P**
 *Every polynomial equation has a complex root*
-3. There is an object of type **T** having property **P**
+1. There is an object of type **T** having property **P**
 *There is a prime number between 20 and 25*
-4. If statement **A**, then statement **B**
+1. If statement **A**, then statement **B**
 *If p is a prime number of the form $4n+1$, then p is a sum of two squares*
 
 The key language terms involved in making these statements are:
@@ -94,10 +93,11 @@ $\phi \Rightarrow \psi$ is not always $\psi \Rightarrow \phi$ (***Converse*** ca
 
 This gives us the following:
 
-1. **Modus Ponens:** $[\phi \land (\phi \Rightarrow \psi)] \Rightarrow \psi$
-$\phi \Rightarrow \psi$, $\phi$ is true, hence $\psi$ is true.
-1. **Modus Tolens:** $[\lnot \psi \land (\phi \Rightarrow \psi)] \Rightarrow \lnot \phi$
-$\phi \Rightarrow \psi$, $\lnot \psi$ is true, hence $\lnot \phi$ is true.
+1. **Modus Ponens:** $[\phi \land (\phi \Rightarrow \psi)] \Rightarrow \psi$,
+    $\phi \Rightarrow \psi$, $\phi$ is true, hence $\psi$ is true.
+
+2. **Modus Tolens:** $[\lnot \psi \land (\phi \Rightarrow \psi)] \Rightarrow \lnot \phi$,
+    $\phi \Rightarrow \psi$, $\lnot \psi$ is true, hence $\lnot \phi$ is true.
 
 Proof by Contradiction can be explained by Implication.  
 For a proof p, $\phi \Rightarrow \psi$, $\psi$ is known to be **false** and the proof (implication) is **true**.  
@@ -202,17 +202,17 @@ To prove $\forall n A(n)$, establish the following two statements:
 1. $A(1)$ is true
 2. $\forall n [A(n) \Rightarrow A(n+1)]$
 
-***Theorem***: For all $n \in \mathbb{N}$, $1 + 2 + 3 + ... + n = \frac{n(n+1)}{2}$
+***Theorem***: For all $n \in \mathbb{N}$, $1 + 2 + 3 + \ldots + n = \frac{n(n+1)}{2}$
 
 ***Proof***: We use the method of proof by induction.
 
 **Basis Step**: For $n = 1$, $1 = \frac{1(1+1)}{2}$, which is true.
 
-**Induction Step**: Assume that for some $k \in \mathbb{N}$, $1 + 2 + 3 + ... + k = \frac{k(k+1)}{2}$
+**Induction Step**: Assume that for some $k \in \mathbb{N}$, $1 + 2 + 3 + \ldots + k = \frac{k(k+1)}{2}$
 
-We need to show that $1 + 2 + 3 + ... + k + (k+1) = \frac{(k+1)(k+2)}{2}$
+We need to show that $1 + 2 + 3 + \ldots + k + (k+1) = \frac{(k+1)(k+2)}{2}$
 
-We have, $1 + 2 + 3 + ... + k + (k+1) = \frac{k(k+1)}{2} + (k+1) = \frac{k(k+1) + 2(k+1)}{2} = \frac{(k+1)(k+2)}{2}$
+We have, $1 + 2 + 3 + \ldots + k + (k+1) = \frac{k(k+1)}{2} + (k+1) = \frac{k(k+1) + 2(k+1)}{2} = \frac{(k+1)(k+2)}{2}$
 
 Hence, by mathematical induction, the theorem is proved.
 
@@ -242,7 +242,7 @@ If $k = n+1$ and if $n+1$ is not prime, then there are natural numbers $p$ and $
 
 Euclid offered a proof published in his work *Elements* which is paraphrased here.
 
-Consider any finite list of prime numbers $p_1, p_2, ..., p_n$. It will be shown that at least one additional prime number not in this list exists. Let $P$ be the product of all the prime numbers in the list: $P = p_1 p_2 ... p_n$. Let $q = P + 1$. Then $q$ is either prime or not:
+Consider any finite list of prime numbers $p_1, p_2, \ldots, p_n$. It will be shown that at least one additional prime number not in this list exists. Let $P$ be the product of all the prime numbers in the list: $P = p_1 p_2 \ldots p_n$. Let $q = P + 1$. Then $q$ is either prime or not:
 
 - If *q* is prime, then there is at least one more prime that is not in the list, namely, *q* itself.
 - If *q* is not prime, then some prime factor *p* divides *q*. If this factor *p* were in our list, then it would divide *P* (since *P* is the product of every number in the list); but *p* also divides *P* + 1 = *q*, as just stated. If *p* divides *P* and also *q,* then *p* must also divide the difference of the two numbers, which is (*P* + 1) − *P* or just 1. Since no prime number divides 1, *p* cannot be in the list. This means that at least one more prime number exists beyond those in the list.
@@ -268,9 +268,9 @@ The theorem is one of the main reasons why 1 is not considered a prime number: i
 
 We have already proved the existence (that every natural number greater than one is at least prime or a product of primes) before. Hence, we only need to prove uniqueness.
 
-To prove uniqueness, we assume that $n$ is the smallest number such that it can be written as a product of primes in two different ways. Let $n = p_1 p_2 ... p_r = q_1 q_2 ... q_s$ where $p_1, p_2, ..., p_r, q_1, q_2, ..., q_s$ are primes. We need to show that $r = s$ and that $p_1, p_2, ..., p_r$ is a permutation of $q_1, q_2, ..., q_s$.
+To prove uniqueness, we assume that $n$ is the smallest number such that it can be written as a product of primes in two different ways. Let $n = p_1 p_2 \ldots p_r = q_1 q_2 \ldots q_s$ where $p_1, p_2, \ldots, p_r, q_1, q_2, \ldots, q_s$ are primes. We need to show that $r = s$ and that $p_1, p_2, \ldots, p_r$ is a permutation of $q_1, q_2, \ldots, q_s$.
 
-We have $p_1 | n$ and $p_1 | q_1 q_2 ... q_s$. Since $p_1$ is prime, it must divide at least one of $q_1, q_2, ..., q_s$. Without loss of generality, let $p_1 | q_1$. Since $q_1$ is prime, $p_1 = q_1$. Otherwise, $p_1 = q_i$ for some $i$ from $2..s$. We can cancel $p_1$ and the corresponding $q_i$ from both sides of the equation and repeat the same argument for $p_2, p_3, ..., p_r$ and $q_2, q_3, ..., q_s$. But then, we have found a smaller representation of a number as a product of primes, which is a contradiction. Hence, $r = s$ and $p_1, p_2, ..., p_r$ is a permutation of $q_1, q_2, ..., q_s$.
+We have $p_1 \mid n$ and $p_1 \mid q_1 q_2 \ldots q_s$. Since $p_1$ is prime, it must divide at least one of $q_1, q_2, \ldots, q_s$. Without loss of generality, let $p_1 \mid q_1$. Since $q_1$ is prime, $p_1 = q_1$. Otherwise, $p_1 = q_i$ for some $i$ from $2..s$. We can cancel $p_1$ and the corresponding $q_i$ from both sides of the equation and repeat the same argument for $p_2, p_3, \ldots, p_r$ and $q_2, q_3, \ldots, q_s$. But then, we have found a smaller representation of a number as a product of primes, which is a contradiction. Hence, $r = s$ and $p_1, p_2, \ldots, p_r$ is a permutation of $q_1, q_2, \ldots, q_s$.
 
 The theorem is proved.
 
@@ -292,7 +292,7 @@ The most often-cited example of this fallacy originated with Amos Tversky and�
 
 The majority of people choose option 2. However, the probability of two events occurring together (that is, in conjunction) is always less than or equal to the probability of either one occurring alone. Formally, for two events *A* and *B* this inequality could be written as
 
-$$Pr(A \land B) \leq Pr(B)$$
+$$\text{Pr}(A \land B) \leq \text{Pr}(B)$$
 
 ### Wason Selection Task
 

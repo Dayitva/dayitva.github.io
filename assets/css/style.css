@@ -61,7 +61,7 @@ html[data-theme="dark"] {
     --text-xl: clamp(1.62rem, calc(1.53rem + 0.43vw), 2.22rem);
     --text-xxl: clamp(1.94rem, calc(1.80rem + 0.73vw), 2.96rem);
     --text-jumbo: clamp(2.33rem, calc(2.10rem + 1.15vw), 4rem);
-    --text-weight-bold: 600;
+    --text-weight-bold: 500;
     --text-weight-normal: 400;
     --text-leading-wide: 1.6em;
     --text-leading-normal: 1.4em;
@@ -69,6 +69,9 @@ html[data-theme="dark"] {
     --padding-normal: 1.2rem;
     --padding-broad: 2rem;
     --padding-thin: 0.8rem;
+    --primary-font-family: 'Fira Sans', sans-serif;
+    --secondary-font-family: 'Fira Sans', sans-serif;
+    --monospace-font-family: 'Fira Mono', monospace;
 }
 
 /* 02. Typography */
@@ -142,7 +145,7 @@ h4,
 h5,
 h6 {
     margin: 0;
-    font-family: 'IBM Plex Sans', sans-serif;
+    font-family: var(--primary-font-family);
 }
 
 p a,
@@ -353,12 +356,14 @@ ul ul {
 /* 08. Figures, Images, Code, Blockquotes, Tables */
 
 img {
-    max-width: 100%;
+    max-width: 80%;
     height: auto;
+    display: block;
+    margin: 1rem auto;
 }
 
 code {
-    font-family: Consolas, 'Courier New', Courier, monospace;
+    font-family: var(--monospace-font-family);
     display: inline-block;
     overflow: auto !important;
     word-wrap: break-word !important;
@@ -385,7 +390,7 @@ code {
 
 
 pre code {
-    font-family: Consolas, 'Courier New', Courier, monospace;
+    font-family: var(--monospace-font-family);
     display: inline-block;
     overflow: auto !important;
     word-wrap: break-word !important;
@@ -422,6 +427,9 @@ blockquote p {
 
 table {
     border-radius: 5px;
+    max-width: 100%;
+    width: auto;
+    margin: 0 auto;
 }
 
 th,
@@ -443,6 +451,27 @@ td a {
 
 table th {
     font-weight: 600;
+}
+
+/* Mathematical tables styling - more compatible approach */
+.content table {
+    margin: 1rem auto;
+    display: table;
+    max-width: 80%;
+}
+
+/* Specific styling for tables with mathematical content */
+.content table th,
+.content table td {
+    white-space: nowrap;
+    padding: 8px 12px;
+    text-align: center;
+}
+
+/* Limit table width for better readability */
+.content table {
+    max-width: 600px;
+    width: auto;
 }
 
 tr {

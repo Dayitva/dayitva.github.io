@@ -5,14 +5,13 @@ date: 09-10-2023
 permalink: /nand2tetris-part1/
 format: card
 ---
----
+<!-- ---
 > Instructor: **Noam Nisan, Shimon Schocken**  
-> Platform: **Coursera**  
 > Status: **Baking...**
 
----
+--- -->
 
-This course is about building a computer from scratch, right from the most basic logic gates to a fully functioning computer.
+A course about building a computer from scratch, right from the most basic logic gates to a fully functioning computer.
 
 And we only need the **NAND** gate to build everything else as it is a universal gate (other logic gates can be built using the NAND gate itself). The truth table for NAND gate looks like this:
 

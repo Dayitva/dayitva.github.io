@@ -1,5 +1,6 @@
 ---
 title: SafeGuard
+feed: hide
 url: https://safe-guard.vercel.app/
 ---
 

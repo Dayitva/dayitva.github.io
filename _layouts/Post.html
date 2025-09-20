@@ -39,7 +39,7 @@
     <meta property="og:image" content="../assets/img/OGImg.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&family=Fira+Mono:wght@400;500;700&display=swap"
         rel="stylesheet">
     {%- if page.title -%}
     <meta content="{{ page.title }}" property="og:title">
@@ -114,7 +114,7 @@
 
             <!--- Notes Layout-->
             {%- if page.content-type == "notes" -%}
-            <div class="column is-5-widescreen  is-6-desktop is-8-tablet is-12-mobile">
+            <div class="column is-11-widescreen  is-8-desktop is-8-tablet is-12-mobile">
                     <div class="note-page-section">
                         <div>
                             {%- if site.preferences.homepage.enabled -%}
@@ -162,7 +162,7 @@
 
              <!--- Post Layout-->
              {%- if page.content-type == "post"  -%}
-             <div class="column is-5-widescreen  is-6-desktop is-8-tablet is-12-mobile">
+             <div class="column is-11-widescreen  is-8-desktop is-8-tablet is-12-mobile">
                      <div class="note-page-section">
                          <div>
                              {%- if site.preferences.homepage.enabled -%}
@@ -182,7 +182,7 @@
 
             <!--- Static Page Layout-->
             {%- if page.content-type == "static" -%}
-            <div class="column is-5-widescreen  is-6-desktop is-8-tablet is-12-mobile">
+            <div class="column is-11-widescreen  is-8-desktop is-8-tablet is-12-mobile">
                         <div class="jumbo">{{page.title}}</div>                        
                         {%- include Content.html -%}
                 </div>

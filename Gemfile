@@ -33,3 +33,9 @@ gem 'jekyll-sitemap'
 gem 'kramdown-math-katex'
 
 gem "webrick", "~> 1.7"
+
+# Required for Ruby 3.4.0+ compatibility
+gem "csv"
+gem "logger"
+gem "base64"
+gem "bigdecimal"

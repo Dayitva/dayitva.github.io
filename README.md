@@ -1,3 +1,3 @@
-# Digital Oven
+# Digital Garden
 
-This is a place for my half-baked articles and random musings.
+A place for my half-baked articles and notes.
