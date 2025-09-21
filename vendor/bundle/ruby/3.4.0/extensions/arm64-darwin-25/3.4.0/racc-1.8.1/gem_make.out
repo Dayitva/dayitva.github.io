@@ -1,0 +1,18 @@
+current directory: /Users/dayitvagoel/Documents/dayitva.github.io/vendor/bundle/ruby/3.4.0/gems/racc-1.8.1/ext/racc/cparse
+/opt/homebrew/opt/ruby/bin/ruby extconf.rb
+creating Makefile
+
+current directory: /Users/dayitvagoel/Documents/dayitva.github.io/vendor/bundle/ruby/3.4.0/gems/racc-1.8.1/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20250921-96024-a3y268 sitelibdir\=./.gem.20250921-96024-a3y268 clean
+
+current directory: /Users/dayitvagoel/Documents/dayitva.github.io/vendor/bundle/ruby/3.4.0/gems/racc-1.8.1/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20250921-96024-a3y268 sitelibdir\=./.gem.20250921-96024-a3y268
+compiling cparse.c
+linking shared-object racc/cparse.bundle
+
+current directory: /Users/dayitvagoel/Documents/dayitva.github.io/vendor/bundle/ruby/3.4.0/gems/racc-1.8.1/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20250921-96024-a3y268 sitelibdir\=./.gem.20250921-96024-a3y268 install
+/usr/bin/install -c -m 0755 cparse.bundle ./.gem.20250921-96024-a3y268/racc
+
+current directory: /Users/dayitvagoel/Documents/dayitva.github.io/vendor/bundle/ruby/3.4.0/gems/racc-1.8.1/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20250921-96024-a3y268 sitelibdir\=./.gem.20250921-96024-a3y268 clean

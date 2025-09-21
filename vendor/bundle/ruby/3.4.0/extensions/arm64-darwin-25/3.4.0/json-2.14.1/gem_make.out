@@ -1,0 +1,25 @@
+current directory: /Users/dayitvagoel/Documents/dayitva.github.io/vendor/bundle/ruby/3.4.0/gems/json-2.14.1/ext/json/ext/parser
+/opt/homebrew/opt/ruby/bin/ruby extconf.rb
+checking for rb_enc_interned_str() in ruby/encoding.h... yes
+checking for rb_hash_new_capa() in ruby.h... yes
+checking for rb_hash_bulk_insert() in ruby.h... yes
+checking for strnlen() in string.h... yes
+checking for whether -std=c99 is accepted as CFLAGS... yes
+checking for arm_neon.h... yes
+checking for cpuid.h... no
+creating Makefile
+
+current directory: /Users/dayitvagoel/Documents/dayitva.github.io/vendor/bundle/ruby/3.4.0/gems/json-2.14.1/ext/json/ext/parser
+make DESTDIR\= sitearchdir\=./.gem.20250921-96024-y9s2ju sitelibdir\=./.gem.20250921-96024-y9s2ju clean
+
+current directory: /Users/dayitvagoel/Documents/dayitva.github.io/vendor/bundle/ruby/3.4.0/gems/json-2.14.1/ext/json/ext/parser
+make DESTDIR\= sitearchdir\=./.gem.20250921-96024-y9s2ju sitelibdir\=./.gem.20250921-96024-y9s2ju
+compiling parser.c
+linking shared-object json/ext/parser.bundle
+
+current directory: /Users/dayitvagoel/Documents/dayitva.github.io/vendor/bundle/ruby/3.4.0/gems/json-2.14.1/ext/json/ext/parser
+make DESTDIR\= sitearchdir\=./.gem.20250921-96024-y9s2ju sitelibdir\=./.gem.20250921-96024-y9s2ju install
+/usr/bin/install -c -m 0755 parser.bundle ./.gem.20250921-96024-y9s2ju/json/ext
+
+current directory: /Users/dayitvagoel/Documents/dayitva.github.io/vendor/bundle/ruby/3.4.0/gems/json-2.14.1/ext/json/ext/parser
+make DESTDIR\= sitearchdir\=./.gem.20250921-96024-y9s2ju sitelibdir\=./.gem.20250921-96024-y9s2ju clean

@@ -60,8 +60,7 @@ encoding: utf-8
 theme: null
 plugins:
   - jekyll-feed 
-  - jekyll-sitemap 
-  - jekyll-tidy
+  - jekyll-sitemap
     
 ## Enable Collections
 ## Suggested collects are "notes" "lists" and "blog"
@@ -111,13 +110,13 @@ exclude:
   - _notes/000 Inbox
   - _notes/200 Private
   - _notes/300 Templates
-#   - .sass-cache/
-#   - .jekyll-cache/
-#   - gemfiles/
-#   - Gemfile
-#   - Gemfile.lock
-#   - node_modules/
-#   - vendor/bundle/
-#   - vendor/cache/
-#   - vendor/gems/
-#   - vendor/ruby/
+  - .sass-cache/
+  - .jekyll-cache/
+  - gemfiles/
+  - Gemfile
+  - Gemfile.lock
+  - node_modules/
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
