@@ -1,0 +1,100 @@
+{%- comment -%}
+  Renders a vertical feed of entries from site.data.
+
+  Usage:
+    {% include SectionFeed.html data=site.data.hackathons kind="hackathon" %}
+    {% include SectionFeed.html data=site.data.hacker_houses kind="hacker_house" %}
+    {% include SectionFeed.html data=site.data.work kind="work" %}
+    {% include SectionFeed.html data=site.data.volunteering kind="volunteering" %}
+{%- endcomment -%}
+
+<div class="section-feed">
+{%- for entry in include.data -%}
+    {%- case include.kind -%}
+
+    {%- when "hackathon" -%}
+        {% include HackathonRow.html entry=entry %}
+
+    {%- when "hacker_house" -%}
+        <div class="section-feed-row">
+            {% include RingMarker.html %}
+            <div class="section-feed-main">
+                <span class="section-feed-title">{{ entry.program }}</span>
+                {%- if entry.project -%}
+                    <span class="section-feed-project">
+                        {%- if entry.url -%}
+                            <a href="{{ entry.url }}">{{ entry.project }}</a>
+                        {%- else -%}
+                            {{ entry.project }}
+                        {%- endif -%}
+                    </span>
+                {%- endif -%}
+                {%- if entry.location -%}
+                    <span class="section-feed-meta">{{ entry.location }}</span>
+                {%- endif -%}
+            </div>
+            {%- if entry.start -%}
+                <div class="section-feed-aside">
+                    {{ entry.start }}{% if entry.end and entry.end != entry.start %} – {{ entry.end }}{% endif %}
+                </div>
+            {%- elsif entry.year -%}
+                <div class="section-feed-aside">{{ entry.year }}</div>
+            {%- endif -%}
+        </div>
+
+    {%- when "work" -%}
+        <div class="section-feed-row with-emblem">
+            {%- if entry.logo -%}
+                <div class="row-emblem"><img src="{{ entry.logo | relative_url }}" alt="{{ entry.company }}" referrerpolicy="no-referrer" loading="lazy"></div>
+            {%- else -%}
+                <div class="row-emblem monogram">{{ entry.company | slice: 0, 1 }}</div>
+            {%- endif -%}
+            <div class="section-feed-main">
+                <span class="section-feed-title">
+                    {%- if entry.url -%}
+                        <a href="{{ entry.url }}">{{ entry.title }}</a>
+                    {%- else -%}
+                        {{ entry.title }}
+                    {%- endif -%}
+                </span>
+                <span class="section-feed-meta">
+                    {{ entry.company }}{% if entry.location %} · {{ entry.location }}{% endif %}{% if entry.arrangement %} · {{ entry.arrangement }}{% endif %}
+                </span>
+                {%- if entry.blurb -%}
+                    <p class="section-feed-blurb">{{ entry.blurb }}</p>
+                {%- endif -%}
+            </div>
+            <div class="section-feed-aside">
+                {{ entry.start }}{% if entry.end and entry.end != entry.start %} – {{ entry.end }}{% endif %}
+            </div>
+        </div>
+
+    {%- when "volunteering" -%}
+        <div class="section-feed-row with-emblem">
+            {%- if entry.logo -%}
+                <div class="row-emblem"><img src="{{ entry.logo | relative_url }}" alt="{{ entry.org }}" referrerpolicy="no-referrer" loading="lazy"></div>
+            {%- else -%}
+                <div class="row-emblem monogram">{{ entry.org | slice: 0, 1 }}</div>
+            {%- endif -%}
+            <div class="section-feed-main">
+                <span class="section-feed-title">{{ entry.role }}</span>
+                <span class="section-feed-meta">
+                    {{ entry.org }}{% if entry.category %} · {{ entry.category }}{% endif %}{% if entry.note %} · {{ entry.note }}{% endif %}
+                </span>
+                {%- if entry.blurb -%}
+                    <p class="section-feed-blurb">{{ entry.blurb }}</p>
+                {%- endif -%}
+                {%- if entry.certificate -%}
+                    <span class="sponsor-chips">
+                        <a class="sponsor-chip sponsor-chip--link" href="{{ entry.certificate }}">↗ certificate</a>
+                    </span>
+                {%- endif -%}
+            </div>
+            <div class="section-feed-aside">
+                {{ entry.start }}{% if entry.end and entry.end != entry.start %} – {{ entry.end }}{% endif %}
+            </div>
+        </div>
+
+    {%- endcase -%}
+{%- endfor -%}
+</div>

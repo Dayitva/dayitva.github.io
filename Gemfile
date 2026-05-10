@@ -32,3 +32,9 @@ gem "wdm", "~> 0.1.1", :install_if => Gem.win_platform?
 
 # Required for Ruby compatibility
 gem "webrick", "~> 1.7"
+
+# Ruby 3.4+ removed these from default gems; Jekyll/Liquid still require them.
+gem "bigdecimal"
+gem "csv"
+gem "base64"
+gem "logger"

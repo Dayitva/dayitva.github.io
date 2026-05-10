@@ -1,0 +1,82 @@
+# Hacker house appearances. Newest first.
+# Fields:
+#   program     (required) — the house/residency name, shown as the TITLE
+#   project     (optional) — what shipped that residency, shown as an italic
+#                            secondary line under the title (linked if url set)
+#   location    (optional) — shown as small-caps meta
+#   url         (optional) — makes the project line clickable
+#   start, end  (optional) — e.g. "Mar 2026" / "May 2026"; renders on the right.
+#                            If start == end, only one month shows.
+
+- program: Based House
+  location: Denver, USA
+  project: SeedMe
+  start: Feb 2026
+  end: Feb 2026
+
+- program: Germina Labs Loops Hacker House
+  location: Buenos Aires, Argentina
+  project: only solvers
+  start: Dec 2025
+  end: Dec 2025
+
+- program: Superfluid Frontier Guild S3
+  project: Streamline
+  location: Virtual
+  start: Jan 2025
+  end: Mar 2025
+
+- program: Coinfi Devcoin[1] Hacker House
+  project: Devcoin
+  location: Bengaluru, India
+  start: Dec 2024
+  end: Dec 2024
+
+- program: Superfluid Hacker House
+  project: Roast Bot
+  location: Bangkok, Thailand
+  start: Nov 2024
+  end: Nov 2024
+
+- program: PoolParty Hacker House
+  project: Pricey
+  location: Bangkok, Thailand
+  start: Nov 2024
+  end: Nov 2024
+
+- program: Capx Casa
+  project: Lero
+  location: Bangkok, Thailand
+  start: Oct 2024
+  end: Nov 2024
+
+- program: Superfluid Frontier Guild S2
+  project: SuperBoost
+  location: Virtual
+  start: Sep 2024
+  end: Nov 2024
+
+- program: Uniswap Hooks Incubator
+  project: Batched Gasless Swaps
+  location: Virtual
+  start: Jul 2024
+  end: Sep 2024
+
+- program: Arweave India Hacker House
+  project: Convergent
+  location: Dharamshala, India
+  start: Jul 2024
+  end: Jul 2024
+
+- program: Stackr Hacker House
+  project: Vouch MicroRollup
+  location: Bengaluru, India
+  start: Dec 2023
+  end: Dec 2023
+
+- program: Tezos India Fellowship
+  project: Liquibrium
+  location: Virtual
+  url: https://liquibrium.netlify.app/
+  start: Aug 2021
+  end: Oct 2021

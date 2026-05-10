@@ -1,0 +1,88 @@
+{%- comment -%}
+  Single hackathon row. Usage:
+    {% include HackathonRow.html entry=entry %}
+
+  Label derivation:
+    - built        → entry.name is the project title
+    - workshop     → entry.name is the workshop title
+    - mentored     → auto-derived "Mentor"
+    - judged       → auto-derived "Judge"
+    - both         → auto-derived "Mentor & Judge"
+
+  Affiliation handling (when entry.affiliation is set):
+    - Advisory roles (mentored/judged/both): inline the company as a title,
+      e.g. "Uniswap Foundation Mentor".
+    - Optional workshop_youtube on advisory rows: small button under the role line.
+    - role: workshop: render "— {affiliation}" under the workshop title.
+    - Built: no affiliation handling today.
+{%- endcomment -%}
+
+{%- assign entry = include.entry -%}
+
+{%- if entry.role == "mentored" -%}
+    {%- assign role_label = "Mentor" -%}
+{%- elsif entry.role == "judged" -%}
+    {%- assign role_label = "Judge" -%}
+{%- elsif entry.role == "both" -%}
+    {%- assign role_label = "Mentor & Judge" -%}
+{%- endif -%}
+
+{%- if entry.role == "built" or entry.role == "workshop" -%}
+    {%- assign label = entry.name -%}
+{%- elsif entry.affiliation -%}
+    {%- assign affil_html = entry.affiliation -%}
+    {%- if entry.affiliation contains "Uniswap" -%}
+        {%- assign affil_html = '<span class="sponsor-chip sponsor-chip--uniswap">🦄 ' | append: entry.affiliation | append: '</span>' -%}
+    {%- endif -%}
+    {%- assign label = affil_html | append: " " | append: role_label -%}
+{%- else -%}
+    {%- assign label = role_label -%}
+{%- endif -%}
+
+{%- if entry.url -%}<a class="section-feed-row hackathon-row" href="{{ entry.url }}">{%- else -%}<div class="section-feed-row hackathon-row">{%- endif -%}
+    {% include RingMarker.html %}
+    <div class="section-feed-main">
+        <span class="section-feed-title">{{ entry.event }}</span>
+        {%- if label -%}
+            <span class="section-feed-project">{{ label }}{% if entry.note %} · {{ entry.note }}{% endif %}</span>
+        {%- endif -%}
+        {%- if entry.role == "workshop" and entry.affiliation -%}
+            <span class="section-feed-meta">— {{ entry.affiliation }}</span>
+        {%- endif -%}
+        {%- if entry.demo or entry.youtube or entry.workshop_youtube -%}
+        <div class="sponsor-chips">
+            {%- if entry.demo -%}
+                <span class="sponsor-chip sponsor-chip--link" onclick="window.open('{{ entry.demo }}', '_blank'); event.preventDefault(); event.stopPropagation()">↗ live demo</span>
+            {%- endif -%}
+            {%- if entry.youtube -%}
+                <span class="sponsor-chip sponsor-chip--link" onclick="window.open('{{ entry.youtube }}', '_blank'); event.preventDefault(); event.stopPropagation()">↗ watch demo</span>
+            {%- endif -%}
+            {%- if entry.workshop_youtube -%}
+                <span class="sponsor-chip sponsor-chip--link" onclick="window.open('{{ entry.workshop_youtube }}', '_blank'); event.preventDefault(); event.stopPropagation()">↗ watch workshop</span>
+            {%- endif -%}
+        </div>
+        {%- endif -%}
+        
+        {%- if entry.sponsors -%}
+        <div class="sponsor-chips">
+            {%- for s in entry.sponsors -%}
+                <span class="sponsor-chip sponsor-chip--prize">🥇 {{ s }}</span>
+            {%- endfor -%}
+        </div>
+        {%- endif -%}
+        {%- if entry.photos -%}
+        <div class="hackathon-photo-deck" onclick="cycleHackathonPhotos(this, event)">
+            {%- for photo in entry.photos -%}
+                {%- assign rotate_deg = forloop.index0 | modulo: 5 | times: 3 | minus: 6 -%}
+                {%- if forloop.first -%}{%- assign rotate_deg = -4 -%}{%- endif -%}
+                <div class="hackathon-photo-wrap" style="--rotation: {{ rotate_deg }}deg; z-index: {{ 10 | minus: forloop.index0 }};">
+                    <img src="{{ photo | relative_url }}" class="hackathon-photo" alt="Hackathon photo" loading="lazy" />
+                </div>
+            {%- endfor -%}
+        </div>
+        {%- endif -%}
+    </div>
+    {%- if entry.date or entry.year -%}
+        <div class="section-feed-aside">{% if entry.date %}{{ entry.date }}{% else %}{{ entry.year }}{% endif %}</div>
+    {%- endif -%}
+{%- if entry.url -%}</a>{%- else -%}</div>{%- endif -%}

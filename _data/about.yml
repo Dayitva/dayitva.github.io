@@ -1,0 +1,22 @@
+# Homepage identity. Edit freely — these strings are the only hand-authored
+# copy on the landing page.
+name: Dayitva Goel
+
+# One-line tagline. Kept short (under ~60 chars reads cleanly).
+# TODO: replace with your own.
+tagline: Web3 Engineer | Developer Support Specialist 
+
+# Short bio. 2-3 sentences. TODO: replace with your own voice.
+bio: >-
+  Web3 engineer and developer support specialist with experience across Uniswap, 
+  smart contract development, security research, and developer education. 
+  Worked with ecosystem teams on protocol integrations, developer tooling, 
+  technical documentation, and hackathon support across Ethereum and related ecosystems.
+
+# Longer "About" copy used on /about. Multiple paragraphs OK.
+# TODO: replace with your own.
+about: >-
+  Web3 engineer and developer support specialist with experience across Uniswap, 
+  smart contract development, security research, and developer education. 
+  Worked with ecosystem teams on protocol integrations, developer tooling, 
+  technical documentation, and hackathon support across Ethereum and related ecosystems.

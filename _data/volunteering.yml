@@ -1,0 +1,47 @@
+# Volunteering, newest first.
+# Add `certificate: https://...` to any entry to render a "↗ certificate" chip.
+- org: Code in Place
+  role: Section Leader
+  start: Apr 2026
+  end: May 2026
+  category: Education
+  note: Currently volunteering
+  logo: /assets/img/logos/code-in-place.jpg
+  # certificate not issued yet for 2026
+
+- org: Code in Place
+  role: Section Leader
+  start: Apr 2025
+  end: May 2025
+  category: Education
+  logo: /assets/img/logos/code-in-place.jpg
+  certificate: https://digitalcredential.stanford.edu/check/FB83A759ED7510F51E5AD3A60CA15AF47063AEA7E0A769FC90F27EFE7334C473dDluY2ZxSkVpdnhNOWhKU0NBY0pGdmRVbEtaKzZBdkJRQ2ZrNVFrWUdFNXRDOHkv
+
+- org: Code in Place
+  role: Section Leader
+  start: Apr 2024
+  end: May 2024
+  category: Education
+  logo: /assets/img/logos/code-in-place.jpg
+  certificate: https://digitalcredential.stanford.edu/check/E45BD828ED5F87F34F203290AD1329A38BA99FDEEA01223CA758EC9F8E2874ABK2F5dlluNjBXMUxVeW43UmVDWGFHM0diNlVsSWRQSFN5T2FpS2k4UU5nSWlWRTMw
+
+- org: Code in Place
+  role: Section Leader
+  start: Apr 2023
+  end: May 2023
+  category: Education
+  logo: /assets/img/logos/code-in-place.jpg
+  certificate: https://digitalcredential.stanford.edu/check/D6B2421B3397F3127CCAA834FA3714BA1A98CE865C2C437512A9C62C3692C0C3YlZBaHJ3bXNLdDRqR0xpU2M1ZVErUFZGblRpRzQrSEpPNFh2dElPK1JRMXBYWldM
+
+- org: "Stanford University: Code in Place"
+  role: Section Leader
+  start: Apr 2021
+  end: May 2021
+  category: Education
+  blurb: >-
+    A 6-week intro to Python (based on the first half of Stanford's CS106A), offered
+    online during the pandemic to 12,000 students and 1,100 volunteer teachers worldwide.
+    Prepared and taught a weekly section of 8-10 students, ran student hangouts,
+    and gave feedback on assignments.
+  logo: /assets/img/logos/code-in-place.jpg
+  certificate: # PASTE 2021 CERT URL

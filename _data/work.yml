@@ -1,0 +1,88 @@
+# Work experience, newest first.
+# Fields: company, title, start, end, location (optional), arrangement (optional),
+#         blurb (optional), logo (optional URL — if omitted, a monogram renders instead),
+#         url (optional — makes the title clickable),
+#         category: one of "work" | "fellowship" | "education"
+- company: Uniswap Labs
+  title: Developer Support Consultant
+  category: work
+  start: Jan 2026
+  end: Apr 2026
+  logo: /assets/img/logos/uniswap-labs.jpg
+
+- company: Uniswap Foundation
+  title: Developer Support Associate
+  category: work
+  start: Jan 2025
+  end: Dec 2025
+  logo: /assets/img/logos/uniswap-foundation.jpg
+
+- company: Questbook
+  title: Web3 Software Engineer
+  category: work
+  arrangement: Internship · Hybrid
+  start: Jan 2023
+  end: Jun 2023
+  logo: /assets/img/logos/questbook.jpg
+
+- company: Liquibrium
+  title: Co-Founder
+  category: work
+  start: Aug 2021
+  end: Jan 2023
+  logo: /assets/img/logos/liquibrium.jpg
+
+- company: International Institute of Information Technology, Hyderabad
+  title: Teaching Assistant
+  category: education
+  location: Hyderabad, India
+  start: Jan 2023
+  end: Apr 2023
+  blurb: >-
+    One of two TAs for "Behavioral Research: Statistical Methods" (90 students).
+    Designed and evaluated assignments, quizzes, and project reports;
+    ran doubt-clearing sessions and gave detailed feedback on student work.
+  logo: /assets/img/logos/iiith.jpg
+
+- company: Polytechnique Montréal
+  title: Mitacs Globalink Research Intern
+  category: education
+  location: Montréal, Canada
+  start: May 2022
+  end: Jul 2022
+  blurb: >-
+    Worked with Prof. Mohammad Hamdaqa on a "Digital Extraction Tool
+    to Convert Legal Contracts into Smart Contracts".
+  logo: /assets/img/logos/polytechnique-montreal.jpg
+
+- company: Antler
+  title: Antler India Fellowship
+  category: fellowship
+  arrangement: Remote
+  start: Jan 2022
+  end: May 2022
+  blurb: >-
+    Selected for the first cohort (8 out of 2,400+ applications) of a program
+    backing college-stage founders.
+  logo: /assets/img/logos/antler.jpg
+
+- company: Tezos India
+  title: Tezos India Fellowship 2.0
+  category: fellowship
+  arrangement: Remote
+  start: Aug 2021
+  end: Oct 2021
+  blurb: >-
+    Eight-week program selecting 30 fellows to build on Tezos
+    with mentorship from the ecosystem.
+  logo: /assets/img/logos/tezos-india.jpg
+
+- company: Gitcoin
+  title: KERNEL Fellowship Block 3
+  category: fellowship
+  arrangement: Remote
+  start: May 2021
+  end: Jul 2021
+  blurb: >-
+    Eight-week web3 fellowship gathering ~250 builders to connect and ship together.
+  logo: /assets/img/logos/gitcoin.jpg

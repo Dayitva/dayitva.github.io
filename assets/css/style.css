@@ -1623,5 +1623,1215 @@ a[href^="http"] {
     }
 }
 
+/* Personal-site additions */
 
+.home-bio {
+    max-width: 34rem;
+    color: var(--color-text-main);
+    font-size: var(--text-m);
+    line-height: var(--text-leading-wide);
+    margin: 1rem 0 1.25rem 0;
+}
 
+.home-social {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.1rem;
+    margin-bottom: 2.5rem;
+    font-size: var(--text-s);
+}
+
+.home-social a {
+    color: var(--color-text-sub);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+}
+
+.home-social a:hover {
+    color: var(--color-text-link);
+    border-bottom-color: var(--color-text-link);
+}
+
+.mini-feed {
+    margin: 2rem 0;
+}
+
+.mini-feed-head {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: baseline;
+    column-gap: 1rem;
+    row-gap: 0.35rem;
+    border-bottom: 1px solid var(--color-border-light);
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.65rem;
+}
+
+.mini-feed-head h5 {
+    margin: 0;
+    color: var(--color-text-sub);
+    font-weight: var(--text-weight-normal);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: var(--text-xs);
+    min-width: 0;
+}
+
+.mini-feed-more {
+    font-size: var(--text-xs);
+    color: var(--color-text-sub);
+    text-decoration: none;
+    justify-self: end;
+    white-space: nowrap;
+}
+
+.mini-feed-more:hover {
+    color: var(--color-text-link);
+}
+
+.mini-feed-row {
+    /* Grid avoids flex min-width bugs on <a> and keeps meta out of the title column. */
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-rows: auto auto;
+    column-gap: 1rem;
+    row-gap: 0.2rem;
+    align-items: center;
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    padding: 0.45rem 0;
+    text-decoration: none;
+    color: var(--color-text-main);
+    border-bottom: 1px dotted var(--color-border-light);
+}
+.mini-feed-row > .ring-marker {
+    grid-column: 1;
+    grid-row: 1 / -1;
+    align-self: center;
+}
+.mini-feed-row > .mini-feed-title {
+    grid-column: 2;
+    grid-row: 1;
+    min-width: 0;
+}
+.mini-feed-row > .mini-feed-meta {
+    grid-column: 2;
+    grid-row: 2;
+    justify-self: start;
+    text-align: left;
+    white-space: normal;
+}
+
+/* Always stack title + meta (event/date). A side-by-side row relapses into
+   overlaps at medium widths because event names + dates are long mono lines. */
+
+.mini-feed-row:last-child {
+    border-bottom: none;
+}
+
+.mini-feed-row:hover .mini-feed-title {
+    color: var(--color-text-link);
+}
+
+.mini-feed-title {
+    font-size: var(--text-m);
+}
+
+.mini-feed-meta {
+    font-size: var(--text-xs);
+    color: var(--color-text-sub);
+}
+
+.section-feed {
+    margin-top: 1.5rem;
+}
+
+.section-feed-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1.5rem;
+    padding: 0.9rem 0;
+    border-bottom: 1px solid var(--color-border-light);
+}
+
+.section-feed-row:last-child {
+    border-bottom: none;
+}
+
+.section-feed-main {
+    flex: 1 1 auto;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.section-feed-aside {
+    flex: 0 0 auto;
+    font-size: var(--text-xs);
+    color: var(--color-text-sub);
+    white-space: nowrap;
+    padding-top: 0.1rem;
+}
+
+.section-feed-title {
+    font-size: var(--text-m);
+    color: var(--color-text-main);
+}
+
+a.section-feed-title {
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+}
+
+a.section-feed-title:hover {
+    color: var(--color-text-link);
+    border-bottom-color: var(--color-text-link);
+}
+
+.section-feed-meta {
+    font-size: var(--text-s);
+    color: var(--color-text-sub);
+}
+
+.section-feed-blurb {
+    font-size: var(--text-s);
+    color: var(--color-text-main);
+    line-height: var(--text-leading-wide);
+    margin: 0.35rem 0 0 0;
+    max-width: 42rem;
+}
+
+.sponsor-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    margin-top: 0.35rem;
+}
+
+.sponsor-chip {
+    display: inline-block;
+    padding: 0.05rem 0.55rem;
+    border: 1px solid var(--color-border-light);
+    border-radius: 999px;
+    font-size: var(--text-xs);
+    color: var(--color-text-sub);
+}
+
+.section-heading {
+    margin-top: 2.5rem;
+    margin-bottom: 0.25rem;
+    color: var(--color-text-sub);
+    font-weight: var(--text-weight-normal);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: var(--text-xs);
+    border-bottom: 1px solid var(--color-border-light);
+    padding-bottom: 0.4rem;
+}
+
+@media (max-width: 600px) {
+    .section-feed-row {
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+    .section-feed-aside {
+        order: -1;
+    }
+}
+
+/* =====================================================================
+   Manuscript: math + Sufi-geometry layer.
+   Paper-texture background, serif body, section numbering, concentric
+   sigils, ornamental dividers. All grayscale so dark mode inverts cleanly.
+   ===================================================================== */
+
+html,
+html[data-theme="light"] {
+    --paper-bg:       #F2EBD7;   /* warm rag-paper cream */
+    --paper-bg-deep:  #E6DCC1;   /* shadow / codeblock */
+    --paper-ink:      #1C1C20;   /* near black, warm */
+    --paper-ink-sub:  #655C4D;   /* olive-gray secondary */
+    --paper-rule:     #2E2A22;
+    --paper-hair:     rgba(28,28,32,0.14);
+    --silver:         #8A8A92;
+    --accent-ink:     #1D4A8A;   /* ultramarine */
+    --accent-red:     #B23A28;   /* minium / vermillion */
+    --accent-gold:    #AE8423;   /* muted gold */
+    --medallion-bg:   #F2EBD7;   /* always cream — the stamp frame */
+}
+
+html[data-theme="dark"] {
+    --paper-bg:       #1C1B17;
+    --paper-bg-deep:  #12110E;
+    --paper-ink:      #EDE3C8;
+    --paper-ink-sub:  #A99E85;
+    --paper-rule:     #D0C4A2;
+    --paper-hair:     rgba(237,227,200,0.18);
+    --silver:         #6F6F76;
+    --accent-ink:     #6FA3FF;
+    --accent-red:     #E77A64;
+    --accent-gold:    #DAAE48;
+    --medallion-bg:   #F2EBD7;   /* medallion stays cream — logos read against their own native bg */
+}
+
+@media (prefers-color-scheme: dark) {
+    html,
+    html[data-theme="dark"] {
+        --paper-bg:       #1C1B17;
+        --paper-bg-deep:  #12110E;
+        --paper-ink:      #EDE3C8;
+        --paper-ink-sub:  #A99E85;
+        --paper-rule:     #D0C4A2;
+        --paper-hair:     rgba(237,227,200,0.18);
+        --silver:         #6F6F76;
+        --accent-ink:     #6FA3FF;
+        --accent-red:     #E77A64;
+        --accent-gold:    #DAAE48;
+        --medallion-bg:   #F2EBD7;
+    }
+    html[data-theme="light"] {
+        --paper-bg:       #F2EBD7;
+        --paper-bg-deep:  #E6DCC1;
+        --paper-ink:      #1C1C20;
+        --paper-ink-sub:  #655C4D;
+        --paper-rule:     #2E2A22;
+        --paper-hair:     rgba(28,28,32,0.14);
+        --silver:         #8A8A92;
+        --accent-ink:     #1D4A8A;
+        --accent-red:     #B23A28;
+        --accent-gold:    #AE8423;
+        --medallion-bg:   #F2EBD7;
+    }
+}
+
+/* Paper texture + base ink colors on the whole doc */
+body.manuscript {
+    background-color: var(--paper-bg);
+    /* SVG noise, inlined, tuned low so text stays crisp */
+    background-image:
+        radial-gradient(ellipse at top left, var(--paper-bg-deep) 0%, transparent 70%),
+        radial-gradient(ellipse at bottom right, var(--paper-bg-deep) 0%, transparent 65%),
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.05  0 0 0 0 0.05  0 0 0 0 0.07  0 0 0 0.08 0'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>");
+    background-attachment: fixed, fixed, fixed;
+    color: var(--paper-ink);
+}
+
+/* Section wrapper: the "page" inside the manuscript */
+.manuscript-page {
+    position: relative;
+}
+
+/* Bulma columns default min-width can clip rotated children; hero sigil needs bleed. */
+body.manuscript .manuscript-page > .columns > .column {
+    overflow: visible;
+}
+
+/* Serif body copy, but only inside article content; keep nav/UI unchanged */
+.manuscript .home-bio,
+.manuscript .section-feed-blurb,
+.manuscript .note-page-section p,
+.manuscript .note-page-section li,
+.manuscript .note-page-section blockquote,
+.manuscript #post-container p,
+.manuscript .home-intro h3,
+.manuscript .content p,
+.manuscript .content li,
+.manuscript .content blockquote,
+.manuscript .content,
+.manuscript .manuscript-numbered {
+    font-family: 'EB Garamond', Georgia, 'Times New Roman', serif;
+    font-size: 1.18rem;
+    line-height: 1.58;
+    color: var(--paper-ink);
+}
+
+.manuscript .home-bio {
+    font-size: 1.28rem;
+    line-height: 1.55;
+    max-width: 36rem;
+}
+
+/* Use serif for the big name too, but keep the mono-meta label style */
+.manuscript .home-intro .jumbo,
+.manuscript .manuscript-page .jumbo {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: var(--paper-ink);
+}
+
+/* Ink-color sweep for headings + links under the manuscript skin */
+.manuscript h1, .manuscript h2, .manuscript h3, .manuscript h4, .manuscript h5, .manuscript h6 {
+    color: var(--paper-ink);
+}
+
+.manuscript a:not(.navbar-item):not(.mini-feed-row):not(.mini-feed-more):not(.button):not(.sponsor-chip--link) {
+    color: var(--accent-ink);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.15s ease, color 0.15s ease;
+}
+.manuscript a:not(.navbar-item):not(.mini-feed-row):not(.mini-feed-more):not(.button):not(.sponsor-chip--link):hover {
+    border-bottom-color: var(--accent-ink);
+}
+
+/* Inline code + code blocks — mono, ink-on-paper, no bright colors */
+.manuscript code, .manuscript pre, .manuscript .highlight {
+    font-family: 'JetBrains Mono', 'Fira Mono', ui-monospace, monospace;
+    font-size: 0.92em;
+}
+.manuscript pre, .manuscript .highlight pre {
+    background: var(--paper-bg-deep);
+    border: 1px solid var(--paper-hair);
+    padding: 1rem 1.1rem;
+    border-radius: 2px;
+}
+
+/* Homepage specifics */
+.home-intro {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+    overflow: visible; /* allow sigil frame to paint outside grid cells when tilted */
+}
+.home-intro-text {
+    min-width: 0;
+}
+.home-intro .jumbo {
+    margin-bottom: 0.1rem;
+}
+.manuscript .home-sub-text h3 {
+    font-family: 'JetBrains Mono', 'Fira Mono', monospace;
+    font-size: 0.82rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--paper-ink-sub);
+    margin-top: 0.35rem;
+    margin-bottom: 0.9rem;
+}
+@media (max-width: 700px) {
+    .home-intro {
+        grid-template-columns: 1fr;
+    }
+    .home-intro-sigil {
+        order: -1;
+        justify-self: start;
+        overflow: visible;
+    }
+}
+
+/* Padded wrapper: cursor tilt applies here so the SVG’s CSS animations are not
+   fighting inline transforms, and corners are not clipped by the column. */
+.hero-sigil-frame {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    padding: clamp(12px, 4vw, 28px);
+    overflow: visible;
+}
+
+/* Drop cap on the bio — illuminated first letter (rubricated) */
+.drop-cap::first-letter {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 3.6em;
+    font-weight: 600;
+    line-height: 0.85;
+    float: left;
+    padding: 0.08em 0.12em 0 0;
+    color: var(--accent-red);
+    font-feature-settings: "smcp" off;
+}
+
+/* The concentric-rings sigil — SVG element below, this is just CSS chrome */
+.hero-sigil {
+    width: clamp(120px, 15vw, 180px);
+    height: clamp(120px, 15vw, 180px);
+    display: block;
+    color: var(--paper-ink);
+    overflow: visible; /* root SVG defaults to clipping in some UAs */
+}
+.hero-sigil .ring {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1;
+    opacity: 0.82;
+}
+.hero-sigil .ring-thick {
+    stroke-width: 1.5;
+    opacity: 1;
+}
+.hero-sigil .star {
+    fill: var(--accent-ink);   /* ultramarine cardinals */
+}
+.hero-sigil .orbit-dot {
+    fill: var(--accent-red);   /* minium planets on the spin-r group */
+}
+.hero-sigil .center {
+    fill: var(--accent-gold);  /* gold at the heart */
+}
+.hero-sigil .spin,
+.hero-sigil .spin-r {
+    /* Percentage origins on SVG <g> are unreliable; anchor to the svg viewBox. */
+    transform-box: view-box;
+    transform-origin: center;
+}
+.hero-sigil .spin {
+    animation: sigil-spin 120s linear infinite;
+}
+.hero-sigil .spin-r {
+    animation: sigil-spin 200s linear infinite reverse;
+}
+@keyframes sigil-spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Section numbering: §1, §2… on h2 inside a manuscript-numbered block */
+.manuscript-numbered {
+    counter-reset: mschapter;
+}
+.manuscript-numbered .section-heading {
+    counter-increment: mschapter;
+    display: flex;
+    align-items: baseline;
+    gap: 0.85rem;
+    font-family: 'JetBrains Mono', 'Fira Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 0.78rem;
+    color: var(--paper-ink-sub);
+    margin-top: 2.8rem;
+    margin-bottom: 0.6rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--paper-hair);
+    font-weight: 400;
+}
+.manuscript-numbered .section-heading::before {
+    content: "§" counter(mschapter) ".1";
+    color: var(--accent-ink);
+    font-weight: 500;
+    letter-spacing: 0.05em;
+}
+
+/* Ornamental divider — used between homepage sections.
+   Three dots and a lotus-like glyph; echoes the "+>o<+" dingbats
+   in the manuscript image without being kitsch. */
+.ornament {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2.4rem 0 2rem 0;
+    color: var(--paper-ink-sub);
+}
+.ornament-rule {
+    flex: 0 0 3.5rem;
+    height: 1px;
+    background: var(--paper-hair);
+}
+.ornament-glyph {
+    width: 28px;
+    height: 28px;
+    color: var(--paper-ink);
+}
+.ornament-glyph .ornament-center {
+    fill: var(--accent-red);
+}
+.ornament-glyph .ornament-cardinals circle {
+    fill: var(--accent-ink);
+}
+
+/* Mini-feed under the manuscript skin — keep structure, restyle */
+.manuscript .mini-feed-head h5 {
+    font-family: 'JetBrains Mono', 'Fira Mono', monospace;
+    color: var(--paper-ink-sub);
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+}
+.manuscript .mini-feed-head {
+    border-bottom: 1px solid var(--paper-hair);
+    /* Solid footing so the first row link never visually collides with “see all”. */
+    position: relative;
+    z-index: 0;
+}
+.manuscript .mini-feed-more {
+    color: var(--paper-ink-sub);
+    font-family: 'JetBrains Mono', 'Fira Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    line-height: 1.4;
+}
+.manuscript .mini-feed-row {
+    border-bottom: 1px dotted var(--paper-hair);
+    padding: 0.8rem 0;
+}
+.manuscript .mini-feed-row .mini-feed-title {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 1.2rem;
+    color: var(--paper-ink);
+    line-height: 1.3;
+    word-break: break-word;
+}
+.manuscript .mini-feed-row .mini-feed-meta {
+    font-family: 'JetBrains Mono', 'Fira Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--paper-ink-sub);
+    line-height: 1.35;
+    max-width: 100%;
+}
+
+/* Ring-marker — tiny concentric rings at the start of each interactive row.
+   Expands on hover, links project to the "sigil" motif. */
+.ring-marker {
+    flex: 0 0 auto;
+    width: 22px;
+    height: 22px;
+    color: var(--accent-red);
+    transition: transform 0.35s ease, color 0.35s ease;
+}
+.ring-marker circle {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.1;
+}
+.mini-feed-row:hover .ring-marker,
+.section-feed-row:hover .ring-marker {
+    color: var(--accent-red);
+    transform: scale(1.25) rotate(45deg);
+}
+
+/* Section feed under manuscript skin.
+   align-items: flex-start keeps the date aside anchored to the top-right
+   of the row so it doesn't drift into the middle when hackathon chips
+   expand on hover. */
+.manuscript .section-feed-row {
+    border-bottom-color: var(--paper-hair);
+    align-items: flex-start;
+    padding: 1.1rem 0;
+}
+.manuscript .section-feed-aside {
+    padding-top: 0.25rem;
+}
+.manuscript .section-feed-main {
+    gap: 0.3rem;
+}
+.manuscript .section-feed-title {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 1.32rem;
+}
+.manuscript a.section-feed-title {
+    border-bottom: 1px solid transparent;
+}
+.manuscript a.section-feed-title:hover {
+    border-bottom-color: var(--paper-rule);
+}
+.manuscript .section-feed-meta {
+    font-family: 'JetBrains Mono', 'Fira Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--paper-ink-sub);
+}
+.manuscript .section-feed-blurb {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 1.08rem;
+    line-height: 1.55;
+    color: var(--paper-ink);
+    opacity: 0.92;
+}
+
+/* Hacker-house project line: italic serif, sits between the big program
+   title and the small-caps location meta. Carries a red tinge when linked. */
+.manuscript .section-feed-project {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 1.08rem;
+    color: var(--paper-ink-sub);
+    line-height: 1.3;
+}
+.manuscript .section-feed-project a {
+    color: var(--accent-red);
+    border-bottom: 1px solid transparent;
+}
+.manuscript .section-feed-project a:hover {
+    border-bottom-color: var(--accent-red);
+}
+.manuscript .section-feed-aside {
+    font-family: 'JetBrains Mono', 'Fira Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    color: var(--paper-ink-sub);
+}
+
+/* Work experience: logo/monogram chip on the left of each row.
+   Emblem has two layers — a circular frame (the "plate") and the image/
+   monogram inside. We let the image fill nearly edge-to-edge for presence. */
+.section-feed-row.with-emblem {
+    display: grid;
+    grid-template-columns: 60px 1fr auto;
+    gap: 1.1rem;
+    align-items: center;
+}
+.manuscript .section-feed-row.with-emblem {
+    align-items: center;   /* keep work/volunteering emblems centered */
+}
+.row-emblem {
+    width: 54px;
+    height: 54px;
+    border: 1px solid var(--paper-hair);
+    /* Softly-rounded square — matches how company logos are actually composed
+       (square marks with baked-in padding). The concentric-ring motif lives
+       in the hero sigil + ring-marker bullets, so the circle identity persists. */
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--paper-ink);
+    /* Cream frame, same in both themes — each emblem reads as a printed stamp. */
+    background: var(--medallion-bg);
+    overflow: hidden;
+    flex-shrink: 0;
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+.row-emblem img, .row-emblem svg {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    /* No padding now — logos carry their own native padding, so we let them
+       fill the frame edge-to-edge. */
+    padding: 0;
+    filter: saturate(0.92) contrast(1.02);
+    mix-blend-mode: multiply;
+}
+.section-feed-row:hover .row-emblem {
+    transform: translateY(-1px);
+    box-shadow: 0 1px 0 var(--paper-hair), 0 6px 14px -10px rgba(28,28,32,0.35);
+}
+.row-emblem.monogram {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-weight: 600;
+    font-style: italic;
+    font-size: 1.6rem;
+    letter-spacing: 0.01em;
+    color: var(--accent-red);
+    background: var(--medallion-bg);
+}
+
+/* Sponsor chips under the manuscript skin */
+.manuscript .sponsor-chip {
+    border-color: var(--paper-hair);
+    color: var(--paper-ink-sub);
+    background: transparent;
+    font-family: 'JetBrains Mono', 'Fira Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+.manuscript .sponsor-chip--link {
+    color: var(--accent-gold);
+    border-color: var(--accent-gold);
+    text-decoration: none;
+    letter-spacing: 0.12em;
+    cursor: pointer;
+}
+.manuscript .sponsor-chip--link:hover {
+    background: var(--accent-gold);
+    color: var(--paper-bg);
+}
+
+.manuscript .sponsor-chip--prize {
+    color: var(--accent-gold);
+    border-color: var(--accent-gold);
+    background: transparent;
+}
+
+.manuscript .sponsor-chip--uniswap {
+    color: #FF007A;
+    border-color: #FF007A;
+    background: transparent;
+    font-style: normal;
+    vertical-align: middle;
+    margin-right: 0.3rem;
+}
+
+/* Social row under manuscript skin */
+.manuscript .home-social a {
+    font-family: 'JetBrains Mono', 'Fira Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--paper-ink-sub);
+    border-bottom: none;
+}
+.manuscript .home-social a:hover {
+    color: var(--paper-ink);
+    border-bottom: 1px solid var(--paper-rule);
+}
+
+/* Nav under manuscript skin — keep it quiet, printed-caption styled */
+.manuscript .navbar {
+    background: transparent;
+    border-bottom: 1px solid var(--paper-hair);
+}
+.manuscript .navbar-item {
+    font-family: 'JetBrains Mono', 'Fira Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--paper-ink-sub);
+}
+.manuscript .navbar-item:hover {
+    color: var(--paper-ink);
+    background: transparent;
+}
+.manuscript .navbar-brand h6 {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 1rem;
+    letter-spacing: 0.02em;
+    color: var(--paper-ink);
+    text-transform: none;
+}
+
+/* Footer */
+.manuscript .footer, .manuscript footer {
+    background: transparent;
+    border-top: 1px solid var(--paper-hair);
+    color: var(--paper-ink-sub);
+    font-family: 'JetBrains Mono', 'Fira Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+}
+
+/* Backlinks + notes interior — tune into the ink look */
+.manuscript .related,
+.manuscript .tooltip .right {
+    background: var(--paper-bg-deep);
+    border: 1px solid var(--paper-hair);
+    color: var(--paper-ink);
+}
+
+/* KaTeX sizing — the default is a touch big in EB Garamond context */
+.manuscript .katex { font-size: 1.04em; }
+.manuscript .katex-display { margin: 1.4em 0; }
+
+/* Hackathon "bring it to life" — each row becomes a hover-tile */
+.manuscript .section-feed-row.hackathon-row {
+    transition: background 0.2s ease, padding-left 0.2s ease;
+    padding-left: 0.1rem;
+}
+.manuscript .section-feed-row.hackathon-row:hover {
+    background: var(--paper-bg-deep);
+    padding-left: 0.8rem;
+}
+.manuscript .section-feed-row.hackathon-row .sponsor-chips {
+    margin-top: 0.5rem;
+}
+
+/* Print caption element — "fig 1", "§5.1" style */
+.plate-caption {
+    font-family: 'JetBrains Mono', 'Fira Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--paper-ink-sub);
+    margin-top: 0.4rem;
+    text-align: center;
+}
+
+/* =====================================================================
+   Travel page — passport-stamp gallery.
+   The page is intentionally stamps only: no surrounding text, no dates
+   alongside. Each stamp carries its own city / date / country.
+   ===================================================================== */
+
+.travel-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 2rem 1.6rem;
+    justify-items: center;
+    padding: 2rem 0 3rem;
+    max-width: 820px;
+    margin: 0 auto;
+}
+
+/* Each stamp sits in a wrapper that carries a small random-feeling tilt.
+   Five rotations cycle via :nth-child so consecutive stamps don't match. */
+.travel-stamp-wrap {
+    width: 130px;
+    height: 130px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.35s ease;
+    transform: rotate(-3deg);
+    cursor: help;
+}
+.travel-gallery > :nth-child(5n+1) .travel-stamp-wrap { transform: rotate(-4deg); }
+.travel-gallery > :nth-child(5n+2) .travel-stamp-wrap { transform: rotate(2.5deg); }
+.travel-gallery > :nth-child(5n+3) .travel-stamp-wrap { transform: rotate(-1.5deg); }
+.travel-gallery > :nth-child(5n+4) .travel-stamp-wrap { transform: rotate(3.5deg); }
+.travel-gallery > :nth-child(5n+5) .travel-stamp-wrap { transform: rotate(-2.5deg); }
+.travel-stamp-wrap:hover {
+    transform: rotate(0deg) scale(1.08);
+}
+
+.travel-stamp {
+    width: 130px;
+    height: 130px;
+    color: var(--accent-ink);
+    opacity: 0.92;
+}
+.travel-stamp .stamp-ring {
+    fill: none;
+    stroke: currentColor;
+}
+.travel-stamp .stamp-ring-outer {
+    stroke-width: 1.4;
+    stroke-dasharray: 2.8 2.4;
+}
+.travel-stamp .stamp-ring-inner {
+    stroke-width: 0.6;
+}
+.travel-stamp .stamp-ornaments circle {
+    fill: currentColor;
+    stroke: none;
+}
+.travel-stamp .stamp-city {
+    font-family: 'JetBrains Mono', 'Fira Mono', monospace;
+    font-size: 7.5px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    fill: currentColor;
+}
+.travel-stamp .stamp-date {
+    font-family: 'JetBrains Mono', 'Fira Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    text-anchor: middle;
+    letter-spacing: 1.2px;
+    fill: currentColor;
+}
+.travel-stamp .stamp-country {
+    font-family: 'JetBrains Mono', 'Fira Mono', monospace;
+    font-size: 6px;
+    font-weight: 500;
+    letter-spacing: 1.6px;
+    fill: currentColor;
+    opacity: 0.78;
+}
+
+@media (max-width: 700px) {
+    .travel-gallery {
+        gap: 1.4rem 1rem;
+        grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    }
+    .travel-stamp-wrap,
+    .travel-stamp {
+        width: 110px;
+        height: 110px;
+    }
+}
+
+.travel-footer {
+    max-width: 34rem;
+    margin: 1rem auto 3rem;
+    padding: 0 1rem;
+    text-align: center;
+    font-family: 'EB Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 1.08rem;
+    line-height: 1.5;
+    color: var(--paper-ink-sub);
+}
+.manuscript .travel-footer a {
+    color: var(--accent-ink);
+    border-bottom: 1px solid var(--paper-hair);
+}
+.manuscript .travel-footer a:hover {
+    border-bottom-color: var(--accent-ink);
+}
+
+/* Subtle page-load reveal. One orchestrated moment, nothing else. */
+@keyframes ms-rise {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+.manuscript .home-intro        { animation: ms-rise 0.55s ease 0.05s both; }
+.manuscript .home-intro + .ornament { animation: ms-rise 0.55s ease 0.15s both; }
+.manuscript .mini-feed:nth-of-type(1) { animation: ms-rise 0.55s ease 0.25s both; }
+.manuscript .mini-feed:nth-of-type(2) { animation: ms-rise 0.55s ease 0.35s both; }
+
+/* A tiny piece of typographic detail — italicize "Finalist" inline notes
+   and let them carry a red tinge, like a manuscript gloss. */
+.manuscript .section-feed-meta {
+    font-variant-numeric: tabular-nums;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .hero-sigil .spin,
+    .hero-sigil .spin-r { animation: none !important; }
+    .ring-marker,
+    .manuscript .section-feed-row.hackathon-row,
+    .manuscript .home-intro,
+    .manuscript .home-intro + .ornament,
+    .manuscript .mini-feed { animation: none !important; transition: none !important; }
+}
+
+/* =====================================================================
+   Hackathon Photo Deck
+   ===================================================================== */
+
+.hackathon-photo-deck {
+    display: flex;
+    position: relative;
+    margin-top: 1rem;
+    height: 120px; /* Base height to reserve space */
+    width: 100%;
+    margin-bottom: 0.5rem;
+    perspective: 800px;
+}
+
+.hackathon-photo-wrap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 160px;
+    height: 120px;
+    background: var(--paper-bg);
+    padding: 4px;
+    border: 1px solid var(--paper-hair);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), z-index 0s 0.1s;
+    transform-origin: center bottom;
+    /* Stacked look by default */
+    transform: rotate(var(--rotation)) translateX(0) scale(1);
+    cursor: pointer;
+}
+
+.hackathon-photo {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    object-fit: cover;
+    display: block;
+    filter: sepia(0.2) contrast(0.9);
+    transition: filter 0.3s ease;
+}
+
+/* Add a stacking context so hovered elements don't float over the page when scrolling */
+.manuscript .section-feed-row.hackathon-row {
+    position: relative;
+    z-index: 1;
+}
+.manuscript .section-feed-row.hackathon-row:hover {
+    z-index: 10;
+}
+
+/* On row hover, fan the photos out */
+.manuscript .section-feed-row.hackathon-row:hover .hackathon-photo-deck .hackathon-photo-wrap:nth-child(1) { transform: rotate(-8deg) translateX(0px); }
+.manuscript .section-feed-row.hackathon-row:hover .hackathon-photo-deck .hackathon-photo-wrap:nth-child(2) { transform: rotate(-2deg) translateX(70px); }
+.manuscript .section-feed-row.hackathon-row:hover .hackathon-photo-deck .hackathon-photo-wrap:nth-child(3) { transform: rotate(5deg) translateX(140px); }
+.manuscript .section-feed-row.hackathon-row:hover .hackathon-photo-deck .hackathon-photo-wrap:nth-child(4) { transform: rotate(12deg) translateX(210px); }
+.manuscript .section-feed-row.hackathon-row:hover .hackathon-photo-deck .hackathon-photo-wrap:nth-child(5) { transform: rotate(18deg) translateX(280px); }
+.manuscript .section-feed-row.hackathon-row:hover .hackathon-photo-deck .hackathon-photo-wrap:nth-child(6) { transform: rotate(22deg) translateX(330px); }
+.manuscript .section-feed-row.hackathon-row:hover .hackathon-photo-deck .hackathon-photo-wrap:nth-child(7) { transform: rotate(25deg) translateX(380px); }
+.manuscript .section-feed-row.hackathon-row:hover .hackathon-photo-deck .hackathon-photo-wrap:nth-child(n+8) { transform: rotate(28deg) translateX(420px); }
+
+/* On individual photo hover, scale up and bring to front */
+.manuscript .section-feed-row.hackathon-row .hackathon-photo-deck .hackathon-photo-wrap:hover {
+    transform: rotate(0deg) scale(1.6) translateY(-20px) !important;
+    z-index: 50 !important;
+    transition-delay: 0s;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+.manuscript .section-feed-row.hackathon-row .hackathon-photo-deck .hackathon-photo-wrap:hover .hackathon-photo {
+    filter: sepia(0) contrast(1.05);
+}
+
+/* =====================================================================
+   Bookshelf Grid
+   ===================================================================== */
+.bookshelf {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 2rem 1.5rem;
+    margin-top: 2rem;
+}
+
+.book-card {
+    display: block;
+    text-decoration: none !important;
+    perspective: 1000px;
+    border: none !important;
+}
+
+.book-cover-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    background-color: var(--color-bg-sub);
+    border-radius: 2px 6px 6px 2px;
+    box-shadow: 
+        inset 4px 0 10px rgba(0, 0, 0, 0.1),
+        3px 4px 10px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transform-origin: left center;
+}
+
+.book-card:hover .book-cover-wrap {
+    transform: rotateY(-15deg) scale(1.05);
+    box-shadow: 
+        inset 4px 0 10px rgba(0, 0, 0, 0.1),
+        8px 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.book-cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    margin: 0;
+    border-radius: 2px 6px 6px 2px;
+    transition: filter 0.3s ease;
+}
+
+.book-card:hover .book-cover {
+    filter: brightness(0.4);
+}
+
+.book-info-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 1rem;
+    box-sizing: border-box;
+    color: white;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.book-card:hover .book-info-overlay {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.book-title {
+    font-size: var(--text-s);
+    font-weight: bold;
+    line-height: 1.2;
+    margin-bottom: 0.2rem;
+}
+
+.book-author {
+    font-size: var(--text-xs);
+    opacity: 0.8;
+    margin-bottom: 0.4rem;
+}
+
+.book-rating {
+    color: #ffd700;
+    font-size: var(--text-xs);
+    letter-spacing: 2px;
+}
+
+/* --- UI Polish & Mobile Responsiveness Fixes --- */
+
+/* Search Dropdown UX */
+.block { position: relative; }
+#search-results {
+    position: absolute;
+    background: var(--paper-bg-deep);
+    border: 1px solid var(--paper-rule);
+    z-index: 1000;
+    max-height: 400px;
+    overflow-y: auto;
+    width: 100%;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    border-radius: 4px;
+    top: 100%;
+    left: 0;
+}
+#search-results ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+#search-results li {
+    border-bottom: 1px solid var(--paper-hair);
+}
+#search-results li a {
+    display: block;
+    padding: 0.75rem 1rem;
+    color: var(--paper-ink);
+}
+#search-results li a:hover {
+    background: var(--paper-rule);
+}
+
+/* Mobile Responsiveness */
+@media screen and (max-width: 1023px) {
+    /* Navbar collapse override */
+    .manuscript .navbar-menu {
+        background: var(--paper-bg-deep);
+        position: absolute;
+        width: 100%;
+        left: 0;
+        top: 100%;
+        z-index: 100;
+        border-bottom: 1px solid var(--paper-rule);
+        box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        padding: 1rem;
+    }
+    .manuscript .navbar-menu:not(.is-active) {
+        display: none !important;
+    }
+    
+    /* Move hackathon metadata below titles */
+    .manuscript .section-feed-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .manuscript .section-feed-aside {
+        position: static;
+        width: 100%;
+        text-align: left;
+        margin-bottom: 0.5rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    /* Scale down photo deck fanning */
+    .hackathon-photo-wrap:nth-child(1) { transform: rotate(-2deg); }
+    .hackathon-photo-wrap:nth-child(2) { transform: translate(4px, 4px) rotate(1deg); }
+    .hackathon-photo-wrap:nth-child(3) { transform: translate(8px, 8px) rotate(3deg); }
+    .hackathon-photo-wrap:nth-child(4) { transform: translate(12px, 12px) rotate(5deg); }
+    .hackathon-photo-wrap:nth-child(5) { transform: translate(16px, 16px) rotate(7deg); }
+    
+    .hackathon-photo-deck:hover .hackathon-photo-wrap:nth-child(1) { transform: translate(-30px, -5px) rotate(-6deg); }
+    .hackathon-photo-deck:hover .hackathon-photo-wrap:nth-child(2) { transform: translate(-10px, 0) rotate(-2deg); }
+    .hackathon-photo-deck:hover .hackathon-photo-wrap:nth-child(3) { transform: translate(10px, 5px) rotate(2deg); }
+    .hackathon-photo-deck:hover .hackathon-photo-wrap:nth-child(4) { transform: translate(30px, 10px) rotate(6deg); }
+    .hackathon-photo-deck:hover .hackathon-photo-wrap:nth-child(5) { transform: translate(50px, 15px) rotate(10deg); }
+
+    /* Books grid adjustment */
+    .bookshelf {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: 1rem;
+    }
+}

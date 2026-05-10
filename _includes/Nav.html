@@ -53,15 +53,21 @@
     
     <div id="navbarBasicExample" class="navbar-menu">
       <div class="navbar-start">
+        <a href="{{'/about' | relative_url}}" class="navbar-item">
+          About
+        </a>
+        <a href="{{'/hackathons' | relative_url}}" class="navbar-item">
+          Hackathons
+        </a>
+        <a href="{{'/hacker-houses' | relative_url}}" class="navbar-item">
+          Hacker Houses
+        </a>
+        <a href="{{'/books' | relative_url}}" class="navbar-item">
+          Books
+        </a>
         <a href="{{'/notes' | relative_url}}" class="navbar-item">
           Notes
         </a>
-        <a href="https://github.com/Dayitva/dayitva.github.io" target="_blank" class="navbar-item">
-          Github
-        </a>
-        <!-- <a href="{{'/projects' | relative_url}}" class="navbar-item">
-          Projects
-        </a> -->
       </div>
       <div class="navbar-end is-hidden-mobile" onclick="modeSwitcher()" >
         <div class="navbar-item">

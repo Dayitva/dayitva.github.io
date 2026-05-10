@@ -1,0 +1,32 @@
+{%- comment -%}
+  Concentric-ring sigil. Inline SVG so it picks up `currentColor` and the
+  CSS spin animations. Two counter-rotating groups (spin + spin-r) give it
+  the Sufi-celestial-map feel without any JS.
+{%- endcomment -%}
+<svg class="hero-sigil" viewBox="-100 -100 200 200" aria-hidden="true" role="img">
+    <g class="spin">
+        <circle class="ring ring-thick" r="92" />
+        <circle class="ring" r="76" />
+        <circle class="ring" r="60" />
+        <circle class="ring" r="44" />
+        <circle class="ring" r="28" />
+        <circle class="ring" r="14" />
+        <!-- cardinal stars -->
+        <g class="star">
+            <circle cx="0" cy="-92" r="2.4" />
+            <circle cx="92" cy="0" r="2.4" />
+            <circle cx="0" cy="92" r="2.4" />
+            <circle cx="-92" cy="0" r="2.4" />
+        </g>
+    </g>
+    <g class="spin-r">
+        <!-- orbit dots, like little planets on concentric rings -->
+        <circle class="orbit-dot" cx="60" cy="0"  r="3" />
+        <circle class="orbit-dot" cx="-44" cy="18" r="2.6" />
+        <circle class="orbit-dot" cx="20" cy="-28" r="2.2" />
+        <circle class="orbit-dot" cx="-14" cy="-72" r="2" />
+        <circle class="orbit-dot" cx="52" cy="-40" r="1.8" />
+        <!-- central mark: gold at the heart -->
+        <circle class="center" cx="0" cy="0" r="3" />
+    </g>
+</svg>

@@ -1,8 +1,86 @@
 <div class="home-intro">
-    <div class="jumbo">{{site.heading}} </div>
-    <div class="home-sub-text"> 
-        <h3>
-        A place for my half-baked articles and notes.
-        </h3> 
-    </div> 
+    <div class="home-intro-text">
+        <div class="jumbo">{{ site.data.about.name }}</div>
+        <div class="home-sub-text"><h3>{{ site.data.about.tagline }}</h3></div>
+        <p class="home-bio drop-cap">{{ site.data.about.bio }}</p>
+        <div class="home-social">
+        {%- for link in site.data.social -%}
+            {%- if link.url and link.url != "" -%}
+                <a href="{{ link.url }}">{{ link.label }}</a>
+            {%- endif -%}
+        {%- endfor -%}
+        </div>
+    </div>
+    <div class="home-intro-sigil">
+        <div class="hero-sigil-frame" aria-hidden="true">
+            {% include Sigil.html %}
+        </div>
+    </div>
 </div>
+
+{% include Ornament.html %}
+
+<section class="mini-feed">
+    <div class="mini-feed-head">
+        <h5>Latest notes</h5>
+        <a class="mini-feed-more" href="{{ site.baseurl }}/notes">see all →</a>
+    </div>
+    {%- assign latest_notes = site.notes | sort: "date" | reverse -%}
+    {%- assign shown = 0 -%}
+    {%- for note in latest_notes -%}
+        {%- if note.feed == "show" and shown < 3 -%}
+            <a class="mini-feed-row" href="{{ site.baseurl }}{{ note.url }}">
+                {% include RingMarker.html %}
+                <span class="mini-feed-title">{{ note.title }}</span>
+                <span class="mini-feed-meta">{{ note.date | date: "%b %Y" }}</span>
+            </a>
+            {%- assign shown = shown | plus: 1 -%}
+        {%- endif -%}
+    {%- endfor -%}
+</section>
+
+{% include Ornament.html %}
+
+<section class="mini-feed">
+    <div class="mini-feed-head">
+        <h5>Recent builds</h5>
+        <a class="mini-feed-more" href="{{ site.baseurl }}/hackathons">see all →</a>
+    </div>
+    {%- assign recent_builds = site.data.hackathons | where: "role", "built" -%}
+    {%- for entry in recent_builds limit:3 -%}
+        {%- if entry.url -%}
+            <a class="mini-feed-row" href="{{ entry.url }}">
+        {%- else -%}
+            <span class="mini-feed-row">
+        {%- endif -%}
+            {% include RingMarker.html %}
+            <span class="mini-feed-title">{{ entry.name }}</span>
+            <span class="mini-feed-meta">
+                {{ entry.event }}{% if entry.date %} · {{ entry.date }}{% elsif entry.year %} · {{ entry.year }}{% endif %}
+            </span>
+        {%- if entry.url -%}
+            </a>
+        {%- else -%}
+            </span>
+        {%- endif -%}
+    {%- endfor -%}
+</section>
+
+<script>
+    // Subtle cursor-reactive tilt on a wrapper (not the SVG root) so inner
+    // CSS keyframe rotations keep a stable origin and nothing clips the viewBox.
+    (function () {
+        var frame = document.querySelector('.hero-sigil-frame');
+        if (!frame) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        var maxRot = 8; // degrees
+        window.addEventListener('mousemove', function (e) {
+            var rect = frame.getBoundingClientRect();
+            var cx = rect.left + rect.width / 2;
+            var cy = rect.top + rect.height / 2;
+            var dx = (e.clientX - cx) / window.innerWidth;
+            var dy = (e.clientY - cy) / window.innerHeight;
+            frame.style.transform = 'rotate(' + (dx * maxRot).toFixed(2) + 'deg) translate(' + (dx * 4).toFixed(2) + 'px,' + (dy * 4).toFixed(2) + 'px)';
+        }, { passive: true });
+    })();
+</script>

@@ -1,0 +1,112 @@
+# Travel log. Each entry renders as a passport-stamp row on /travel.
+# Seeded from existing hackathon, hacker-house, and work data — edit freely.
+# Fields:
+#   city           (required)
+#   country        (required) — full name, shown alongside the city
+#   code           (required) — 3-letter code inside the stamp (airport / metro)
+#   country_code   (required) — 3-letter ISO, curved under the code
+#   start          (required) — e.g. "Nov 2025"
+#   end            (optional) — omit if same month as start
+#   context        (optional) — short one-line reason/note (italic serif)
+
+- city: Denver
+  country: USA
+  code: DEN
+  country_code: USA
+  start: Feb 2026
+  context: BasedHouse
+
+- city: Buenos Aires
+  country: Argentina
+  code: BUE
+  country_code: ARG
+  start: Nov 2025
+  end: Dec 2025
+  context: ETHGlobal Buenos Aires · Germina Labs
+
+- city: New Delhi
+  country: India
+  code: DEL
+  country_code: IND
+  start: Sep 2025
+  context: ETHGlobal New Delhi · Uniswap v4 workshop
+
+- city: New York
+  country: USA
+  code: NYC
+  country_code: USA
+  start: Aug 2025
+  context: ETHGlobal New York
+
+- city: Bhopal
+  country: India
+  code: BHO
+  country_code: IND
+  start: Apr 2025
+  context: Core Nexus Hackathon
+
+- city: New Delhi
+  country: India
+  code: DEL
+  country_code: IND
+  start: Mar 2025
+  context: EDUchain Regional Hackathon
+
+- city: Bengaluru
+  country: India
+  code: BLR
+  country_code: IND
+  start: Dec 2024
+  context: ETHIndia · Devcoin Hacker House
+
+- city: Bangkok
+  country: Thailand
+  code: BKK
+  country_code: THA
+  start: Oct 2024
+  end: Nov 2024
+  context: ETHGlobal Bangkok · Capx Casa · PoolParty · Superfluid
+
+- city: Singapore
+  country: Singapore
+  code: SIN
+  country_code: SGP
+  start: Sep 2024
+  context: ETHGlobal Singapore
+
+- city: Dharamshala
+  country: India
+  code: DHM
+  country_code: IND
+  start: Jul 2024
+  context: Arweave India Hacker House
+
+- city: Mumbai
+  country: India
+  code: BOM
+  country_code: IND
+  start: Mar 2024
+  context: ETHMumbai
+
+- city: Bengaluru
+  country: India
+  code: BLR
+  country_code: IND
+  start: Dec 2023
+  context: ETHIndia · Stackr Hacker House
+
+- city: Hyderabad
+  country: India
+  code: HYD
+  country_code: IND
+  start: Jan 2023
+  end: Apr 2023
+  context: IIIT Teaching Assistant
+
+- city: Montréal
+  country: Canada
+  code: YUL
+  country_code: CAN
+  start: May 2022
+  end: Jul 2022
+  context: Polytechnique Mitacs Research

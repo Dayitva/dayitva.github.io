@@ -1,0 +1,229 @@
+# Hackathon entries. Newest first within each role.
+# Fields:
+#   name         (built + workshop only) — project / workshop title
+#   event        (required) — hackathon name (rendered as the TITLE)
+#   date         (required) — e.g. "Nov 2024"
+#   role         (required) — one of: built | mentored | judged | both | workshop
+#   url          (optional) — ETHGlobal showcase / Devfolio / event page
+#   affiliation  (optional) — e.g. "Uniswap Foundation". On advisory rows it
+#                             renders inline as a title (e.g. "Uniswap Foundation
+#                             Mentor"). On role: workshop it renders as "— {X}" below
+#                             the workshop title.
+#   workshop_title   (optional) — your records only; not shown on the site
+#   workshop_youtube (optional) — on mentored/judged/both: chip after the role line
+#   demo         (optional) — deployed demo URL; renders as a gold chip
+#   youtube      (optional) — recording URL; renders as a gold chip
+#   sponsors     (optional) — sponsor prize tracks won against (built only)
+#   note         (optional) — e.g. "Finalist"
+
+# ---- BUILT ------------------------------------------------------------------
+- name: Cleverly Using Money
+  event: ETHGlobal Buenos Aires
+  date: Nov 2025
+  role: built
+  url: https://ethglobal.com/showcase/cleverly-using-money-pogqu
+  sponsors:
+    - 1inch
+  photos:
+    - assets/img/ETHGlobalPics/ETHGlobal Buenos Aires 2025/Me and Rashid after demo .jpg
+    - assets/img/ETHGlobalPics/ETHGlobal Buenos Aires 2025/During 1inch demo.jpg
+    - assets/img/ETHGlobalPics/ETHGlobal Buenos Aires 2025/During 1inch demo pt2.jpg
+
+- name: Waterfall
+  event: ETHGlobal New York
+  date: Aug 2025
+  role: built
+  url: https://ethglobal.com/showcase/waterfall-2ka35
+  sponsors:
+    - ASA
+    - Flow
+  photos:
+    - assets/img/ETHGlobalPics/ETHGlobal New York 2025/Hacker/Me and Divyansh after demo.jpg
+    - assets/img/ETHGlobalPics/ETHGlobal New York 2025/Hacker/Me and Divyansh at dinner.jpg
+    - assets/img/ETHGlobalPics/ETHGlobal New York 2025/Hacker/Me at breakfast.jpg
+
+- name: Liquid++
+  event: ETHGlobal Bangkok
+  date: Nov 2024
+  role: built
+  url: https://ethglobal.com/showcase/liquid-kzmsj
+  sponsors:
+    - 1inch
+  photos:
+    - assets/img/ETHGlobalPics/ETHGlobal Bangkok 2024/The entire team.jpg
+    - assets/img/ETHGlobalPics/ETHGlobal Bangkok 2024/Me, Melke and Divyansh.jpg
+    - assets/img/ETHGlobalPics/ETHGlobal Bangkok 2024/Me hacking.jpg
+
+- name: BetOnBuild
+  event: ETHGlobal Singapore
+  date: Sep 2024
+  role: built
+  url: https://ethglobal.com/showcase/betonbuild-rsvjq
+  sponsors:
+    - 1inch
+    - AirDao
+    - Flow
+    - Pyth
+    - WorldCoin
+  photos:
+    - assets/img/ETHGlobalPics/ETHGlobal Singapore 2024/Me and Lucifer after demo.jpg
+    - assets/img/ETHGlobalPics/ETHGlobal Singapore 2024/Playing TT.jpg
+    - assets/img/ETHGlobalPics/ETHGlobal Singapore 2024/Me playing TT pt.2.jpg
+
+- name: Price Feed Llama
+  event: AO Reality Protocol Quest
+  date: Aug 2024
+  role: built
+  url: https://x.com/dayitva_goel/status/1823030235362938981
+  sponsors:
+    - Reality Protocol
+
+- name: TinyRaise
+  event: ETHMumbai
+  date: Mar 2024
+  role: built
+  url: https://devfolio.co/projects/tinyraise-761c
+  sponsors:
+    - Purple DAO
+
+- name: Reputation MicroRollup
+  event: ETHIndia 2023
+  date: Dec 2023
+  role: built
+  url: https://ethglobal.com/showcase/reputation-microrollup-827e5
+  sponsors:
+    - 1inch
+    - Graph
+    - Scroll
+  photos:
+    - assets/img/ETHGlobalPics/ETHIndia 2023/Me and Richik after demo.jpg
+    - assets/img/ETHGlobalPics/ETHIndia 2023/SBF.jpg
+
+- name: AA Dashboard
+  event: SAAFE Hackathon
+  date: Oct 2023
+  role: built
+  url: https://github.com/Dayitva/aa-dashboard
+  sponsors:
+    - Safe
+    - Covalent
+
+- name: FlowFunds
+  event: ETHforAll
+  date: Mar 2023
+  role: built
+  url: https://devfolio.co/projects/flowfunds-9048
+  sponsors:
+    - Superfluid
+    - Arcana
+
+- name: SafeGuard
+  event: ETHIndia 2022
+  date: Dec 2022
+  role: built
+  url: https://ethglobal.com/showcase/safeguard-5uav2
+  youtube: https://www.youtube.com/live/9rieTya8Yds?t=4198s
+  sponsors:
+    - Top 10 Finalist
+    - Safe
+  photos:
+    - assets/img/ETHGlobalPics/ETHIndia 2022/After hackathon demo.jpg
+    - assets/img/ETHGlobalPics/ETHIndia 2022/Hackathon demo.jpg
+    - assets/img/ETHGlobalPics/ETHIndia 2022/Hackathon demo pt2.jpg
+    - assets/img/ETHGlobalPics/ETHIndia 2022/Finalists group pic.jpg
+
+# ---- MENTORED / JUDGED ------------------------------------------------------
+# No `name:` needed — the label is derived from `role` (and prefixed with the
+# affiliation when set).  e.g. role: both + affiliation: Uniswap Foundation
+# renders as "Uniswap Foundation Mentor & Judge".
+- event: ETHGlobal Cannes
+  date: Apr 2026
+  role: mentored
+  url: https://ethglobal.com/events/cannes2026
+  affiliation: Uniswap Labs
+
+- event: HackMoney 2026
+  date: Feb 2026
+  role: both
+  url: https://ethglobal.com/events/hackmoney2026
+  affiliation: Uniswap Labs
+
+- event: Octant DeFi Hackathon 
+  date: Nov 2025
+  role: both
+  url: https://octant.devfolio.co/
+  affiliation: Uniswap Foundation
+
+- event: ETHGlobal New Delhi
+  date: Sep 2025
+  role: both
+  url: https://ethglobal.com/events/newdelhi
+  affiliation: Uniswap Foundation
+  workshop_title: "Uniswap v4: Exploring New Possibilities"
+  workshop_youtube: https://www.youtube.com/watch?v=wcKtMV8Ek_c
+  photos:
+    - assets/img/ETHGlobalPics/ETHGlobal New Delhi 2025/Me at the booth.jpg
+    - assets/img/ETHGlobalPics/ETHGlobal New Delhi 2025/Workshop1.jpg
+    - assets/img/ETHGlobalPics/ETHGlobal New Delhi 2025/Workshop2.jpg
+    - assets/img/ETHGlobalPics/ETHGlobal New Delhi 2025/Workshop5.jpg
+    - assets/img/ETHGlobalPics/ETHGlobal New Delhi 2025/Workshop6.jpg
+
+- event: ETHGlobal New York
+  date: Aug 2025
+  role: mentored
+  url: https://ethglobal.com/events/newyork2025
+  affiliation: Uniswap Foundation
+  photos:
+    - assets/img/ETHGlobalPics/ETHGlobal New York 2025/Judge/Me at regs.jpg
+    - assets/img/ETHGlobalPics/ETHGlobal New York 2025/Judge/Talking at booth.jpg
+    - assets/img/ETHGlobalPics/ETHGlobal New York 2025/Judge/Me at booth pt.2.jpg
+
+- event: EulerSwap Builder Competition
+  date: Apr 2025
+  role: mentored
+  url: https://eulerswap.encode.club/
+  affiliation: Uniswap Foundation
+
+- event: Zora Coinathon
+  date: June 2025
+  role: mentored
+  url: https://coinathon.encode.club/
+  affiliation: Uniswap Foundation
+
+- event: Base Batches 001
+  date: May 2025
+  role: both
+  url: https://basebatches.xyz/
+  affiliation: Uniswap Foundation
+
+- event: ETHGlobal Taipei
+  date: Apr 2025
+  role: both
+  url: https://ethglobal.com/events/taipei
+  affiliation: Uniswap Foundation
+
+- event: Core Nexus Hackathon, Bhopal
+  date: Apr 2025
+  role: both
+  url: https://www.hackquest.io/hackathons/CoreNexus-Hackathon-Bhopal
+
+- event: EDUchain x HackQuest Regional Hackathon Delhi
+  date: Mar 2025
+  role: both
+  url: https://www.hackquest.io/hackathons/EDU-Chain-Semester-3
+
+- event: Eigen Games 2025
+  date: Feb 2025
+  role: both
+  url: https://x.com/eigencloud/status/1879936715470602725
+  affiliation: Uniswap Foundation
+
+- event: ETHIndia 2024
+  date: Dec 2024
+  role: mentored
+  url: https://ethglobal.com/events/ethindia2024
+
+- event: EDUchain x HackQuest Mega Co-Learning Camp
+  date: Dec 2024
+  role: both
+  url: https://www.hackquest.io/hackathons/EDU-Chain-Semester-3
