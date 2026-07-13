@@ -3,6 +3,10 @@ layout: Stylesheet
 --- 
 @import "fruity.css";
 
+::selection {
+    background-color: #e92026; /* The brand red */
+    color: #ffffff;
+}
 
 html,
 html[data-theme="light"] {
@@ -72,6 +76,8 @@ html[data-theme="dark"] {
     --primary-font-family: 'Fira Sans', sans-serif;
     --secondary-font-family: 'Fira Sans', sans-serif;
     --monospace-font-family: 'Fira Mono', monospace;
+    --ease-out-snappy: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-active-press: cubic-bezier(0.32, 0.94, 0.6, 1);
 }
 
 /* 02. Typography */
@@ -173,14 +179,45 @@ strong {
     font-weight: 600;
 }
 
-/* 03. Layout */
-
 html {
     scroll-behavior: smooth;
 }
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+
+
+/* Global Noise Overlay */
+.global-noise {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* 03. Layout */
 
 body {
     counter-reset: sidenote-counter;
+    transition: background-color 250ms ease-out, color 250ms ease-out, border-color 250ms ease-out;
+}
+@keyframes fade-in-up {
+    0% { opacity: 0; transform: translateY(12px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+header, 
+footer, 
+main,
+.manuscript, 
+.navbar,
+.mini-feed-row,
+.section-feed-row {
+    transition: background-color 250ms ease-out, color 250ms ease-out, border-color 250ms ease-out;
 }
 
 .section {
@@ -195,6 +232,14 @@ header {
 
 main {
     min-height: 300px;
+    transition: background-color 250ms ease-out, color 250ms ease-out, border-color 250ms ease-out, transform 300ms var(--ease-out-snappy), filter 300ms var(--ease-out-snappy);
+    transform-origin: center top;
+}
+
+body.lightbox-active main {
+    transform: scale(0.985);
+    filter: blur(1.5px);
+    pointer-events: none;
 }
 
 /* 04. Buttons*/
@@ -1861,6 +1906,7 @@ html[data-theme="light"] {
     --accent-red:     #B23A28;   /* minium / vermillion */
     --accent-gold:    #AE8423;   /* muted gold */
     --medallion-bg:   #F2EBD7;   /* always cream — the stamp frame */
+    --navbar-bg-translucent: rgba(242, 235, 215, 0.85);
 }
 
 html[data-theme="dark"] {
@@ -1875,6 +1921,7 @@ html[data-theme="dark"] {
     --accent-red:     #E77A64;
     --accent-gold:    #DAAE48;
     --medallion-bg:   #F2EBD7;   /* medallion stays cream — logos read against their own native bg */
+    --navbar-bg-translucent: rgba(28, 27, 23, 0.85);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -1891,6 +1938,7 @@ html[data-theme="dark"] {
         --accent-red:     #E77A64;
         --accent-gold:    #DAAE48;
         --medallion-bg:   #F2EBD7;
+        --navbar-bg-translucent: rgba(28, 27, 23, 0.85);
     }
     html[data-theme="light"] {
         --paper-bg:       #F2EBD7;
@@ -1904,6 +1952,7 @@ html[data-theme="dark"] {
         --accent-red:     #B23A28;
         --accent-gold:    #AE8423;
         --medallion-bg:   #F2EBD7;
+        --navbar-bg-translucent: rgba(242, 235, 215, 0.85);
     }
 }
 
@@ -1944,13 +1993,13 @@ body.manuscript .manuscript-page > .columns > .column {
 .manuscript .manuscript-numbered {
     font-family: 'EB Garamond', Georgia, 'Times New Roman', serif;
     font-size: 1.18rem;
-    line-height: 1.58;
+    line-height: 1.65;
     color: var(--paper-ink);
 }
 
 .manuscript .home-bio {
     font-size: 1.28rem;
-    line-height: 1.55;
+    line-height: 1.62;
     max-width: 36rem;
 }
 
@@ -1959,7 +2008,8 @@ body.manuscript .manuscript-page > .columns > .column {
 .manuscript .manuscript-page .jumbo {
     font-family: 'EB Garamond', Georgia, serif;
     font-weight: 500;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.025em;
+    line-height: 1.15;
     color: var(--paper-ink);
 }
 
@@ -1967,15 +2017,33 @@ body.manuscript .manuscript-page > .columns > .column {
 .manuscript h1, .manuscript h2, .manuscript h3, .manuscript h4, .manuscript h5, .manuscript h6 {
     color: var(--paper-ink);
 }
+.manuscript h1, .manuscript h2, .manuscript h3 {
+    letter-spacing: -0.025em;
+    line-height: 1.15;
+}
 
 .manuscript a:not(.navbar-item):not(.mini-feed-row):not(.mini-feed-more):not(.button):not(.sponsor-chip--link) {
     color: var(--accent-ink);
     text-decoration: none;
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.15s ease, color 0.15s ease;
+    position: relative;
+    font-weight: 500;
 }
-.manuscript a:not(.navbar-item):not(.mini-feed-row):not(.mini-feed-more):not(.button):not(.sponsor-chip--link):hover {
-    border-bottom-color: var(--accent-ink);
+.manuscript a:not(.navbar-item):not(.mini-feed-row):not(.mini-feed-more):not(.button):not(.sponsor-chip--link)::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    bottom: 0px;
+    left: 0;
+    background-color: var(--accent-ink);
+    transform: scaleX(0.2);
+    opacity: 0.5;
+    transform-origin: bottom left;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+}
+.manuscript a:not(.navbar-item):not(.mini-feed-row):not(.mini-feed-more):not(.button):not(.sponsor-chip--link):hover::after {
+    transform: scaleX(1);
+    opacity: 1;
 }
 
 /* Inline code + code blocks — mono, ink-on-paper, no bright colors */
@@ -2167,10 +2235,25 @@ body.manuscript .manuscript-page > .columns > .column {
     font-size: 0.7rem;
     letter-spacing: 0.1em;
     line-height: 1.4;
+    display: inline-block;
+    transition: transform 120ms var(--ease-active-press), color 200ms var(--ease-out-snappy);
+}
+.manuscript .mini-feed-more:active {
+    transform: scale(0.96);
 }
 .manuscript .mini-feed-row {
     border-bottom: 1px dotted var(--paper-hair);
-    padding: 0.8rem 0;
+    padding: 0.8rem 0.5rem;
+    margin: 0 -0.5rem;
+    border-radius: 6px;
+    transition: transform 180ms var(--ease-out-snappy), background-color 180ms var(--ease-out-snappy);
+}
+.manuscript .mini-feed-row:hover {
+    transform: translateY(-2px);
+    background-color: var(--paper-bg-deep);
+}
+.manuscript .mini-feed-row:active {
+    transform: translateY(-1px) scale(0.985);
 }
 .manuscript .mini-feed-row .mini-feed-title {
     font-family: 'EB Garamond', Georgia, serif;
@@ -2182,7 +2265,7 @@ body.manuscript .manuscript-page > .columns > .column {
 .manuscript .mini-feed-row .mini-feed-meta {
     font-family: 'JetBrains Mono', 'Fira Mono', monospace;
     font-size: 0.7rem;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--paper-ink-sub);
     line-height: 1.35;
@@ -2196,7 +2279,7 @@ body.manuscript .manuscript-page > .columns > .column {
     width: 22px;
     height: 22px;
     color: var(--accent-red);
-    transition: transform 0.35s ease, color 0.35s ease;
+    transition: transform 200ms var(--ease-out-snappy), color 200ms var(--ease-out-snappy);
 }
 .ring-marker circle {
     fill: none;
@@ -2216,7 +2299,17 @@ body.manuscript .manuscript-page > .columns > .column {
 .manuscript .section-feed-row {
     border-bottom-color: var(--paper-hair);
     align-items: flex-start;
-    padding: 1.1rem 0;
+    padding: 1.1rem 0.6rem;
+    margin: 0 -0.6rem;
+    border-radius: 8px;
+    transition: transform 220ms var(--ease-out-snappy), background-color 220ms var(--ease-out-snappy), box-shadow 220ms var(--ease-out-snappy);
+}
+.manuscript .section-feed-row:hover {
+    transform: translateY(-2px);
+    background-color: var(--paper-bg-deep);
+}
+.manuscript .section-feed-row:active {
+    transform: translateY(-1px) scale(0.99);
 }
 .manuscript .section-feed-aside {
     padding-top: 0.25rem;
@@ -2237,7 +2330,7 @@ body.manuscript .manuscript-page > .columns > .column {
 .manuscript .section-feed-meta {
     font-family: 'JetBrains Mono', 'Fira Mono', monospace;
     font-size: 0.72rem;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--paper-ink-sub);
 }
@@ -2342,10 +2435,15 @@ body.manuscript .manuscript-page > .columns > .column {
     text-decoration: none;
     letter-spacing: 0.12em;
     cursor: pointer;
+    display: inline-block;
+    transition: transform 120ms var(--ease-active-press), background 200ms var(--ease-out-snappy), color 200ms var(--ease-out-snappy);
 }
 .manuscript .sponsor-chip--link:hover {
     background: var(--accent-gold);
     color: var(--paper-bg);
+}
+.manuscript .sponsor-chip--link:active {
+    transform: scale(0.96);
 }
 
 .manuscript .sponsor-chip--prize {
@@ -2371,15 +2469,25 @@ body.manuscript .manuscript-page > .columns > .column {
     text-transform: uppercase;
     color: var(--paper-ink-sub);
     border-bottom: none;
+    display: inline-block;
+    transition: transform 120ms var(--ease-active-press), color 200ms var(--ease-out-snappy);
 }
 .manuscript .home-social a:hover {
     color: var(--paper-ink);
     border-bottom: 1px solid var(--paper-rule);
 }
+.manuscript .home-social a:active {
+    transform: scale(0.96);
+}
 
 /* Nav under manuscript skin — keep it quiet, printed-caption styled */
 .manuscript .navbar {
-    background: transparent;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: var(--navbar-bg-translucent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--paper-hair);
 }
 .manuscript .navbar-item {
@@ -2388,10 +2496,28 @@ body.manuscript .manuscript-page > .columns > .column {
     letter-spacing: 0.16em;
     text-transform: uppercase;
     color: var(--paper-ink-sub);
+    transition: transform 120ms var(--ease-active-press), color 200ms var(--ease-out-snappy);
+    position: relative;
+}
+.manuscript .navbar-item::after {
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 1px;
+    bottom: -2px;
+    left: 0;
+    background-color: var(--paper-ink);
+    transition: width 300ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.manuscript .navbar-item:hover::after {
+    width: 100%;
 }
 .manuscript .navbar-item:hover {
     color: var(--paper-ink);
     background: transparent;
+}
+.manuscript .navbar-item:active {
+    transform: scale(0.96);
 }
 .manuscript .navbar-brand h6 {
     font-family: 'EB Garamond', Georgia, serif;
@@ -2562,13 +2688,13 @@ body.manuscript .manuscript-page > .columns > .column {
 
 /* Subtle page-load reveal. One orchestrated moment, nothing else. */
 @keyframes ms-rise {
-    from { opacity: 0; transform: translateY(6px); }
-    to   { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; transform: translateY(8px) scale(0.985); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
 }
-.manuscript .home-intro        { animation: ms-rise 0.55s ease 0.05s both; }
-.manuscript .home-intro + .ornament { animation: ms-rise 0.55s ease 0.15s both; }
-.manuscript .mini-feed:nth-of-type(1) { animation: ms-rise 0.55s ease 0.25s both; }
-.manuscript .mini-feed:nth-of-type(2) { animation: ms-rise 0.55s ease 0.35s both; }
+.manuscript .home-intro        { animation: ms-rise 0.4s var(--ease-out-snappy) 0.03s both; }
+.manuscript .home-intro + .ornament { animation: ms-rise 0.4s var(--ease-out-snappy) 0.1s both; }
+.manuscript .mini-feed:nth-of-type(1) { animation: ms-rise 0.4s var(--ease-out-snappy) 0.18s both; }
+.manuscript .mini-feed:nth-of-type(2) { animation: ms-rise 0.4s var(--ease-out-snappy) 0.26s both; }
 
 /* A tiny piece of typographic detail — italicize "Finalist" inline notes
    and let them carry a red tinge, like a manuscript gloss. */
@@ -2588,75 +2714,150 @@ body.manuscript .manuscript-page > .columns > .column {
 }
 
 /* =====================================================================
-   Hackathon Photo Deck
+   Hackathon Photo Gallery
    ===================================================================== */
 
-.hackathon-photo-deck {
+.hackathon-photo-gallery {
     display: flex;
-    position: relative;
+    flex-wrap: wrap;
+    gap: 0.6rem;
     margin-top: 1rem;
-    height: 120px; /* Base height to reserve space */
     width: 100%;
     margin-bottom: 0.5rem;
-    perspective: 800px;
 }
 
-.hackathon-photo-wrap {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 160px;
-    height: 120px;
-    background: var(--paper-bg);
-    padding: 4px;
+.hackathon-gallery-thumb {
+    width: 120px;
+    height: 90px;
+    border-radius: 6px;
+    overflow: hidden;
     border: 1px solid var(--paper-hair);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), z-index 0s 0.1s;
-    transform-origin: center bottom;
-    /* Stacked look by default */
-    transform: rotate(var(--rotation)) translateX(0) scale(1);
+    background: var(--paper-bg);
+    padding: 3px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
     cursor: pointer;
+    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease;
+    transform-origin: center center;
 }
 
-.hackathon-photo {
+.hackathon-gallery-thumb:hover {
+    transform: translateY(-4px) scale(1.04);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+}
+
+.hackathon-gallery-img {
     width: 100%;
     height: 100%;
     margin: 0;
     object-fit: cover;
     display: block;
-    filter: sepia(0.2) contrast(0.9);
+    border-radius: 4px;
+    filter: sepia(0.1) contrast(0.95);
     transition: filter 0.3s ease;
 }
 
-/* Add a stacking context so hovered elements don't float over the page when scrolling */
-.manuscript .section-feed-row.hackathon-row {
-    position: relative;
-    z-index: 1;
-}
-.manuscript .section-feed-row.hackathon-row:hover {
-    z-index: 10;
-}
-
-/* On row hover, fan the photos out */
-.manuscript .section-feed-row.hackathon-row:hover .hackathon-photo-deck .hackathon-photo-wrap:nth-child(1) { transform: rotate(-8deg) translateX(0px); }
-.manuscript .section-feed-row.hackathon-row:hover .hackathon-photo-deck .hackathon-photo-wrap:nth-child(2) { transform: rotate(-2deg) translateX(70px); }
-.manuscript .section-feed-row.hackathon-row:hover .hackathon-photo-deck .hackathon-photo-wrap:nth-child(3) { transform: rotate(5deg) translateX(140px); }
-.manuscript .section-feed-row.hackathon-row:hover .hackathon-photo-deck .hackathon-photo-wrap:nth-child(4) { transform: rotate(12deg) translateX(210px); }
-.manuscript .section-feed-row.hackathon-row:hover .hackathon-photo-deck .hackathon-photo-wrap:nth-child(5) { transform: rotate(18deg) translateX(280px); }
-.manuscript .section-feed-row.hackathon-row:hover .hackathon-photo-deck .hackathon-photo-wrap:nth-child(6) { transform: rotate(22deg) translateX(330px); }
-.manuscript .section-feed-row.hackathon-row:hover .hackathon-photo-deck .hackathon-photo-wrap:nth-child(7) { transform: rotate(25deg) translateX(380px); }
-.manuscript .section-feed-row.hackathon-row:hover .hackathon-photo-deck .hackathon-photo-wrap:nth-child(n+8) { transform: rotate(28deg) translateX(420px); }
-
-/* On individual photo hover, scale up and bring to front */
-.manuscript .section-feed-row.hackathon-row .hackathon-photo-deck .hackathon-photo-wrap:hover {
-    transform: rotate(0deg) scale(1.6) translateY(-20px) !important;
-    z-index: 50 !important;
-    transition-delay: 0s;
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
-}
-
-.manuscript .section-feed-row.hackathon-row .hackathon-photo-deck .hackathon-photo-wrap:hover .hackathon-photo {
+.hackathon-gallery-thumb:hover .hackathon-gallery-img {
     filter: sepia(0) contrast(1.05);
+}
+
+/* =====================================================================
+   Lightbox Overlay Modal
+   ===================================================================== */
+
+.lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.88);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.lightbox.is-active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.lightbox-content {
+    position: relative;
+    max-width: 85%;
+    max-height: 85%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    animation: lightboxZoomIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes lightboxZoomIn {
+    from { transform: scale(0.95); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+#lightbox-img {
+    max-width: 100%;
+    max-height: 85vh;
+    margin: 0;
+    border-radius: 8px;
+    box-shadow: 0 12px 36px rgba(0,0,0,0.5);
+    object-fit: contain;
+}
+
+#lightbox-caption {
+    color: #fff;
+    margin-top: 1rem;
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+    text-align: center;
+}
+
+.lightbox-close,
+.lightbox-prev,
+.lightbox-next {
+    position: absolute;
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 2.5rem;
+    cursor: pointer;
+    transition: color 0.2s ease, transform 0.2s ease;
+    padding: 10px;
+    z-index: 2100;
+}
+
+.lightbox-close:hover,
+.lightbox-prev:hover,
+.lightbox-next:hover {
+    color: #fff;
+    transform: scale(1.1);
+}
+
+.lightbox-close {
+    top: 20px;
+    right: 20px;
+    font-size: 3rem;
+}
+
+.lightbox-prev {
+    left: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.lightbox-next {
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 /* =====================================================================
@@ -2816,18 +3017,19 @@ body.manuscript .manuscript-page > .columns > .column {
 }
 
 @media screen and (max-width: 768px) {
-    /* Scale down photo deck fanning */
-    .hackathon-photo-wrap:nth-child(1) { transform: rotate(-2deg); }
-    .hackathon-photo-wrap:nth-child(2) { transform: translate(4px, 4px) rotate(1deg); }
-    .hackathon-photo-wrap:nth-child(3) { transform: translate(8px, 8px) rotate(3deg); }
-    .hackathon-photo-wrap:nth-child(4) { transform: translate(12px, 12px) rotate(5deg); }
-    .hackathon-photo-wrap:nth-child(5) { transform: translate(16px, 16px) rotate(7deg); }
-    
-    .hackathon-photo-deck:hover .hackathon-photo-wrap:nth-child(1) { transform: translate(-30px, -5px) rotate(-6deg); }
-    .hackathon-photo-deck:hover .hackathon-photo-wrap:nth-child(2) { transform: translate(-10px, 0) rotate(-2deg); }
-    .hackathon-photo-deck:hover .hackathon-photo-wrap:nth-child(3) { transform: translate(10px, 5px) rotate(2deg); }
-    .hackathon-photo-deck:hover .hackathon-photo-wrap:nth-child(4) { transform: translate(30px, 10px) rotate(6deg); }
-    .hackathon-photo-deck:hover .hackathon-photo-wrap:nth-child(5) { transform: translate(50px, 15px) rotate(10deg); }
+    /* Responsive Lightbox Controls */
+    .lightbox-prev,
+    .lightbox-next {
+        display: none !important;
+    }
+    .lightbox-close {
+        top: 15px;
+        right: 15px;
+        font-size: 2.5rem;
+    }
+    .lightbox-content {
+        max-width: 95%;
+    }
 
     /* Books grid adjustment */
     .bookshelf {

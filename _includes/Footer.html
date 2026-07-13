@@ -30,6 +30,17 @@
 
 {%- if site.copyright.msg != nil and site.copyright.msg != empty and site.copyright.msg != null -%}
 <div id="copyright">
+    <!-- Small centered celestial dingbat glyph -->
+    <div class="footer-ornament" aria-hidden="true" style="display: flex; justify-content: center; margin-bottom: 1.2rem; color: var(--paper-ink-sub); opacity: 0.5;">
+        <svg viewBox="-8 -8 16 16" style="width: 16px; height: 16px; display: block;">
+            <circle r="4" fill="none" stroke="currentColor" stroke-width="1.1" />
+            <circle r="1.2" fill="currentColor" />
+            <g stroke="currentColor" stroke-width="1" fill="none">
+                <path d="M-7 0 L-5 0 M7 0 L5 0 M0 -7 L0 -5 M0 7 L0 5" />
+            </g>
+        </svg>
+    </div>
     <p id="copyright-notice"> {{site.copyright.year}} • {{site.copyright.msg}} </p>
 </div> 
 {%- endif -%}
+<div class="global-noise"></div>

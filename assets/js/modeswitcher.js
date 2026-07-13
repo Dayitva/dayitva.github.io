@@ -15,8 +15,10 @@ const iconMoon = "{{ site.baseurl }}/assets/img/moon.svg";
 
 
 function changeIconImgSrc(src) {
-	document.getElementById("theme-toggle-img").src = src;
-	document.getElementById("theme-toggle-img--mobile").src = src;
+	let desktopIcon = document.getElementById("theme-toggle-img");
+	let mobileIcon = document.getElementById("theme-toggle-img--mobile");
+	if (desktopIcon) desktopIcon.src = src;
+	if (mobileIcon) mobileIcon.src = src;
 }
 
 if (systemInitiatedDark.matches) {

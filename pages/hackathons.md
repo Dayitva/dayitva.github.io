@@ -42,25 +42,93 @@ Weekend builds, mostly at ETHGlobal — plus mentor and judge slots. Hover a row
 
 </div>
 
+<!-- Lightbox Modal Overlay -->
+<div id="hackathon-lightbox" class="lightbox" onclick="closeLightbox()">
+    <button class="lightbox-close" onclick="closeLightbox(event)" aria-label="Close lightbox">&times;</button>
+    <button class="lightbox-prev" onclick="changeLightboxImage(-1, event)" aria-label="Previous image">&#10094;</button>
+    <div class="lightbox-content" onclick="event.stopPropagation()">
+        <img id="lightbox-img" src="" alt="Hackathon full preview" />
+        <div id="lightbox-caption"></div>
+    </div>
+    <button class="lightbox-next" onclick="changeLightboxImage(1, event)" aria-label="Next image">&#10095;</button>
+</div>
+
 <script>
-function cycleHackathonPhotos(deck, event) {
-    // Prevent the link from triggering
+let currentGalleryImages = [];
+let currentImageIndex = 0;
+let currentEventTitle = "";
+
+function openLightbox(thumb, event) {
     event.preventDefault();
     event.stopPropagation();
+
+    let gallery = thumb.closest('.hackathon-photo-gallery');
+    let thumbs = Array.from(gallery.querySelectorAll('.hackathon-gallery-thumb'));
+    currentGalleryImages = Array.from(gallery.querySelectorAll('.hackathon-gallery-img')).map(img => img.src);
+    currentImageIndex = thumbs.indexOf(thumb);
     
-    // Find all photo wraps inside this deck
-    let wraps = Array.from(deck.querySelectorAll('.hackathon-photo-wrap'));
-    if (wraps.length <= 1) return;
+    let row = thumb.closest('.hackathon-row');
+    currentEventTitle = row.querySelector('.section-feed-title').textContent;
+
+    updateLightbox();
     
-    // The current top photo is the first one in the DOM.
-    // Move it to the end of the DOM.
-    let topPhoto = wraps[0];
-    deck.appendChild(topPhoto);
+    let lightbox = document.getElementById('hackathon-lightbox');
+    // Move lightbox to body root so it's outside <main> and won't be blurred/scaled
+    if (lightbox.parentElement !== document.body) {
+        document.body.appendChild(lightbox);
+    }
+    lightbox.classList.add('is-active');
+    lightbox.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden'; // prevent background scrolling
+    document.body.classList.add('lightbox-active');
+    // Also block navbar clicks
+    let navbar = document.querySelector('.navbar');
+    if (navbar) navbar.style.pointerEvents = 'none';
+
+    // Add keyboard listeners
+    document.addEventListener('keydown', handleLightboxKeydown);
+}
+
+function closeLightbox(event) {
+    if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+    }
+    let lightbox = document.getElementById('hackathon-lightbox');
+    lightbox.classList.remove('is-active');
+    lightbox.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = ''; // restore scrolling
+    document.body.classList.remove('lightbox-active');
+    // Restore navbar clicks
+    let navbar = document.querySelector('.navbar');
+    if (navbar) navbar.style.pointerEvents = '';
+    document.removeEventListener('keydown', handleLightboxKeydown);
+}
+
+function updateLightbox() {
+    let img = document.getElementById('lightbox-img');
+    let caption = document.getElementById('lightbox-caption');
     
-    // Re-assign z-indexes based on new DOM order so the stack continues to work properly
-    let newWraps = Array.from(deck.querySelectorAll('.hackathon-photo-wrap'));
-    newWraps.forEach((wrap, index) => {
-        wrap.style.zIndex = 10 - index;
-    });
+    img.src = currentGalleryImages[currentImageIndex];
+    caption.textContent = `${currentEventTitle} (${currentImageIndex + 1} / ${currentGalleryImages.length})`;
+}
+
+function changeLightboxImage(dir, event) {
+    if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+    }
+    currentImageIndex = (currentImageIndex + dir + currentGalleryImages.length) % currentGalleryImages.length;
+    updateLightbox();
+}
+
+function handleLightboxKeydown(event) {
+    if (event.key === 'Escape') {
+        closeLightbox();
+    } else if (event.key === 'ArrowLeft') {
+        changeLightboxImage(-1);
+    } else if (event.key === 'ArrowRight') {
+        changeLightboxImage(1);
+    }
 }
 </script>

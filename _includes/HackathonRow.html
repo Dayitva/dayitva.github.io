@@ -71,12 +71,10 @@
         </div>
         {%- endif -%}
         {%- if entry.photos -%}
-        <div class="hackathon-photo-deck" onclick="cycleHackathonPhotos(this, event)">
+        <div class="hackathon-photo-gallery">
             {%- for photo in entry.photos -%}
-                {%- assign rotate_deg = forloop.index0 | modulo: 5 | times: 3 | minus: 6 -%}
-                {%- if forloop.first -%}{%- assign rotate_deg = -4 -%}{%- endif -%}
-                <div class="hackathon-photo-wrap" style="--rotation: {{ rotate_deg }}deg; z-index: {{ 10 | minus: forloop.index0 }};">
-                    <img src="{{ photo | relative_url }}" class="hackathon-photo" alt="Hackathon photo" loading="lazy" />
+                <div class="hackathon-gallery-thumb" onclick="openLightbox(this, event)">
+                    <img src="{{ photo | relative_url }}" class="hackathon-gallery-img" alt="{{ entry.event }} photo" loading="lazy" />
                 </div>
             {%- endfor -%}
         </div>

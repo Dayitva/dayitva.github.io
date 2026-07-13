@@ -1,0 +1,326 @@
+---
+layout: null
+permalink: /deck/
+title: Deck
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dayitva Goel — Deck</title>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;800&family=Inter:wght@400;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #222;
+        }
+        .deck-viewport {
+            position: fixed;
+            inset: 0;
+            overflow: hidden;
+        }
+        .deck-stage {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 1920px;
+            height: 1080px;
+            overflow: hidden;
+            transform-origin: 0 0;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            background: white; /* fallback */
+        }
+        .slide {
+            position: absolute;
+            inset: 0;
+            display: none;
+        }
+        .slide.active {
+            display: flex;
+        }
+        ul { list-style-type: none; }
+        li { position: relative; padding-left: 30px; margin-bottom: 24px; font-size: 32px; line-height: 1.5;}
+        li::before { content: "•"; position: absolute; left: 0; font-weight: bold;}
+        
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .slide.visible .reveal {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal:nth-child(1) { transition-delay: 0.1s; }
+        .reveal:nth-child(2) { transition-delay: 0.2s; }
+        .reveal:nth-child(3) { transition-delay: 0.3s; }
+        .reveal:nth-child(4) { transition-delay: 0.4s; }
+        .reveal:nth-child(5) { transition-delay: 0.5s; }
+        .reveal:nth-child(6) { transition-delay: 0.6s; }
+
+        .nav-overlay {
+            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+            display: flex; gap: 20px; z-index: 100; background: rgba(0,0,0,0.5);
+            padding: 10px 20px; border-radius: 30px; backdrop-filter: blur(10px);
+            color: white; font-family: sans-serif;
+        }
+        .nav-overlay button {
+            background: none; border: none; color: white; cursor: pointer;
+            font-weight: bold; font-size: 16px;
+        }
+        .deck-home-link {
+            position: fixed;
+            top: 24px;
+            left: 28px;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            color: rgba(255, 255, 255, 0.85);
+            padding: 10px 18px;
+            border-radius: 999px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .deck-home-link:hover {
+            background: rgba(0, 0, 0, 0.85);
+            color: #fff;
+            transform: translateY(-1px);
+            border-color: rgba(255, 255, 255, 0.3);
+            opacity: 1;
+        }
+        
+        a {
+            color: inherit;
+            text-decoration: none;
+            border-bottom: 2px solid currentColor;
+            padding-bottom: 2px;
+            transition: opacity 0.2s;
+        }
+        a:hover {
+            opacity: 0.7;
+        }
+
+        
+        .theme-container { background: #f4f4f4; font-family: 'Inter', sans-serif; color: #111; padding: 100px; display: flex; flex-direction: column; width: 100%; height: 100%; position: relative;}
+        .slide { display: none; width: 100%; height: 100%; flex-direction: column; justify-content: center; background: #f4f4f4; }
+        .slide.active { display: flex; }
+        h1, h2, h3 { font-weight: 800; letter-spacing: -0.05em; text-transform: lowercase; }
+        h1 { font-size: 180px; line-height: 0.85; margin-bottom: 40px;}
+        h2 { font-size: 100px; margin-bottom: 40px; color: #e92026;}
+        h3 { font-size: 40px; margin-bottom: 20px; color: #0047b6;}
+        p { font-size: 32px; font-weight: 400; margin-bottom: 20px; max-width: 1200px; line-height: 1.4;}
+        li { font-size: 28px; line-height: 1.4; }
+        li::before { color: #fed300; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; max-width: 1400px;}
+        .shape-red { position: absolute; top: 80px; right: 80px; width: 250px; height: 250px; background: #e92026; border-radius: 50%; z-index: 0;}
+        .shape-blue { position: absolute; bottom: 80px; left: 80px; width: 500px; height: 80px; background: #0047b6; z-index: 0;}
+        .shape-yellow { position: absolute; bottom: 180px; right: 180px; width: 350px; height: 350px; background: #fed300; z-index: 0;}
+        
+        /* Fixed centered content align for left-aligned text inside container */
+        .centered-content { z-index: 10; position: relative; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: flex-start;}
+        
+        .item-box { padding: 30px; background: white; box-shadow: 10px 10px 0px #111; border: 4px solid #111; margin-bottom: 30px; }
+        .item-meta { font-size: 20px; font-weight: 700; color: #888; text-transform: uppercase; margin-bottom: 10px; }
+        .sub-text { font-size: 22px; color: #666; display: block; margin-top: 5px; }
+        
+        .work-card-link {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            border-bottom: none;
+            cursor: pointer;
+        }
+        .work-card-link:hover {
+            opacity: 1;
+        }
+        .work-card-link .item-box {
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s;
+        }
+        .work-card-link:hover .item-box {
+            transform: translate(-4px, -4px);
+            box-shadow: 14px 14px 0px #e92026;
+            border-color: #e92026;
+        }
+        .work-card-link:hover h3 {
+            color: #e92026;
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            z-index: 2000;
+        }
+        .progress-bar-fill {
+            height: 100%;
+            background: #e92026;
+            width: 0%;
+            transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Subtle Grain Overlay */
+        .grain-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+            opacity: 0.05;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+    
+    </style>
+</head>
+<body>
+    <div class="progress-bar"><div class="progress-bar-fill" id="progressFill"></div></div>
+    <div class="grain-overlay"></div>
+    <a href="/" class="deck-home-link">← Back to Site</a>
+    <div class="deck-viewport">
+        <main class="deck-stage" id="deckStage">
+            
+            <section class="slide ">
+                <div class="theme-container">
+                    <div class='shape-red'></div><div class='shape-blue'></div><div class='shape-yellow'></div>
+                    <div class="centered-content">
+                        <h1 class='reveal'>dayitva<br>goel</h1><p class='reveal' style='font-size:48px; font-weight: 700;'>web3 engineer &<br>developer support specialist.</p><p class='reveal' style='font-size: 28px;'>building the future of decentralized protocols and empowering developers<br>across the ethereum ecosystem.</p>
+                    </div>
+                </div>
+            </section>
+    
+
+            <section class="slide ">
+                <div class="theme-container">
+                    
+                    <div class="centered-content">
+                        <h2 class='reveal'>profile.</h2><p class='reveal' style='font-size: 42px; font-weight: 700; max-width: 1400px;'>i have deep experience across uniswap, smart contract development, security research, and developer education.</p><p class='reveal' style='font-size: 32px; color: #555; max-width: 1400px;'>i've worked closely with ecosystem teams on protocol integrations, developer tooling, technical documentation, and hackathon support across ethereum and related ecosystems.</p>
+                    </div>
+                </div>
+            </section>
+    
+
+            <section class="slide ">
+                <div class="theme-container">
+                    
+                    <div class="centered-content">
+                        <h2 class='reveal'>work.</h2><div class='grid-2'><div class='reveal'><a href="https://uniswap.org" target="_blank" rel="noopener" class="work-card-link"><div class='item-box'><div class='item-meta'>jan 2026 - apr 2026</div><h3>uniswap labs ↗</h3><p style='font-size:28px'>developer support consultant</p></div></a><a href="https://uniswapfoundation.org" target="_blank" rel="noopener" class="work-card-link"><div class='item-box'><div class='item-meta'>jan 2025 - dec 2025</div><h3>uniswap foundation ↗</h3><p style='font-size:28px'>developer support associate</p></div></a></div><div class='reveal'><a href="https://questbook.app" target="_blank" rel="noopener" class="work-card-link"><div class='item-box'><div class='item-meta'>jan 2023 - jun 2023</div><h3>questbook ↗</h3><p style='font-size:28px'>web3 swe intern</p></div></a><a href="https://github.com/Dayitva" target="_blank" rel="noopener" class="work-card-link"><div class='item-box'><div class='item-meta'>aug 2021 - jan 2023</div><h3>liquibrium ↗</h3><p style='font-size:28px'>co-founder</p></div></a></div></div>
+                    </div>
+                </div>
+            </section>
+    
+
+            <section class="slide ">
+                <div class="theme-container">
+                    
+                    <div class="centered-content">
+                        <h2 class='reveal'>community.</h2><div class='grid-2'><div class='reveal'><h3>fellowships</h3><ul><li><strong>antler india</strong><br><span class='sub-text'>selected for the first cohort (8 out of 2,400+ applications).</span></li><li><strong>tezos india 2.0</strong><br><span class='sub-text'>8-week program selecting 30 fellows to build on tezos.</span></li><li><strong>gitcoin kernel block 3</strong><br><span class='sub-text'>gathering ~250 builders to connect and ship together.</span></li></ul></div><div class='reveal'><h3>volunteering</h3><ul><li><strong>stanford code in place</strong><br><span class='sub-text'>section leader (2021-2026)<br>taught python to weekly sections of 8-10 students worldwide, ran student hangouts, and gave feedback.</span></li></ul></div></div>
+                    </div>
+                </div>
+            </section>
+    
+
+            <section class="slide ">
+                <div class="theme-container">
+                    
+                    <div class="centered-content">
+                        <h2 class='reveal'>hackathons.</h2><div class='grid-2'><div class='reveal'><h3>built</h3><ul><li><strong><a href='https://ethglobal.com/showcase/cleverly-using-money-pogqu' target='_blank' rel='noopener'>cleverly using money ↗</a></strong> — ethglobal buenos aires</li><li><strong><a href='https://ethglobal.com/showcase/liquid-kzmsj' target='_blank' rel='noopener'>liquid++ ↗</a></strong> — ethglobal bangkok</li><li><strong><a href='https://ethglobal.com/showcase/betonbuild-rsvjq' target='_blank' rel='noopener'>betonbuild ↗</a></strong> — ethglobal singapore</li><li><strong><a href='https://ethglobal.com/showcase/reputation-microrollup-827e5' target='_blank' rel='noopener'>reputation microrollup ↗</a></strong> — ethindia</li><li><strong><a href='https://ethglobal.com/showcase/safeguard-5uav2' target='_blank' rel='noopener'>safeguard ↗</a></strong> — ethindia (top 10 finalist)</li></ul></div><div class='reveal'><h3>mentored</h3><ul><li><strong><a href='/hackathons' target='_blank' rel='noopener'>ethglobal hackathons ↗</a></strong><br><span class='sub-text'>cannes, new delhi, new york, taipei</span></li><li><strong><a href='/hackathons' target='_blank' rel='noopener'>hackmoney 2026 ↗</a></strong></li><li><strong><a href='/hackathons' target='_blank' rel='noopener'>octant defi hackathon ↗</a></strong></li><li><strong><a href='/hackathons' target='_blank' rel='noopener'>base batches 001 ↗</a></strong></li></ul></div></div>
+                    </div>
+                </div>
+            </section>
+    
+
+            <section class="slide ">
+                <div class="theme-container">
+                    <div class='shape-red'></div><div class='shape-blue'></div><div class='shape-yellow'></div>
+                    <div class="centered-content">
+                        <h1 class='reveal'>contact<br>me.</h1><ul class='reveal' style='font-size:36px; line-height: 2;'><li>github: <strong><a href='https://github.com/Dayitva'>github.com/dayitva</a></strong></li><li>x: <strong><a href='https://x.com/dayitvagoel'>x.com/dayitvagoel</a></strong></li><li>linkedin: <strong><a href='https://linkedin.com/in/dayitvagoel'>linkedin.com/in/dayitvagoel</a></strong></li><li>email: <strong><a href='mailto:dayitvagoel@gmail.com'>dayitvagoel@gmail.com</a></strong></li></ul>
+                    </div>
+                </div>
+            </section>
+    
+        </main>
+    </div>
+    <div class="nav-overlay">
+        <button onclick="slides.prev()">← Prev</button>
+        <span id="slideCounter">1 / 6</span>
+        <button onclick="slides.next()">Next →</button>
+    </div>
+    <script>
+        
+        class SlidePresentation {
+            constructor() {
+                this.slides = document.querySelectorAll('.slide');
+                this.currentSlide = 0;
+                this.stage = document.getElementById('deckStage');
+                this.counter = document.getElementById('slideCounter');
+                this.progressFill = document.getElementById('progressFill');
+                
+                this.setupStageScale();
+                this.setupKeyboardNav();
+                this.setupParallax();
+                
+                window.addEventListener('resize', () => this.setupStageScale());
+                setTimeout(() => this.showSlide(0), 100);
+            }
+
+            setupStageScale() {
+                const factor = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+                const x = (window.innerWidth - 1920 * factor) / 2;
+                const y = (window.innerHeight - 1080 * factor) / 2;
+                this.stage.style.transform = `translate(${x}px, ${y}px) scale(${factor})`;
+            }
+
+            setupKeyboardNav() {
+                window.addEventListener('keydown', (e) => {
+                    if (e.key === 'ArrowRight' || e.key === 'Space' || e.key === 'PageDown') this.next();
+                    else if (e.key === 'ArrowLeft' || e.key === 'PageUp') this.prev();
+                    else if (e.key === 'Escape') window.location.href = '/';
+                });
+            }
+            
+            setupParallax() {
+                document.addEventListener('mousemove', (e) => {
+                    const cx = window.innerWidth / 2;
+                    const cy = window.innerHeight / 2;
+                    const dx = (e.clientX - cx) / cx;
+                    const dy = (e.clientY - cy) / cy;
+                    
+                    document.querySelectorAll('.shape-red').forEach(el => el.style.transform = `translate(${dx * -40}px, ${dy * -40}px)`);
+                    document.querySelectorAll('.shape-blue').forEach(el => el.style.transform = `translate(${dx * 30}px, ${dy * 30}px)`);
+                    document.querySelectorAll('.shape-yellow').forEach(el => el.style.transform = `translate(${dx * -20}px, ${dy * -20}px)`);
+                });
+            }
+
+            showSlide(index) {
+                if (index < 0 || index >= this.slides.length) return;
+                this.slides.forEach(s => s.classList.remove('active', 'visible'));
+                this.currentSlide = index;
+                this.slides[index].classList.add('active');
+                if (this.counter) this.counter.textContent = `${index + 1} / ${this.slides.length}`;
+                if (this.progressFill) this.progressFill.style.width = `${(index / (this.slides.length - 1)) * 100}%`;
+                setTimeout(() => this.slides[index].classList.add('visible'), 50);
+            }
+
+            next() { if (this.currentSlide < this.slides.length - 1) this.showSlide(this.currentSlide + 1); }
+            prev() { if (this.currentSlide > 0) this.showSlide(this.currentSlide - 1); }
+        }
+        const slides = new SlidePresentation();
+
+    </script>
+</body>
+</html>

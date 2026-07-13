@@ -114,6 +114,8 @@ exclude:
   - debug.yml
   - blog.code-workspace
   - LICENSE
+  - _scratch/
+  - utilities/
   - _notes/000 Inbox
   - _notes/200 Private
   - _notes/300 Templates
@@ -123,7 +125,4 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - node_modules/
-  - vendor/bundle/
-  - vendor/cache/
-  - vendor/gems/
-  - vendor/ruby/
+  - vendor/
