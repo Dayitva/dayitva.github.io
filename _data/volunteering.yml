@@ -1,47 +1,44 @@
 # Volunteering, newest first.
 # Add `certificate: https://...` to any entry to render a "↗ certificate" chip.
-- org: Code in Place
+# For a role repeated across years, list each run under `cohorts:` instead.
+# `url` (optional) renders a "↗ profile" chip.
+- org: Code in Place · Stanford University
   role: Section Leader
-  start: Apr 2026
-  end: May 2026
-  category: Education
-  note: Currently volunteering
-  logo: /assets/img/logos/code-in-place.jpg
-  # certificate not issued yet for 2026
-
-- org: Code in Place
-  role: Section Leader
-  start: Apr 2025
-  end: May 2025
+  start: "2021"
+  end: "2026"
   category: Education
   logo: /assets/img/logos/code-in-place.jpg
-  certificate: https://digitalcredential.stanford.edu/check/FB83A759ED7510F51E5AD3A60CA15AF47063AEA7E0A769FC90F27EFE7334C473dDluY2ZxSkVpdnhNOWhKU0NBY0pGdmRVbEtaKzZBdkJRQ2ZrNVFrWUdFNXRDOHkv
-
-- org: Code in Place
-  role: Section Leader
-  start: Apr 2024
-  end: May 2024
-  category: Education
-  logo: /assets/img/logos/code-in-place.jpg
-  certificate: https://digitalcredential.stanford.edu/check/E45BD828ED5F87F34F203290AD1329A38BA99FDEEA01223CA758EC9F8E2874ABK2F5dlluNjBXMUxVeW43UmVDWGFHM0diNlVsSWRQSFN5T2FpS2k4UU5nSWlWRTMw
-
-- org: Code in Place
-  role: Section Leader
-  start: Apr 2023
-  end: May 2023
-  category: Education
-  logo: /assets/img/logos/code-in-place.jpg
-  certificate: https://digitalcredential.stanford.edu/check/D6B2421B3397F3127CCAA834FA3714BA1A98CE865C2C437512A9C62C3692C0C3YlZBaHJ3bXNLdDRqR0xpU2M1ZVErUFZGblRpRzQrSEpPNFh2dElPK1JRMXBYWldM
-
-- org: "Stanford University: Code in Place"
-  role: Section Leader
-  start: Apr 2021
-  end: May 2021
-  category: Education
   blurb: >-
-    A 6-week intro to Python (based on the first half of Stanford's CS106A), offered
-    online during the pandemic to 12,000 students and 1,100 volunteer teachers worldwide.
-    Prepared and taught a weekly section of 8-10 students, ran student hangouts,
-    and gave feedback on assignments.
-  logo: /assets/img/logos/code-in-place.jpg
-  certificate: # PASTE 2021 CERT URL
+    Stanford University's 6-week intro to Python (based on the first half of CS106A).
+    In every cohort, I prepared and taught a weekly section
+    of 10-12 students, ran student hangouts, and gave feedback on assignments.
+  # One row per cohort. `certificate` renders the year as a link chip;
+  # leave it blank and the year renders as a plain chip.
+  cohorts:
+    - year: 2026
+      dates: Apr – May 2026
+      certificate: https://digitalcredential.stanford.edu/check/42606F32A5D4CD4983B08C42D6727CA7EB649EFAD55202D60EA166A0D2C069E5TW9hakNYUUNmaGozU1hJbVhGczV3WE1RTGF1dUtRUDhqMXRTSHBKQ1J3R3kwYWRU
+    - year: 2025
+      dates: Apr – May 2025
+      certificate: https://digitalcredential.stanford.edu/check/FB83A759ED7510F51E5AD3A60CA15AF47063AEA7E0A769FC90F27EFE7334C473dDluY2ZxSkVpdnhNOWhKU0NBY0pGdmRVbEtaKzZBdkJRQ2ZrNVFrWUdFNXRDOHkv
+    - year: 2024
+      dates: Apr – May 2024
+      certificate: https://digitalcredential.stanford.edu/check/E45BD828ED5F87F34F203290AD1329A38BA99FDEEA01223CA758EC9F8E2874ABK2F5dlluNjBXMUxVeW43UmVDWGFHM0diNlVsSWRQSFN5T2FpS2k4UU5nSWlWRTMw
+    - year: 2023
+      dates: Apr – May 2023
+      certificate: https://digitalcredential.stanford.edu/check/D6B2421B3397F3127CCAA834FA3714BA1A98CE865C2C437512A9C62C3692C0C3YlZBaHJ3bXNLdDRqR0xpU2M1ZVErUFZGblRpRzQrSEpPNFh2dElPK1JRMXBYWldM
+    - year: 2021
+      dates: Apr – May 2021
+      certificate: # PASTE 2021 CERT URL
+
+- org: Schoolhouse.world
+  role: Volunteer Tutor
+  start: Jun 2021
+  end: Present
+  category: Education
+  url: https://schoolhouse.world/u/18514
+  logo: /assets/img/logos/schoolhouse.png
+  blurb: >-
+    Free peer tutoring for learners worldwide. Certified to tutor Trigonometry and
+    Pre-Calculus, with honorary SAT Prep certifications; hosted 4 sessions reaching
+    11 learners across 6 countries.

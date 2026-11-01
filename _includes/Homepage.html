@@ -1,8 +1,8 @@
 <div class="home-intro">
     <div class="home-intro-text">
-        <div class="jumbo">{{ site.data.about.name }}</div>
-        <div class="home-sub-text"><h3>{{ site.data.about.tagline }}</h3></div>
-        <p class="home-bio drop-cap">{{ site.data.about.bio }}</p>
+        <h1 class="jumbo">{{ site.data.about.name | downcase | replace: " ", "<br>" }}<span class="jumbo-dot">.</span></h1>
+        <p class="home-tagline">{{ site.data.about.tagline | downcase | replace: " | ", " &amp;<br>" }}</p>
+        <p class="home-bio">{{ site.data.about.bio }}</p>
         <div class="home-social">
         {%- for link in site.data.social -%}
             {%- if link.url and link.url != "" -%}
@@ -11,14 +11,16 @@
         {%- endfor -%}
         </div>
     </div>
-    <div class="home-intro-sigil">
-        <div class="hero-sigil-frame" aria-hidden="true">
-            {% include Sigil.html %}
-        </div>
+    <div class="home-shapes" aria-hidden="true">
+        <span class="shape shape-red"></span>
+        <span class="shape shape-yellow"></span>
+        <span class="shape shape-blue"></span>
     </div>
 </div>
 
 {% include Ornament.html %}
+
+<div class="home-feeds">
 
 <section class="mini-feed">
     <div class="mini-feed-head">
@@ -38,8 +40,6 @@
         {%- endif -%}
     {%- endfor -%}
 </section>
-
-{% include Ornament.html %}
 
 <section class="mini-feed">
     <div class="mini-feed-head">
@@ -65,22 +65,22 @@
         {%- endif -%}
     {%- endfor -%}
 </section>
+</div>
 
 <script>
-    // Subtle cursor-reactive tilt on a wrapper (not the SVG root) so inner
-    // CSS keyframe rotations keep a stable origin and nothing clips the viewBox.
+    // Same cursor parallax as the deck: each shape drifts at its own rate.
     (function () {
-        var frame = document.querySelector('.hero-sigil-frame');
-        if (!frame) return;
+        var shapes = document.querySelectorAll('.home-shapes .shape');
+        if (!shapes.length) return;
         if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-        var maxRot = 8; // degrees
+        var rates = { 'shape-red': -24, 'shape-yellow': -12, 'shape-blue': 18 };
         window.addEventListener('mousemove', function (e) {
-            var rect = frame.getBoundingClientRect();
-            var cx = rect.left + rect.width / 2;
-            var cy = rect.top + rect.height / 2;
-            var dx = (e.clientX - cx) / window.innerWidth;
-            var dy = (e.clientY - cy) / window.innerHeight;
-            frame.style.transform = 'rotate(' + (dx * maxRot).toFixed(2) + 'deg) translate(' + (dx * 4).toFixed(2) + 'px,' + (dy * 4).toFixed(2) + 'px)';
+            var dx = (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2);
+            var dy = (e.clientY - window.innerHeight / 2) / (window.innerHeight / 2);
+            shapes.forEach(function (el) {
+                var r = rates[el.classList[1]] || 0;
+                el.style.transform = 'translate(' + (dx * r).toFixed(1) + 'px,' + (dy * r).toFixed(1) + 'px)';
+            });
         }, { passive: true });
     })();
 </script>

@@ -52,6 +52,8 @@ Structured content lives in `_data/` so new entries are one-line YAML edits, not
 - `_data/volunteering.yml` — volunteering list (same include, `kind="volunteering"`).
 - `_data/hackathons.yml` — rendered on /hackathons and as "Recent builds" on the homepage.
 - `_data/hacker_houses.yml` — rendered on /hacker-houses.
+- `_data/books.yml` — rendered on /books. Generated, not hand-edited: export your Goodreads library as CSV to `utilities/goodreads_library_export.csv` (gitignored) and run `python3 utilities/import_goodreads_csv.py`. The older RSS fetcher, `utilities/fetch_books.py`, has returned 404 since Nov 2026.
+- `_data/projects.yml` — side projects, rendered on /projects/ (`kind="project"`). Standalone apps live as plain static files under `projects/<slug>/` (no front matter, so Jekyll copies them untouched) and the data entry links to them. `/projects/` has a trailing slash on purpose: `_layouts/Post.html` has a legacy branch keyed on the exact permalink `/projects` that renders the empty `_posts` feed.
 
 `_includes/SectionFeed.html` is the single dispatcher — it takes `data=` and `kind=` and branches per kind. To add a new section type, add a new `when` clause there + a matching block in the `content-type: section` branch of `_layouts/Post.html`.
 
@@ -86,17 +88,20 @@ Markdown is parsed as GFM via kramdown (`kramdown.input: GFM`), with Rouge synta
 
 Math is rendered **client-side by KaTeX auto-render** (loaded from jsdelivr in `_layouts/Post.html`). Delimiters: `$...$` for inline, `$$...$$` for display. Although `_config.yml` sets `math_engine: katex` for kramdown, the kramdown-katex pre-renderer is not reliably available in the GitHub Pages gem set, so the raw LaTeX passes through unchanged and the client-side script renders it at page load. Do not re-add MathJax — the old `cdn.mathjax.org/mathjax/latest` URL is dead and the gzipped `kramdown-math-katex` path silently drops the math.
 
-### Design language (April 2026 redesign)
+### Design language (November 2026: Swiss)
 
-The site presents as a printed manuscript — paper-textured background, serif body (EB Garamond), monospaced captions (JetBrains Mono), monochrome ink. Concentric-ring "sigils" are the recurring visual motif (math + Sufi geometry). Everything grayscale so dark mode inverts cleanly.
+The site matches the deck at `/deck` (`presentation.html`): Swiss / Bauhaus style. Inter only (JetBrains Mono for code), heavy lowercase headings with a red trailing period, red / blue / yellow primaries on a light-gray ground, and hard-edged white cards with a 3px ink border and a 6px offset shadow that turns red on hover. Dark mode swaps the ground and ink; the primaries stay.
+
+All of it lives in `assets/css/swiss.css`, loaded last in `_layouts/Post.html`. It re-skins the older manuscript styles at the bottom of `assets/css/style.css` instead of editing them, and points the old `--paper-*` / `--color-*` tokens at its own `--sw-*` tokens so unrestyled pages still match. When adding components, use the `--sw-*` tokens; a new hex color is almost always a mistake.
 
 Key partials:
-- `_includes/Sigil.html` — the big counter-rotating concentric-rings SVG used on the homepage. Cursor-reactive via a small inline script in `Homepage.html`.
-- `_includes/Ornament.html` — section divider glyph (four-lobed dingbat with hairlines).
-- `_includes/RingMarker.html` — small three-ring bullet used before every feed row.
+- `_includes/Homepage.html` — hero: giant lowercase name, plus the deck's three shapes (red disc, yellow square, blue bar) with the same cursor parallax.
+- `_includes/Ornament.html` — section divider: those three shapes in miniature.
+- `_includes/RingMarker.html` — the small red square bullet before feed rows (the name is historical).
+- `_includes/Sigil.html` — the old concentric-rings hero; no longer included anywhere.
 
-CSS tokens for the manuscript look live under a `.manuscript` scope at the bottom of `assets/css/style.css` — `--paper-bg`, `--paper-ink`, `--paper-ink-sub`, `--paper-rule`, `--paper-hair`, `--silver`. These override the original `--color-*` tokens inside content areas only; nav chrome and existing notes layouts pick them up automatically. When adding new components, stay inside this token set — introducing a new hex color is almost always a mistake.
+Section headings (`.manuscript-numbered .section-heading`) render as big red lowercase words with a `01`, `02`… counter. These are opt-in per page.
 
-Section numbering (`§1.1`, `§2.1`…) is driven by CSS counters on `.manuscript-numbered .section-heading`. The drop cap on the first paragraph is `.drop-cap::first-letter`. These are opt-in per page.
+Work-experience logos use Simple Icons via jsdelivr (`cdn.jsdelivr.net/npm/simple-icons@v11/icons/<slug>.svg`) or files in `assets/img/logos/`; companies without a logo fall back to a single-letter monogram tile (`.row-emblem.monogram`).
 
-Work-experience logos use Simple Icons via jsdelivr (`cdn.jsdelivr.net/npm/simple-icons@v11/icons/<slug>.svg`); companies without a brand in that set fall back to a single-letter monogram inside a circle (`.row-emblem.monogram`).
+Volunteering entries that repeat across years use a `cohorts:` list (year, dates, certificate) instead of separate entries; `SectionFeed.html` renders each year as a chip, linked when a certificate exists.

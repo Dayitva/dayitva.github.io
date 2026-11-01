@@ -6,6 +6,6 @@ content-type: section
 section: hacker_houses
 ---
 
-Longer residencies — fellowships, guild seasons, a few weeks-long houses. Usually a project came out of each.
+Longer residencies, guild seasons, a few weeks-long houses.
 
 {% include Ornament.html %}

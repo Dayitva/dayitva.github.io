@@ -66,7 +66,7 @@
         {%- if entry.sponsors -%}
         <div class="sponsor-chips">
             {%- for s in entry.sponsors -%}
-                <span class="sponsor-chip sponsor-chip--prize">🥇 {{ s }}</span>
+                <span class="sponsor-chip sponsor-chip--prize"><span class="prize-medal" aria-hidden="true">🥇</span>{{ s }}</span>
             {%- endfor -%}
         </div>
         {%- endif -%}

@@ -7,7 +7,7 @@ content-type: static
 
 <div class="manuscript-numbered">
 
-Weekend builds, mostly at ETHGlobal — plus mentor and judge slots. Hover a row to see the sponsors the team shipped against.
+Weekend builds, mostly at ETHGlobal — plus mentor and judge slots.
 
 {% include Ornament.html %}
 

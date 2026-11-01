@@ -1,0 +1,1383 @@
+/* ==========================================================================
+   1. Design Tokens & Core Settings (Minimalist Clean Web UI)
+   ========================================================================== */
+:root {
+  --bg-web: #f4f7f9; /* Soft cool off-white bank portal bg */
+  --bg-card: #ffffff;
+  --text-main: #111111;
+  --text-muted: #334155;
+  --text-light: #64748b;
+  --sbi-blue: #0072bc; /* State Bank of India Corporate Blue */
+  --sbi-blue-dark: #005a96;
+  --sbi-cyan: #00b1ec; /* State Bank of India Logo Cyan */
+  --accent: var(--sbi-blue);
+  --accent-hover: var(--sbi-blue-dark);
+  --border-color: #cbd5e1;
+  --focus-outline: var(--sbi-blue);
+  
+  /* Passbook Theme (Dot-Matrix Ink) */
+  --passbook-paper: #fbf8f0; /* Warm off-white paper */
+  --passbook-ink: #232b70; /* Authentic violet-blue ink */
+  --passbook-ink-faded: rgba(35, 43, 112, 0.75);
+  --passbook-stamp-blue: rgba(28, 48, 144, 0.8);
+  --passbook-stamp-purple: rgba(85, 34, 119, 0.75);
+  --passbook-watermark: rgba(27, 122, 156, 0.05);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: var(--bg-web);
+  color: var(--text-main);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Visually Hidden Utility for Accessibility */
+.visually-hidden {
+  position: absolute;
+  clip-path: inset(50%);
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  white-space: nowrap;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ==========================================================================
+   2. Buttons & Inputs (Clean & Minimalist, No Gradients)
+   ========================================================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 0.75rem 1.25rem;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-height: 44px;
+}
+
+.btn-primary {
+  background-color: var(--accent);
+  color: #ffffff;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: var(--accent-hover);
+}
+
+.btn-primary:disabled {
+  background-color: var(--text-light);
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background-color: #ffffff;
+  color: var(--text-main);
+  border-color: var(--border-color);
+}
+
+.btn-secondary:hover {
+  background-color: #f8fafc;
+  border-color: var(--text-light);
+}
+
+.btn-icon {
+  background-color: #ffffff;
+  color: var(--text-main);
+  border: 1px solid var(--border-color);
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  font-size: 1.1rem;
+  padding: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.btn-icon:hover:not(:disabled) {
+  background-color: #f8fafc;
+  border-color: var(--text-light);
+}
+
+.btn-icon:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+}
+
+/* Currency Selector in Header */
+.currency-toggle {
+  display: inline-flex;
+  background-color: #f1f5f9;
+  padding: 2px;
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+  margin-right: 1.25rem;
+}
+
+.currency-btn {
+  background: none;
+  border: none;
+  padding: 0.4rem 0.9rem;
+  font-family: inherit;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 3px;
+  color: var(--text-light);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.currency-btn:hover {
+  color: var(--text-main);
+}
+
+.currency-btn.active {
+  background-color: #ffffff;
+  color: var(--text-main);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+/* ==========================================================================
+   3. Web UI Layout & Components
+   ========================================================================== */
+.app-header {
+  background-color: var(--sbi-blue);
+  color: #ffffff;
+  border-bottom: 3px solid var(--sbi-cyan);
+  padding: 0.8rem 2rem;
+  box-shadow: 0 4px 12px rgba(0, 114, 188, 0.15);
+}
+
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo-area {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.sbi-symbol-header {
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+}
+
+.sbi-header-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.sbi-header-text .hindi-title {
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  font-size: 1.15rem;
+  color: #ffffff;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+}
+
+.sbi-header-text .english-title {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.85);
+  letter-spacing: 0.05em;
+  line-height: 1.1;
+}
+
+/* Header Action Buttons & Togglers overridden for blue background */
+.app-header .currency-toggle {
+  background-color: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.app-header .currency-btn {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.app-header .currency-btn:hover {
+  color: #ffffff;
+}
+
+.app-header .currency-btn.active {
+  background-color: #ffffff;
+  color: var(--sbi-blue);
+}
+
+.app-header #print-btn {
+  background-color: transparent;
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.app-header #print-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: #ffffff;
+}
+
+.app-container {
+  max-width: 1200px;
+  margin: 2.5rem auto;
+  padding: 0 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Search Bar Section */
+.search-section {
+  max-width: 750px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.search-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.search-form .input-group {
+  display: flex;
+  width: 100%;
+  border-radius: 4px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+}
+
+.search-form input[type="text"] {
+  flex-grow: 1;
+  border: 1px solid var(--border-color);
+  border-right: none;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+  padding: 0.75rem 1.25rem;
+  font-size: 0.95rem;
+  outline: none;
+  min-height: 48px;
+  font-family: inherit;
+  background-color: #ffffff;
+}
+
+.search-form input[type="text"]:focus {
+  border-color: var(--text-light);
+}
+
+.search-form .btn-primary {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  height: 48px;
+}
+
+.search-error-msg {
+  color: #dc2626;
+  font-size: 0.8rem;
+  min-height: 18px;
+  margin-top: 0.2rem;
+}
+
+/* Loading Spinner */
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Workspace Panels (Centered Single Column) */
+.workspace {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+/* Web Footer */
+.app-footer {
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-light);
+  font-size: 0.75rem;
+  border-top: 1px solid var(--border-color);
+  background-color: #ffffff;
+  margin-top: auto;
+}
+
+/* ==========================================================================
+   4. Passbook Book Container and Navigation Controls
+   ========================================================================== */
+.passbook-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 1350px;
+}
+
+.book-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff;
+  padding: 0.75rem 1.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.01);
+}
+
+.segmented-control {
+  display: flex;
+  background-color: #f1f5f9;
+  padding: 2px;
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+}
+
+.control-tab {
+  background: none;
+  border: none;
+  padding: 0.4rem 1rem;
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: 500;
+  border-radius: 3px;
+  color: var(--text-light);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.control-tab.active {
+  background-color: #ffffff;
+  color: var(--text-main);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.pagination-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.page-display {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  min-width: 80px;
+  text-align: center;
+}
+
+/* ==========================================================================
+   5. Vertical Flip Booklet Canvas (The Physical Passbook)
+   ========================================================================== */
+.passbook-outer-wrapper {
+  perspective: 1800px; /* Enhanced 3D perspective */
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+/* The actual physical book mockup container for PageFlip */
+.passbook-booklet {
+  display: block;
+  margin: 0 auto;
+}
+
+.page {
+  background-color: var(--passbook-paper);
+  border: 1px solid rgba(139, 126, 102, 0.25);
+  box-shadow: inset 0 0 40px rgba(180, 160, 130, 0.12); /* Warm paper inner glow */
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* Prevent text/table bleed-out */
+}
+
+.page-content {
+  width: 100%;
+  height: 100%;
+  padding: 2.25rem 2.75rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-content.ledger-view {
+  padding: 1.25rem 1.5rem;
+}
+
+/* ==========================================================================
+   7. Cover Flap Layouts (SBI Aesthetics)
+   ========================================================================== */
+.flap-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  opacity: 1;
+}
+
+/* Abbreviations Table (Cover Top) */
+.abbreviations-container {
+  color: var(--passbook-ink-faded);
+  font-size: 0.65rem;
+  line-height: 1.3;
+  margin-right: 155px; /* Leave space for photo frame */
+}
+
+.abbrev-title {
+  font-weight: 700;
+  margin-bottom: 0.35rem;
+  border-bottom: 1.5px solid rgba(35, 43, 112, 0.3);
+  padding-bottom: 0.15rem;
+}
+
+.abbrev-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.15rem 0.5rem;
+}
+
+/* Passport Photo with stamp overlap */
+.passport-photo-wrapper {
+  position: absolute;
+  top: 2.25rem;
+  right: 2.75rem;
+  width: 125px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.passport-photo-frame {
+  width: 110px;
+  height: 135px;
+  border: 1px solid rgba(35, 43, 112, 0.4);
+  background-color: #e2e8f0;
+  position: relative;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.passport-photo-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: contrast(1.05) sepia(0.08);
+}
+
+.photo-sign-here {
+  font-size: 0.5rem;
+  color: var(--passbook-ink-faded);
+  text-align: center;
+  border-top: 1px dashed rgba(35, 43, 112, 0.3);
+  width: 100%;
+  padding-top: 0.2rem;
+}
+
+/* Rubber Ink Stamps */
+.rubber-stamp {
+  position: absolute;
+  color: var(--passbook-stamp-blue);
+  pointer-events: none;
+  mix-blend-mode: multiply;
+  opacity: 0.88;
+  filter: blur(0.3px) contrast(1.2);
+}
+
+.circular-stamp {
+  width: 120px;
+  height: 120px;
+  bottom: -35px;
+  left: -40px;
+  transform: rotate(-10deg);
+}
+
+.ink-stamp {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.stamp-purple {
+  color: var(--passbook-stamp-purple);
+}
+
+/* SBI Header & Logo (Cover Bottom) */
+.sbi-header-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border-bottom: 2px solid #00b1ec;
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.sbi-symbol {
+  width: 44px;
+  height: 44px;
+  filter: drop-shadow(0.5px 0.5px 0.5px rgba(0,0,0,0.1));
+}
+
+.sbi-title-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.hindi-logo-text {
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  font-size: 1.35rem;
+  color: #1a1a1a;
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+}
+
+.english-logo-text {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #555555;
+  letter-spacing: 0.05em;
+  line-height: 1.1;
+}
+
+/* Branch Address Box */
+.branch-details-area {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.5rem;
+}
+
+.branch-address {
+  display: flex;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #111111;
+}
+
+.branch-address-sub {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  margin-left: 5.5rem;
+}
+
+/* Cover details Grid */
+.account-details-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  padding-top: 0.4rem;
+}
+
+.details-row {
+  display: flex;
+  width: 100%;
+}
+
+.detail-cell {
+  display: flex;
+  font-size: 0.72rem;
+  line-height: 1.4;
+  align-items: center;
+}
+
+.w-50 { width: 50%; }
+.w-100 { width: 100%; }
+
+.detail-cell .label {
+  color: var(--text-muted);
+  width: 120px;
+  flex-shrink: 0;
+}
+
+/* Consistent typewriter-like print values */
+.detail-cell .val.font-mono,
+.branch-details-area .val.font-mono {
+  font-family: 'VT323', Courier, monospace;
+  font-size: 1.05rem; /* Larger readable typewriter font */
+  letter-spacing: 0.03em;
+  font-weight: 500;
+  color: var(--passbook-ink);
+  text-shadow: 0.25px 0.25px 0.5px rgba(35, 43, 112, 0.25);
+  line-height: 1;
+}
+
+.text-uppercase {
+  text-transform: uppercase;
+}
+
+/* Signatures Area */
+.signatures-area {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: auto;
+  border-top: 1.5px dashed rgba(0, 0, 0, 0.06);
+  padding-top: 0.5rem;
+}
+
+.sig-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.helpline-box {
+  font-size: 0.6rem;
+  color: var(--text-light);
+}
+
+.manager-sig-box {
+  align-items: center;
+  position: relative;
+  width: 180px;
+}
+
+.sig-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  border-top: 1px solid #ddd;
+  width: 100%;
+  text-align: center;
+  padding-top: 0.15rem;
+}
+
+.branch-manager-stamp {
+  position: relative;
+  width: 110px;
+  height: 50px;
+  margin-bottom: 0.25rem;
+}
+
+.branch-manager-stamp .ink-stamp {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.8;
+  mix-blend-mode: multiply;
+  transform: rotate(3deg);
+}
+
+.signature-handwritten {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-style: italic;
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #1c2b8c;
+  position: absolute;
+  top: 10px;
+  left: 20px;
+  z-index: 5;
+  letter-spacing: -0.05em;
+  opacity: 0.85;
+  pointer-events: none;
+  transform: rotate(-5deg);
+}
+
+/* ==========================================================================
+   8. Ledger Tables & Dot Matrix Printing (LEDGER VIEW)
+   ========================================================================== */
+.ledger-view {
+  color: var(--passbook-ink);
+  font-family: 'VT323', Courier, monospace;
+  font-size: 0.95rem; /* Matches dot-matrix size scaling */
+  line-height: 1.2;
+}
+
+.ledger-page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 0.25rem;
+  border-bottom: 1.5px dashed rgba(35, 43, 112, 0.18);
+  margin-bottom: 0.4rem;
+}
+
+.ledger-branch-info,
+.ledger-ac-info {
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  opacity: 0.85;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.ledger-page-num {
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  font-weight: bold;
+}
+
+.ledger-page-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: auto;
+  padding-top: 0.25rem;
+  border-top: 1.5px dashed rgba(35, 43, 112, 0.18);
+}
+
+/* Watermark */
+.sbi-watermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 280px;
+  height: 280px;
+  color: var(--passbook-watermark);
+  pointer-events: none;
+}
+
+.sbi-watermark svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Ledger Tables */
+.ledger-table {
+  width: 100%;
+  border-collapse: collapse;
+  position: relative;
+  z-index: 5;
+  table-layout: fixed;
+}
+
+/* Dot-matrix headers */
+.ledger-table th {
+  font-family: 'VT323', monospace;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  color: var(--passbook-ink-faded);
+  font-weight: 500;
+  text-align: left;
+  border-bottom: 2px solid rgba(220, 100, 100, 0.25);
+  border-right: 1.2px solid rgba(220, 100, 100, 0.15);
+  padding: 0.25rem 0.15rem 0.4rem 0.15rem;
+  line-height: 1.15;
+}
+
+.ledger-table th:last-child {
+  border-right: none;
+}
+
+/* Right align money columns */
+.ledger-table th:nth-child(4),
+.ledger-table th:nth-child(5),
+.ledger-table th:nth-child(6) {
+  text-align: right;
+}
+
+/* Table body row alignment */
+.ledger-table td {
+  padding: 0.2rem 0.15rem;
+  font-size: 0.82rem;
+  vertical-align: middle;
+  word-wrap: break-word;
+  white-space: normal;
+  /* Simulate ink bleed */
+  text-shadow: 0.25px 0.25px 0.5px rgba(35, 43, 112, 0.25);
+  letter-spacing: 0.02em;
+  border-bottom: 1px solid rgba(220, 100, 100, 0.15);
+  border-right: 1.2px solid rgba(220, 100, 100, 0.15);
+}
+
+.ledger-table td:last-child {
+  border-right: none;
+}
+
+.ledger-table tr.ledger-row:nth-child(even) {
+  background-color: rgba(220, 100, 100, 0.025);
+}
+
+.tx-link {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.tx-link:hover {
+  text-decoration: underline;
+}
+
+.ledger-table td:nth-child(4),
+.ledger-table td:nth-child(5),
+.ledger-table td:nth-child(6) {
+  text-align: right;
+}
+
+/* Specific alignments and stylings */
+.ledger-table td.particulars-cell {
+  font-size: 0.82rem;
+  line-height: 1.1;
+  text-transform: uppercase;
+  max-width: 320px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ledger-table tr.ledger-row {
+  height: 28px; /* Tighter dot matrix rows to prevent vertical page overflow with 10 rows */
+}
+
+/* Subtext lines: Brought Forward / Carried Forward */
+.forward-row {
+  color: var(--passbook-ink-faded);
+  font-weight: bold;
+}
+
+.forward-row td {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+/* Custom ink color shifts for a realistic ribbon printing vibe */
+.ink-weak {
+  opacity: 0.82;
+  text-shadow: 0.2px 0.2px 0.4px rgba(35, 43, 112, 0.18);
+}
+
+.ink-blurry {
+  text-shadow: 0.4px 0.4px 0.8px rgba(35, 43, 112, 0.4);
+}
+
+/* ==========================================================================
+   9. Print Optimization (@media print)
+   ========================================================================== */
+@media print {
+  /* Hide all browser components */
+  body, .app-header, .search-section, .book-controls, .app-footer {
+    background: none !important;
+    background-color: transparent !important;
+    color: #000000 !important;
+    box-shadow: none !important;
+  }
+  
+  .app-header, 
+  .search-section, 
+  .book-controls, 
+  .app-footer,
+  #ledger-pagination,
+  .flipping-page,
+  #photocopy-btn {
+    display: none !important;
+  }
+  
+  .app-container {
+    margin: 0 !important;
+    padding: 0 !important;
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+
+  .workspace {
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .passbook-section {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+  }
+
+  .passbook-outer-wrapper {
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: visible !important;
+    display: block !important;
+  }
+
+  /* Printable Passbook styling overrides */
+  .passbook-booklet {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    border: none !important;
+    box-shadow: none !important;
+    background-color: #ffffff !important;
+    background: none !important;
+    overflow: visible !important;
+    page-break-after: avoid;
+    page-break-inside: avoid;
+  }
+
+  .booklet-flap {
+    height: 48% !important;
+    min-height: 460px !important;
+    padding: 1.5rem 2rem !important;
+    background: none !important;
+    background-color: #ffffff !important;
+    overflow: visible !important;
+  }
+
+  .booklet-spine {
+    height: 25px !important;
+    background: #ffffff !important;
+    border-top: 1px dashed #777 !important;
+    border-bottom: 1px dashed #777 !important;
+    box-shadow: none !important;
+  }
+
+  /* For stamp visibility when printing in black and white */
+  .rubber-stamp {
+    opacity: 0.95 !important;
+    filter: contrast(1.5) !important;
+  }
+  
+  .branch-manager-stamp {
+    opacity: 0.95 !important;
+  }
+}
+
+/* ==========================================================================
+   10. Custom SBI Outer and Back Covers (3D Booklet Styling)
+   ========================================================================== */
+
+.page-cover-outer,
+.page-cover-back-outside {
+  background-color: #eceef1 !important;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.08) !important;
+  border: 1.5px solid #a6b2c1 !important;
+}
+
+.outer-cover-view {
+  padding: 2rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.cover-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.cover-sbi-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sbi-symbol-cover {
+  width: 38px;
+  height: 38px;
+}
+
+.cover-sbi-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.cover-sbi-title {
+  font-family: 'Inter', sans-serif;
+  font-weight: 900;
+  font-size: 1.5rem;
+  color: #0072bc;
+  line-height: 1;
+}
+
+.cover-sbi-sub {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.hindi-logo-sub {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 0.5rem;
+  color: #0072bc;
+  letter-spacing: 0.02em;
+}
+
+.english-logo-sub {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 0.45rem;
+  color: #0072bc;
+  letter-spacing: 0.02em;
+}
+
+.cover-passbook-title {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  line-height: 1;
+}
+
+.passbook-hindi {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: #2c3e50;
+}
+
+.passbook-english {
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  font-size: 1.25rem;
+  color: #1a252f;
+  letter-spacing: 0.05em;
+}
+
+/* Pattern Grid */
+.cover-circles-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 0.75rem;
+  justify-items: center;
+  align-items: center;
+  margin: 1.5rem 0;
+  padding: 0 1rem;
+}
+
+.cover-circle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  transition: transform 0.2s ease;
+}
+
+.cover-circle:hover {
+  transform: scale(1.08);
+}
+
+.circle-navy {
+  background-color: #1b2a75;
+}
+
+.circle-keyhole {
+  width: 44px;
+  height: 44px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.keyhole-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.cover-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.yono-logo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #a83279, #d32f2f);
+  border-radius: 6px;
+  width: 60px;
+  height: 45px;
+  color: #ffffff;
+  padding: 2px 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.yono-text {
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  font-size: 0.95rem;
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+}
+
+.yono-sbi {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 0.55rem;
+  line-height: 0.9;
+  background-color: #ffffff;
+  color: #a83279;
+  padding: 1px 3px;
+  border-radius: 2px;
+  margin-top: 1px;
+}
+
+/* Inside Back Cover styling */
+.page-cover-back-inside {
+  background-color: #f7f9fa;
+  color: #2c3e50;
+  box-shadow: inset 0 0 30px rgba(0,0,0,0.03);
+}
+
+.back-inside-view {
+  padding: 2rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.back-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #0072bc;
+  border-bottom: 2px solid #00b1ec;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.back-rules {
+  flex-grow: 1;
+}
+
+.back-rules-list {
+  padding-left: 1.25rem;
+  font-size: 0.78rem;
+  line-height: 1.6;
+  color: #34495e;
+}
+
+.back-rules-list li {
+  margin-bottom: 0.75rem;
+}
+
+.back-helplines {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.72rem;
+  color: #7f8c8d;
+  border-top: 1px solid rgba(0,0,0,0.05);
+  padding-top: 0.75rem;
+  font-weight: 500;
+}
+
+/* Outside Back Cover styling */
+.back-outside-view {
+  padding: 2rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.barcode-sticker-frame {
+  background-color: #ffffff;
+  border: 1.5px solid #bdc3c7;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  width: 80%;
+  max-width: 280px;
+  margin: 3rem auto auto auto;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+#barcode-link {
+  cursor: pointer;
+}
+
+#barcode-link:hover .barcode-sticker-frame {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px rgba(0, 82, 255, 0.12);
+  border-color: var(--sbi-blue);
+}
+
+.barcode-label-hindi {
+  font-size: 0.58rem;
+  font-weight: 700;
+  color: #7f8c8d;
+  margin-bottom: 0.1rem;
+}
+
+.barcode-label-english {
+  font-size: 0.58rem;
+  font-weight: 700;
+  color: #7f8c8d;
+  margin-bottom: 0.5rem;
+}
+
+.mock-barcode {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.mock-barcode svg {
+  display: block;
+}
+
+.barcode-num {
+  font-size: 0.62rem;
+  color: #2c3e50;
+  letter-spacing: 0.05em;
+  font-weight: bold;
+}
+
+.back-logo-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: auto;
+}
+
+.sbi-title-text-footer {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.hindi-logo-text-footer {
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  font-size: 0.75rem;
+  color: #0072bc;
+}
+
+.english-logo-text-footer {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 0.58rem;
+  color: #0072bc;
+}
+
+/* Base Network Branding rotations and morph transitions (SBI <-> Base Logo) */
+.logo-inner {
+  transform-origin: 50px 50px;
+  transform-box: view-box;
+  transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+body.network-base .logo-inner {
+  transform: rotate(90deg); /* Rotate 90deg clockwise to point the slit left (Base logo) */
+}
+
+/* Colors transition */
+.logo-outer-circle,
+.logo-inner circle,
+.logo-inner rect,
+.keyhole-svg circle,
+.keyhole-svg rect {
+  transition: fill 0.8s ease, stroke 0.8s ease;
+}
+
+/* Outer circle color morphs from SBI Blue (#0072bc) to Coinbase/Base Blue (#0052ff) */
+.logo-outer-circle {
+  fill: #0072bc;
+}
+body.network-base .logo-outer-circle {
+  fill: #0052ff;
+}
+
+/* Inner keyhole components color in header (white outer, blue cutout) */
+.sbi-symbol-header .logo-inner circle,
+.sbi-symbol-header .logo-inner rect {
+  fill: #0072bc;
+}
+body.network-base .sbi-symbol-header .logo-inner circle,
+body.network-base .sbi-symbol-header .logo-inner rect {
+  fill: #0052ff;
+}
+
+/* Grid pattern navy circle color shift */
+.circle-navy {
+  background-color: #1b2a75;
+  transition: background-color 0.8s ease;
+}
+body.network-base .circle-navy {
+  background-color: #001f66; /* Base brand deep navy */
+}
+
+/* Small keyhole pattern grid circles color shift */
+.cover-circle.circle-keyhole svg circle {
+  fill: #00b1ec;
+}
+body.network-base .cover-circle.circle-keyhole svg circle {
+  fill: #0052ff;
+}
+
+/* Inside bank details stamp color shift (Purple ink to Base Blue ink) */
+.stamp-purple {
+  color: #5c2d91;
+  transition: color 0.8s ease;
+}
+body.network-base .stamp-purple {
+  color: #0052ff;
+}
+
+/* Dynamic theme variables updates */
+body.network-base {
+  --sbi-blue: #0052ff;
+  --sbi-blue-dark: #003db3;
+  --sbi-cyan: #4c85ff;
+  --passbook-ink: #0052ff;
+  --passbook-ink-faded: rgba(0, 82, 255, 0.75);
+}
+
+
+
+
+/* Link back to the main site (added when hosting on dayitva.github.io) */
+.back-to-site {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.85rem;
+  margin-right: 0.8rem;
+  opacity: 0.85;
+}
+.back-to-site:hover { opacity: 1; text-decoration: underline; }

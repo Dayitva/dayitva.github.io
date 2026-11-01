@@ -1,7 +1,7 @@
 # Social + contact links. Shown on the homepage and about page.
 # Set `url` to empty string to hide a row.
 - label: GitHub
-  url: https://github.com/Dayitva
+  url: https://github.com/dayitva
 - label: LinkedIn
   url: https://linkedin.com/in/dayitvagoel
 - label: X

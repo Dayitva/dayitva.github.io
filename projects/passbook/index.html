@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ethereum SBI Passbook Generator</title>
+  <!-- Google Fonts for Minimalist UI and Dot-Matrix Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Inter:wght@300;400;500;600;700&family=VT323&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=1.3.0">
+</head>
+<body>
+
+  <!-- Minimalist Clean UI Header -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="logo-area">
+        <svg class="sbi-symbol-header" viewBox="0 0 100 100" aria-hidden="true">
+          <circle cx="50" cy="50" r="40" fill="#ffffff" />
+          <g class="logo-inner">
+            <circle cx="50" cy="50" r="10" />
+            <rect x="45" y="50" width="10" height="40" />
+          </g>
+        </svg>
+        <div class="sbi-header-text">
+          <span class="hindi-title">भारतीय स्टेट बैंक</span>
+          <span class="english-title">State Bank of India</span>
+        </div>
+      </div>
+      <div class="header-action">
+        <a class="back-to-site" href="/projects/">&larr; Back</a>
+        <!-- Network Toggle Buttons -->
+        <div class="currency-toggle" id="network-toggle" style="margin-right: 0.5rem;">
+          <button class="currency-btn active" data-network="ETH" type="button">ETH</button>
+          <button class="currency-btn" data-network="BASE" type="button">BASE</button>
+        </div>
+        
+        <!-- Currency Toggle Buttons -->
+        <div class="currency-toggle" id="currency-toggle">
+          <button class="currency-btn" data-currency="USD" type="button">USD</button>
+          <button class="currency-btn active" data-currency="ETH" type="button">ETH</button>
+          <button class="currency-btn" data-currency="INR" type="button">INR</button>
+        </div>
+        <button id="print-btn" class="btn btn-secondary" type="button">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
+            <rect x="6" y="14" width="12" height="8" />
+          </svg>
+          Print Passbook
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="app-container">
+    <!-- Top Search Section -->
+    <section class="search-section">
+      <form id="search-form" class="search-form" novalidate>
+        <div class="input-group">
+          <label for="search-input" class="visually-hidden">Ethereum Address or ENS Name</label>
+          <input 
+            type="text" 
+            id="search-input" 
+            name="query" 
+            placeholder="Enter Ethereum address (0x...), ENS name (.eth), or Basename (.base.eth)"
+            required 
+            autocomplete="off"
+            spellcheck="false"
+          >
+          <button type="submit" id="search-submit" class="btn btn-primary">
+            <span class="btn-text">Generate Passbook</span>
+            <span class="spinner hidden"></span>
+          </button>
+        </div>
+        <div id="search-error" class="search-error-msg hint" aria-live="polite"></div>
+      </form>
+    </section>
+
+    <!-- Main Workspace (Centered Passbook Booklet only) -->
+    <div class="workspace">
+      
+      <!-- Passbook Section -->
+      <section class="passbook-section">
+        <!-- Passbook Book Control Panel -->
+        <div class="book-controls" style="justify-content: center;">
+          <div class="pagination-controls" id="ledger-pagination">
+            <button id="prev-page-btn" class="btn btn-icon" type="button" aria-label="Previous Page">
+              &larr;
+            </button>
+            <span id="page-num-display" class="page-display">Page 1-2</span>
+            <button id="next-page-btn" class="btn btn-icon" type="button" aria-label="Next Page">
+              &rarr;
+            </button>
+          </div>
+        </div>
+
+        <div class="passbook-outer-wrapper">
+          <!-- The Physical 3D Booklet -->
+          <div class="passbook-booklet" id="passbook-booklet">
+            <!-- Outer Front Cover -->
+            <div class="page page-cover-outer" id="page-cover-outer">
+              <div class="page-content outer-cover-view">
+                <div class="cover-header">
+                  <div class="cover-sbi-logo">
+                    <svg class="sbi-symbol-cover" viewBox="0 0 100 100">
+                      <circle class="logo-outer-circle" cx="50" cy="50" r="40" />
+                      <g class="logo-inner logo-inner-white">
+                        <circle cx="50" cy="50" r="10" fill="#ffffff" />
+                        <rect x="45" y="50" width="10" height="40" fill="#ffffff" />
+                      </g>
+                    </svg>
+                    <div class="cover-sbi-text">
+                      <span class="cover-sbi-title">SBI</span>
+                      <div class="cover-sbi-sub">
+                        <span class="hindi-logo-sub">भारतीय स्टेट बैंक</span>
+                        <span class="english-logo-sub">STATE BANK OF INDIA</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="cover-passbook-title">
+                    <span class="passbook-hindi">पास बुक</span>
+                    <span class="passbook-english">PASS BOOK</span>
+                  </div>
+                </div>
+
+                 <!-- Circles Pattern Grid -->
+                <div class="cover-circles-grid">
+                  <!-- Row 1 -->
+                  <div class="cover-circle circle-navy"></div>
+                  <div class="cover-circle circle-navy"></div>
+                  <div class="cover-circle circle-keyhole">
+                    <svg viewBox="0 0 100 100" class="keyhole-svg">
+                      <circle cx="50" cy="50" r="40" fill="currentColor" />
+                      <g class="logo-inner">
+                        <circle cx="50" cy="50" r="10" fill="#ffffff" />
+                        <rect x="45" y="50" width="10" height="40" fill="#ffffff" />
+                      </g>
+                    </svg>
+                  </div>
+                  <div class="cover-circle circle-navy"></div>
+                  <div class="cover-circle circle-navy"></div>
+                  <div class="cover-circle circle-navy"></div>
+                  <div class="cover-circle circle-keyhole">
+                    <svg viewBox="0 0 100 100" class="keyhole-svg">
+                      <circle cx="50" cy="50" r="40" fill="currentColor" />
+                      <g class="logo-inner">
+                        <circle cx="50" cy="50" r="10" fill="#ffffff" />
+                        <rect x="45" y="50" width="10" height="40" fill="#ffffff" />
+                      </g>
+                    </svg>
+                  </div>
+                  <div class="cover-circle circle-navy"></div>
+
+                  <!-- Row 2 -->
+                  <div class="cover-circle circle-keyhole">
+                    <svg viewBox="0 0 100 100" class="keyhole-svg">
+                      <circle cx="50" cy="50" r="40" fill="currentColor" />
+                      <g class="logo-inner">
+                        <circle cx="50" cy="50" r="10" fill="#ffffff" />
+                        <rect x="45" y="50" width="10" height="40" fill="#ffffff" />
+                      </g>
+                    </svg>
+                  </div>
+                  <div class="cover-circle circle-navy"></div>
+                  <div class="cover-circle circle-navy"></div>
+                  <div class="cover-circle circle-navy"></div>
+                  <div class="cover-circle circle-keyhole">
+                    <svg viewBox="0 0 100 100" class="keyhole-svg">
+                      <circle cx="50" cy="50" r="40" fill="currentColor" />
+                      <g class="logo-inner">
+                        <circle cx="50" cy="50" r="10" fill="#ffffff" />
+                        <rect x="45" y="50" width="10" height="40" fill="#ffffff" />
+                      </g>
+                    </svg>
+                  </div>
+                  <div class="cover-circle circle-navy"></div>
+                  <div class="cover-circle circle-navy"></div>
+                  <div class="cover-circle circle-navy"></div>
+
+                  <!-- Row 3 -->
+                  <div class="cover-circle circle-navy"></div>
+                  <div class="cover-circle circle-navy"></div>
+                  <div class="cover-circle circle-keyhole">
+                    <svg viewBox="0 0 100 100" class="keyhole-svg">
+                      <circle cx="50" cy="50" r="40" fill="currentColor" />
+                      <g class="logo-inner">
+                        <circle cx="50" cy="50" r="10" fill="#ffffff" />
+                        <rect x="45" y="50" width="10" height="40" fill="#ffffff" />
+                      </g>
+                    </svg>
+                  </div>
+                  <div class="cover-circle circle-navy"></div>
+                  <div class="cover-circle circle-navy"></div>
+                  <div class="cover-circle circle-navy"></div>
+                  <div class="cover-circle circle-keyhole">
+                    <svg viewBox="0 0 100 100" class="keyhole-svg">
+                      <circle cx="50" cy="50" r="40" fill="currentColor" />
+                      <g class="logo-inner">
+                        <circle cx="50" cy="50" r="10" fill="#ffffff" />
+                        <rect x="45" y="50" width="10" height="40" fill="#ffffff" />
+                      </g>
+                    </svg>
+                  </div>
+                  <div class="cover-circle circle-navy"></div>
+                </div>
+
+                <div class="cover-footer">
+                  <div class="yono-logo">
+                    <span class="yono-text">yono</span>
+                    <span id="cover-yono-sbi" class="yono-sbi">SBI</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Cover Page 1: Abbreviations -->
+            <div class="page page-cover" id="page-cover-top">
+              <div class="page-content">
+              
+              <!-- Cover Top Flap: Abbreviations -->
+              <div class="flap-content cover-view" id="cover-top-content">
+                <div class="abbreviations-container">
+                  <h3 class="abbrev-title">Generally used abbreviations / सामान्यतः प्रयुक्त संक्षेप रूप :</h3>
+                  <div class="abbrev-grid">
+                    <div>a/c = Account / खाता</div>
+                    <div>DR = Debit / नामे</div>
+                    <div>Pr = Principal / मूलधन</div>
+                    <div>Adj = Adjustment / समायोजन</div>
+                    <div>DoB = Date of Birth / जन्म तिथि</div>
+                    <div>Proc = Processing Charge / प्रक्रिया शुल्क</div>
+                    <div>Amt = Amount / राशि</div>
+                    <div>eft = Electronic Fund Transfer</div>
+                    <div>rd = Recurring Deposit / आवर्ती जमा</div>
+                    <div>Ar = Arrear / बकाया</div>
+                    <div>Inop = Inoperative / निष्क्रिय</div>
+                    <div>Ret/Rtn = Return / वापसी</div>
+                    <div>bal = Balance / शेष</div>
+                    <div>Ins = Insurance / बीमा</div>
+                    <div>Rnd = Round of / पूर्णांकन</div>
+                    <div>Capn = Capitalization / पूंजीकरण</div>
+                    <div>int/In = Interest / ब्याज</div>
+                    <div>SB = Savings Bank / बचत बैंक</div>
+                    <div>chg/ch = Charge / प्रभार</div>
+                    <div>lon/ln = Loan / ऋण</div>
+                    <div>SC = Short Credit / अल्प जमा</div>
+                    <div>Chq = Cheque / चेक</div>
+                    <div>min = Minimum / न्यूनतम</div>
+                    <div>SI/So/SORD = Standing Inst.</div>
+                    <div>Clos = Closure / बंदी</div>
+                    <div>os = Outstanding / बकाया</div>
+                    <div>S/D/W/H/o = Son/Daughter/Wife/Husband of</div>
+                    <div>Coll = Collection / वसूली</div>
+                    <div>P & T = Postage & Telegram</div>
+                    <div>tr/trf/xfer = Transfer / अंतरण</div>
+                    <div>Comm = Commission / कमीशन</div>
+                    <div>Pos = Point of Sale</div>
+                    <div>TT = Telegraphic Transfer</div>
+                    <div>CDR/CORR = Correction / संशोधन</div>
+                    <div>txn = Transaction / लेनदेन</div>
+                    <div>Wdl = Withdrawal / आहरण</div>
+                    <div>CR = Credit / जमा</div>
+                    <div>csh = Cash / नकद</div>
+                    <div>+MOD Bal = total balance (SB+linked MOD)</div>
+                  </div>
+                </div>
+                
+                <!-- Passport Photo Section with Stamped Ink Seal -->
+                <div class="passport-photo-wrapper">
+                  <div class="passport-photo-frame">
+                    <img id="passport-photo" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='150' viewBox='0 0 120 150'><rect width='120' height='150' fill='%23e0e0e0'/><path d='M60 70c16.5 0 30-13.5 30-30S76.5 10 60 10 30 23.5 30 40s13.5 30 30 30zm0 10c-25 0-45 15-45 35v15h90v-15c0-20-20-35-45-35z' fill='%239e9e9e'/></svg>" alt="Passport Photo">
+                    <!-- Blue circular rubber stamp overlay -->
+                    <div class="rubber-stamp circular-stamp">
+                      <svg viewBox="0 0 200 200">
+                        <circle cx="100" cy="100" r="85" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="8 2" />
+                        <circle cx="100" cy="100" r="55" fill="none" stroke="currentColor" stroke-width="1.5" />
+                        <path id="stamp-text-path-1" fill="none" d="M 25 100 A 75 75 0 0 1 175 100" />
+                        <path id="stamp-text-path-2" fill="none" d="M 175 100 A 75 75 0 0 1 25 100" />
+                        <text font-family="Inter" font-size="12" font-weight="700" fill="currentColor">
+                          <textPath id="photo-stamp-bank" href="#stamp-text-path-1" startOffset="50%" text-anchor="middle">
+                            STATE BANK OF INDIA
+                          </textPath>
+                        </text>
+                        <text font-family="Inter" font-size="10" font-weight="700" fill="currentColor">
+                          <textPath id="photo-stamp-branch" href="#stamp-text-path-2" startOffset="50%" text-anchor="middle">
+                            * BETAMCHERLA BR. *
+                          </textPath>
+                        </text>
+                        <!-- Center signature or logo -->
+                        <text x="100" y="105" font-family="EB Garamond" font-size="18" font-weight="700" fill="currentColor" text-anchor="middle" transform="rotate(-15 100 105)">
+                          PASSED
+                        </text>
+                      </svg>
+                    </div>
+                  </div>
+                  <span class="photo-sign-here">Signature of a/c Holder / खाताधारक के हस्ताक्षर</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+            <!-- Cover Page 2: Account Details -->
+            <div class="page page-cover" id="page-cover-bottom">
+              <div class="page-content">
+                <div class="sbi-watermark">
+                  <svg viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="2 3" />
+                    <circle cx="50" cy="50" r="18" fill="none" stroke="currentColor" stroke-width="0.75" />
+                    <rect x="47.5" y="50" width="5" height="40" fill="currentColor" opacity="0.15" />
+                  </svg>
+                </div>
+                
+                <div class="sbi-header-logo">
+                  <!-- Custom SVG of SBI Logo -->
+                  <svg class="sbi-symbol" viewBox="0 0 100 100">
+                    <circle class="logo-outer-circle" cx="50" cy="50" r="40" />
+                    <g class="logo-inner logo-inner-white">
+                      <circle cx="50" cy="50" r="10" fill="#ffffff" />
+                      <rect x="45" y="50" width="10" height="40" fill="#ffffff" />
+                    </g>
+                  </svg>
+                  <div class="sbi-title-text">
+                    <span class="hindi-logo-text">भारतीय स्टेट बैंक</span>
+                    <span class="english-logo-text">State Bank of India</span>
+                  </div>
+                </div>
+
+                <div class="branch-details-area">
+                  <div class="branch-address">
+                    <span class="label">Branch / शाखा:</span>
+                    <span class="val font-mono" id="disp-branch-name">GENESIS MAINNET</span>
+                  </div>
+                  <div class="branch-address-sub">
+                    <span class="val font-mono" id="disp-branch-addr">CONSENSUAL HARMONY, ETHEREUM VIRTUAL MACHINE</span>
+                  </div>
+                </div>
+
+                <div class="account-details-grid">
+                  <div class="details-row">
+                    <div class="detail-cell w-100">
+                      <span class="label">CIF No :</span>
+                      <span class="val font-mono" id="disp-cif">00000000000</span>
+                    </div>
+                  </div>
+
+                  <div class="details-row">
+                    <div class="detail-cell w-100">
+                      <span class="label">Account No :</span>
+                      <span class="val font-mono" id="disp-account-no">20150730000</span>
+                    </div>
+                  </div>
+
+                  <div class="details-row">
+                    <div class="detail-cell w-100">
+                      <span class="label">Customer Name :</span>
+                      <span class="val font-mono text-uppercase" id="disp-cust-name">VITALIK BUTERIN</span>
+                    </div>
+                  </div>
+
+                  <div class="details-row">
+                    <div class="detail-cell w-100">
+                      <span class="label">S/D/W/H/o :</span>
+                      <span class="val font-mono" id="disp-relation">DMITRY BUTERIN</span>
+                    </div>
+                  </div>
+
+                  <div class="details-row">
+                    <div class="detail-cell w-100">
+                      <span class="label">Address / पता :</span>
+                      <span class="val font-mono" id="disp-address">BLOCK 0, GENESIS BLOCK, ETHEREUM MAINNET</span>
+                    </div>
+                  </div>
+
+                  <div class="details-row">
+                    <div class="detail-cell w-100">
+                      <span class="label">Phone / दूरभाष :</span>
+                      <span class="val font-mono" id="disp-phone">1559, 4844</span>
+                    </div>
+                  </div>
+
+                  <div class="details-row">
+                    <div class="detail-cell w-100">
+                      <span class="label">Email / ईमेल :</span>
+                      <span class="val font-mono" id="disp-email">vitalik@ethereum.org</span>
+                    </div>
+                  </div>
+
+                  <div class="details-row">
+                    <div class="detail-cell w-50">
+                      <span class="label">D.O.B. :</span>
+                      <span class="val font-mono" id="disp-dob">-</span>
+                    </div>
+                    <div class="detail-cell w-50">
+                      <span class="label">MOP :</span>
+                      <span class="val font-mono" id="disp-mop">SINGLE</span>
+                    </div>
+                  </div>
+
+                  <div class="details-row">
+                    <div class="detail-cell w-100">
+                      <span class="label">Nominee No :</span>
+                      <span class="val font-mono" id="disp-nominee">SATOSHI NAKAMOTO</span>
+                    </div>
+                  </div>
+
+                  <div class="details-row">
+                    <div class="detail-cell w-50">
+                      <span class="label">Issue Date :</span>
+                      <span class="val font-mono" id="disp-issue-date">30/07/2015</span>
+                    </div>
+                    <div class="detail-cell w-50">
+                      <span class="label">IFSC :</span>
+                      <span class="val font-mono" id="disp-ifsc">SBIN0000000</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="signatures-area">
+                  <div class="sig-box helpline-box">
+                    <span>Helpline: 1800112211 / 18004253800</span>
+                  </div>
+                  <div class="sig-box manager-sig-box">
+                    <div class="branch-manager-stamp">
+                      <svg viewBox="0 0 140 60" class="ink-stamp stamp-purple">
+                        <rect x="5" y="5" width="130" height="50" fill="none" stroke="currentColor" stroke-width="2" rx="4" />
+                        <text id="stamp-bank-title" x="70" y="22" font-family="Inter" font-size="10" font-weight="700" fill="currentColor" text-anchor="middle">
+                          STATE BANK OF INDIA
+                        </text>
+                        <text id="stamp-branch-title" x="70" y="36" font-family="Inter" font-size="8" fill="currentColor" text-anchor="middle">
+                          BETAMCHERLA BRANCH
+                        </text>
+                        <text id="stamp-manager-title" x="70" y="48" font-family="Inter" font-size="9" font-weight="700" fill="currentColor" text-anchor="middle">
+                          BRANCH MANAGER
+                        </text>
+                      </svg>
+                      <!-- Script signature overlap -->
+                      <span id="stamp-signature" class="signature-handwritten">B. Venkatswamy</span>
+                    </div>
+                    <span class="sig-label">Branch Manager / शाखा प्रबंधक</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Inside Back Cover -->
+            <div class="page page-cover-back-inside" id="page-cover-back-inside">
+              <div class="page-content back-inside-view">
+                <h3 class="back-title">IMPORTANT INFORMATION / महत्वपूर्ण निर्देश</h3>
+                <div class="back-rules">
+                  <ol class="back-rules-list">
+                    <li>Register your Mobile number & Email ID for alerts. / अलर्ट के लिए मोबाइल और ईमेल पंजीकृत करें।</li>
+                    <li>Update passbook regularly to monitor transactions. / लेनदेन की निगरानी के लिए पासबुक नियमित अपडेट करें।</li>
+                    <li>Never share your OTP, PIN, or password with anyone. / किसी के साथ अपना ओटीपी, पिन या पासवर्ड साझा न करें।</li>
+                    <li>For help or reporting lost cards, call 1800 11 2211. / सहायता या खोए हुए कार्ड की रिपोर्ट के लिए 1800 11 2211 पर कॉल करें।</li>
+                  </ol>
+                </div>
+                <div class="back-helplines">
+                  <span>Helpline: 1800 11 2211 / 1800 425 3800</span>
+                  <span>Website: https://bank.sbi</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Outside Back Cover -->
+            <div class="page page-cover-back-outside" id="page-cover-back-outside">
+              <div class="page-content back-outside-view">
+                <div class="barcode-sticker-frame">
+                  <span class="barcode-label-hindi">कृपया बारकोड स्टिकर यहाँ चिपकाएं।</span>
+                  <span class="barcode-label-english">Please paste barcode sticker here.</span>
+                  <a id="barcode-link" href="#" target="_blank" style="text-decoration: none; color: inherit;">
+                    <div class="mock-barcode">
+                      <svg viewBox="0 0 100 30" width="160" height="40" style="color: #111;">
+                        <rect x="0" y="0" width="2" height="30" fill="currentColor" />
+                        <rect x="4" y="0" width="1" height="30" fill="currentColor" />
+                        <rect x="7" y="0" width="3" height="30" fill="currentColor" />
+                        <rect x="12" y="0" width="1" height="30" fill="currentColor" />
+                        <rect x="15" y="0" width="2" height="30" fill="currentColor" />
+                        <rect x="19" y="0" width="4" height="30" fill="currentColor" />
+                        <rect x="25" y="0" width="1" height="30" fill="currentColor" />
+                        <rect x="28" y="0" width="3" height="30" fill="currentColor" />
+                        <rect x="33" y="0" width="2" height="30" fill="currentColor" />
+                        <rect x="37" y="0" width="1" height="30" fill="currentColor" />
+                        <rect x="40" y="0" width="4" height="30" fill="currentColor" />
+                        <rect x="46" y="0" width="2" height="30" fill="currentColor" />
+                        <rect x="50" y="0" width="1" height="30" fill="currentColor" />
+                        <rect x="53" y="0" width="3" height="30" fill="currentColor" />
+                        <rect x="58" y="0" width="1" height="30" fill="currentColor" />
+                        <rect x="61" y="0" width="2" height="30" fill="currentColor" />
+                        <rect x="65" y="0" width="4" height="30" fill="currentColor" />
+                        <rect x="71" y="0" width="1" height="30" fill="currentColor" />
+                        <rect x="74" y="0" width="3" height="30" fill="currentColor" />
+                        <rect x="79" y="0" width="2" height="30" fill="currentColor" />
+                        <rect x="83" y="0" width="1" height="30" fill="currentColor" />
+                        <rect x="86" y="0" width="4" height="30" fill="currentColor" />
+                        <rect x="92" y="0" width="2" height="30" fill="currentColor" />
+                        <rect x="96" y="0" width="4" height="30" fill="currentColor" />
+                      </svg>
+                      <span id="barcode-address" class="barcode-num font-mono">0x00000000...00000000</span>
+                    </div>
+                  </a>
+                </div>
+                
+                <div class="back-logo-footer">
+                  <svg class="sbi-symbol" viewBox="0 0 100 100" style="width: 32px; height: 32px;">
+                    <circle class="logo-outer-circle" cx="50" cy="50" r="40" />
+                    <g class="logo-inner logo-inner-white">
+                      <circle cx="50" cy="50" r="10" fill="#ffffff" />
+                      <rect x="45" y="50" width="10" height="40" fill="#ffffff" />
+                    </g>
+                  </svg>
+                  <div class="sbi-title-text-footer">
+                    <span class="hindi-logo-text-footer">भारतीय स्टेट बैंक</span>
+                    <span class="english-logo-text-footer">State Bank of India</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div style="margin-top: 2rem; text-align: center; margin-bottom: 1rem;">
+          <button type="button" id="photocopy-btn" class="btn btn-secondary">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px; margin-right: 6px; vertical-align: middle;">
+              <path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
+              <rect x="6" y="14" width="12" height="8" />
+            </svg>
+            Print / Photocopy Passbook
+          </button>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="app-footer">
+    <p>State Bank of India Passbook Replica. Maintained for educational and fun blockchain visualizations.</p>
+  </footer>
+
+  <!-- Ethers.js v6 CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.13.0/ethers.umd.min.js"></script>
+  <!-- PageFlip.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.js"></script>
+  <!-- Application JS Script -->
+  <script src="app.js?v=1.3.0"></script>
+</body>
+</html>

@@ -1,8 +1,8 @@
 ---
-title: BuidlGuidl CTF Walkthrough
+title: BuidlGuidl CTF Bangkok Walkthrough
 feed: show
 date: 20-09-2025
-permalink: /buidlguidl-ctf
+permalink: /buidlguidl-ctf-bangkok
 format: list
 ---
 

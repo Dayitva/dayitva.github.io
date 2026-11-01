@@ -9,8 +9,14 @@
 #                            If start == end, only one month shows.
 
 - program: Based House
+  location: Mumbai, India
+  project: seedme
+  start: Nov 2026
+  end: Nov 2026
+
+- program: Based House
   location: Denver, USA
-  project: SeedMe
+  project: seedme
   start: Feb 2026
   end: Feb 2026
 
@@ -64,7 +70,7 @@
 
 - program: Arweave India Hacker House
   project: Convergent
-  location: Dharamshala, India
+  location: Mussoorie, India
   start: Jul 2024
   end: Jul 2024
 
@@ -73,10 +79,3 @@
   location: Bengaluru, India
   start: Dec 2023
   end: Dec 2023
-
-- program: Tezos India Fellowship
-  project: Liquibrium
-  location: Virtual
-  url: https://liquibrium.netlify.app/
-  start: Aug 2021
-  end: Oct 2021

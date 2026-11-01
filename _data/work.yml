@@ -3,24 +3,16 @@
 #         blurb (optional), logo (optional URL — if omitted, a monogram renders instead),
 #         url (optional — makes the title clickable),
 #         category: one of "work" | "fellowship" | "education"
-- company: Uniswap Labs
-  title: Developer Support Consultant
-  category: work
-  start: Jan 2026
-  end: Apr 2026
-  logo: /assets/img/logos/uniswap-labs.jpg
-
-- company: Uniswap Foundation
-  title: Developer Support Associate
+- company: Uniswap Foundation & Uniswap Labs
+  title: Developer Support Associate / Consultant
   category: work
   start: Jan 2025
-  end: Dec 2025
+  end: Apr 2026
   logo: /assets/img/logos/uniswap-foundation.jpg
 
 - company: Questbook
   title: Web3 Software Engineer
   category: work
-  arrangement: Internship · Hybrid
   start: Jan 2023
   end: Jun 2023
   logo: /assets/img/logos/questbook.jpg

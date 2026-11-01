@@ -22,3 +22,5 @@ _notes/Private/*
 
 # Legacy / unused
 pages/tags.md
+# Goodreads library export (personal data; read by utilities/import_goodreads_csv.py)
+utilities/goodreads_library_export.csv

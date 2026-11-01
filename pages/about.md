@@ -7,7 +7,7 @@ content-type: static
 
 <div class="manuscript-numbered">
 
-<p class="home-bio drop-cap">{{ site.data.about.about }}</p>
+<p class="home-bio">{{ site.data.about.about }}</p>
 
 <div class="home-social">
 {%- for link in site.data.social -%}

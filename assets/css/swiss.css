@@ -1,0 +1,778 @@
+/* =====================================================================
+   Swiss layer — mirrors the deck (/deck): Inter, heavy lowercase
+   headings, red / blue / yellow primaries, hard-edged cards with
+   offset shadows. Loaded last, so it re-skins the manuscript styles
+   in style.css without editing them.
+   ===================================================================== */
+
+html,
+html[data-theme="light"] {
+    --sw-bg:        #f4f4f4;
+    --sw-card:      #ffffff;
+    --sw-ink:       #111111;
+    --sw-sub:       #666666;
+    --sw-faint:     #888888;
+    --sw-line:      #111111;
+    --sw-hair:      rgba(17, 17, 17, 0.12);
+    --sw-red:       #e92026;
+    --sw-blue:      #0047b6;
+    --sw-blue-text: #0047b6;
+    --sw-yellow:    #fed300;
+    --sw-nav-bg:    rgba(244, 244, 244, 0.92);
+}
+
+html[data-theme="dark"] {
+    --sw-bg:        #111111;
+    --sw-card:      #1b1b1b;
+    --sw-ink:       #f4f4f4;
+    --sw-sub:       #a8a8a8;
+    --sw-faint:     #8a8a8a;
+    --sw-line:      #f4f4f4;
+    --sw-hair:      rgba(244, 244, 244, 0.14);
+    --sw-red:       #ff3b40;
+    --sw-blue:      #2f6fe0;
+    --sw-blue-text: #7aa7ff;
+    --sw-yellow:    #fed300;
+    --sw-nav-bg:    rgba(17, 17, 17, 0.92);
+}
+
+@media (prefers-color-scheme: dark) {
+    html,
+    html[data-theme="dark"] {
+        --sw-bg:        #111111;
+        --sw-card:      #1b1b1b;
+        --sw-ink:       #f4f4f4;
+        --sw-sub:       #a8a8a8;
+        --sw-faint:     #8a8a8a;
+        --sw-line:      #f4f4f4;
+        --sw-hair:      rgba(244, 244, 244, 0.14);
+        --sw-red:       #ff3b40;
+        --sw-blue:      #2f6fe0;
+        --sw-blue-text: #7aa7ff;
+        --sw-yellow:    #fed300;
+        --sw-nav-bg:    rgba(17, 17, 17, 0.92);
+    }
+    html[data-theme="light"] {
+        --sw-bg:        #f4f4f4;
+        --sw-card:      #ffffff;
+        --sw-ink:       #111111;
+        --sw-sub:       #666666;
+        --sw-faint:     #888888;
+        --sw-line:      #111111;
+        --sw-hair:      rgba(17, 17, 17, 0.12);
+        --sw-red:       #e92026;
+        --sw-blue:      #0047b6;
+        --sw-blue-text: #0047b6;
+        --sw-yellow:    #fed300;
+        --sw-nav-bg:    rgba(244, 244, 244, 0.92);
+    }
+}
+
+/* Point the older token sets at the Swiss palette so anything not
+   restyled below (notes, backlinks, books, travel) still matches. */
+html body.manuscript {
+    --paper-bg:       var(--sw-bg);
+    --paper-bg-deep:  var(--sw-card);
+    --paper-ink:      var(--sw-ink);
+    --paper-ink-sub:  var(--sw-sub);
+    --paper-rule:     var(--sw-line);
+    --paper-hair:     var(--sw-hair);
+    --accent-ink:     var(--sw-blue-text);
+    --accent-red:     var(--sw-red);
+    --accent-gold:    var(--sw-ink);
+    --medallion-bg:   #ffffff;
+    --navbar-bg-translucent: var(--sw-nav-bg);
+    --color-bg-main:  var(--sw-bg);
+    --color-bg-sub:   var(--sw-card);
+    --color-text-main: var(--sw-ink);
+    --color-text-sub: var(--sw-sub);
+    --color-text-link: var(--sw-blue-text);
+    --color-border-light: var(--sw-hair);
+}
+
+/* ---------------------------------------------------------------- base */
+
+html { background: var(--sw-bg); }
+
+body.manuscript {
+    background: var(--sw-bg);
+    background-image: none;
+    color: var(--sw-ink);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+/* !important because style.css sets EB Garamond / JetBrains Mono on
+   dozens of selectors; one sweep here is simpler than matching each. */
+body.manuscript,
+body.manuscript :is(p, li, span, div, a, h1, h2, h3, h4, h5, h6, blockquote, input, button, td, th):not(.katex, .katex *) {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif !important;
+}
+body.manuscript :is(code, pre, kbd, samp),
+body.manuscript :is(code, pre) * {
+    font-family: 'JetBrains Mono', ui-monospace, monospace !important;
+}
+
+.global-noise { opacity: 0.035; }
+
+body.manuscript .manuscript-numbered,
+body.manuscript .content,
+body.manuscript .content p,
+body.manuscript .content li,
+body.manuscript .note-page-section p,
+body.manuscript .note-page-section li,
+body.manuscript #post-container p {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 1.08rem;
+    line-height: 1.65;
+    color: var(--sw-ink);
+}
+
+body.manuscript h1,
+body.manuscript h2,
+body.manuscript h3,
+body.manuscript h4 {
+    color: var(--sw-ink);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+}
+
+/* Links: ink + 2px underline, like the deck. */
+body.manuscript a:not(.navbar-item):not(.mini-feed-row):not(.mini-feed-more):not(.button):not(.sponsor-chip--link):not(.section-feed-row):not(.book-card) {
+    color: var(--sw-blue-text);
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 2px solid currentColor;
+    padding-bottom: 1px;
+    transition: color 0.15s, border-color 0.15s;
+}
+body.manuscript a:not(.navbar-item):not(.mini-feed-row):not(.mini-feed-more):not(.button):not(.sponsor-chip--link):not(.section-feed-row):not(.book-card)::after {
+    display: none;
+}
+body.manuscript a:not(.navbar-item):not(.mini-feed-row):not(.mini-feed-more):not(.button):not(.sponsor-chip--link):not(.section-feed-row):not(.book-card):hover {
+    color: var(--sw-red);
+}
+
+/* Rows that are whole-card links shouldn't get the inline-link underline. */
+body.manuscript a.section-feed-row,
+body.manuscript a.book-card,
+body.manuscript .notelist-feed a,
+body.manuscript .list-feed a,
+body.manuscript .navbar-brand a,
+body.manuscript .meta-title a,
+body.manuscript .note-page-section > div > a {
+    border-bottom: none !important;
+    color: inherit !important;
+}
+
+body.manuscript pre,
+body.manuscript .highlight pre {
+    background: var(--sw-card);
+    border: 3px solid var(--sw-line);
+    border-radius: 0;
+    box-shadow: 6px 6px 0 var(--sw-line);
+}
+body.manuscript :not(pre) > code {
+    background: var(--sw-card);
+    border: 1px solid var(--sw-hair);
+    border-radius: 0;
+    padding: 0.05em 0.35em;
+    color: var(--sw-ink);
+}
+
+body.manuscript blockquote {
+    border-left: 6px solid var(--sw-yellow);
+    background: transparent;
+    padding-left: 1.2rem;
+}
+
+::selection { background: var(--sw-red); color: #fff; }
+
+/* ----------------------------------------------------------------- nav */
+
+body.manuscript .navbar {
+    background: var(--sw-nav-bg);
+    border-bottom: 4px solid var(--sw-line);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+body.manuscript .navbar-brand h6 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 900;
+    font-size: 1.25rem;
+    letter-spacing: -0.04em;
+    text-transform: lowercase;
+    color: var(--sw-ink);
+}
+body.manuscript .navbar-brand h6::after {
+    content: ".";
+    color: var(--sw-red);
+}
+body.manuscript .navbar-item {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    text-transform: lowercase;
+    color: var(--sw-ink);
+}
+body.manuscript .navbar-item::after {
+    height: 3px;
+    bottom: 4px;
+    background-color: var(--sw-red);
+}
+body.manuscript .navbar-item:hover {
+    color: var(--sw-red);
+}
+body.manuscript .navbar-item .icon img {
+    filter: none;
+}
+html[data-theme="dark"] body.manuscript .navbar-item .icon img { filter: invert(1); }
+@media (prefers-color-scheme: dark) {
+    html:not([data-theme="light"]) body.manuscript .navbar-item .icon img { filter: invert(1); }
+}
+
+/* -------------------------------------------------------- page titles */
+
+body.manuscript .manuscript-page .jumbo {
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    font-size: clamp(3.2rem, 8vw, 6rem);
+    letter-spacing: -0.055em;
+    line-height: 0.9;
+    text-transform: lowercase;
+    color: var(--sw-ink);
+    margin: 0.4rem 0 1.4rem;
+}
+body.manuscript .manuscript-page .jumbo::after {
+    content: ".";
+    color: var(--sw-red);
+}
+body.manuscript .home-intro .jumbo::after { content: none; }
+
+body.manuscript .meta-title,
+body.manuscript .meta-title a,
+body.manuscript .meta-title h5 {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0;
+    text-transform: lowercase;
+    color: var(--sw-faint) !important;
+}
+
+/* ---------------------------------------------------------------- hero */
+
+body.manuscript .home-intro {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 340px;
+    gap: 3rem;
+    align-items: center;
+    margin: 1.5rem 0 3rem;
+    padding: 0; /* style.css gives it 5% 10%, which pushed the hero off the page's left edge */
+    animation: none;
+}
+
+/* Latest notes + recent builds side by side on wide screens. */
+.home-feeds {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 3rem;
+    align-items: start;
+}
+body.manuscript .home-feeds .mini-feed { margin: 0; }
+@media (max-width: 1023px) {
+    .home-feeds { grid-template-columns: 1fr; gap: 2rem; }
+}
+body.manuscript .home-intro .jumbo {
+    font-size: clamp(4rem, 11vw, 8.5rem);
+    font-weight: 800;
+    letter-spacing: -0.06em;
+    line-height: 0.85;
+    margin: 0 0 1.6rem;
+    text-transform: lowercase;
+}
+.jumbo-dot { color: var(--sw-red); }
+.home-tagline {
+    font-size: clamp(1.4rem, 2.6vw, 2rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    margin-bottom: 1.2rem;
+}
+body.manuscript .home-bio {
+    font-size: 1.15rem;
+    line-height: 1.6;
+    color: var(--sw-sub);
+    max-width: 40rem;
+    margin-bottom: 1.6rem;
+}
+
+.home-shapes {
+    position: relative;
+    width: 300px;
+    height: 340px;
+}
+.home-shapes .shape {
+    position: absolute;
+    display: block;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.home-shapes .shape-red {
+    top: 0;
+    right: 10px;
+    width: 170px;
+    height: 170px;
+    border-radius: 50%;
+    background: var(--sw-red);
+    z-index: 2;
+}
+.home-shapes .shape-yellow {
+    top: 110px;
+    left: 0;
+    width: 200px;
+    height: 200px;
+    background: var(--sw-yellow);
+    z-index: 1;
+}
+.home-shapes .shape-blue {
+    bottom: 0;
+    right: 0;
+    width: 260px;
+    height: 44px;
+    background: var(--sw-blue);
+    z-index: 3;
+}
+
+/* Social row: bold lowercase pills with hard borders. */
+body.manuscript .home-social {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+}
+body.manuscript .home-social a,
+body.manuscript .home-social a:not(.navbar-item):not(.mini-feed-row):not(.mini-feed-more):not(.button):not(.sponsor-chip--link):not(.section-feed-row):not(.book-card) {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0;
+    text-transform: lowercase;
+    color: var(--sw-ink);
+    background: var(--sw-card);
+    border: 2px solid var(--sw-line);
+    padding: 0.35rem 0.85rem;
+    box-shadow: 3px 3px 0 var(--sw-line);
+    transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.15s, color 0.15s, border-color 0.15s;
+}
+body.manuscript .home-social a:hover,
+body.manuscript .home-social a:not(.navbar-item):not(.mini-feed-row):not(.mini-feed-more):not(.button):not(.sponsor-chip--link):not(.section-feed-row):not(.book-card):hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 5px 5px 0 var(--sw-red);
+    border-color: var(--sw-red);
+    color: var(--sw-red);
+}
+
+@media (max-width: 860px) {
+    body.manuscript .home-intro {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    .home-shapes {
+        order: -1;
+        width: 200px;
+        height: 150px;
+    }
+    .home-shapes .shape-red { width: 90px; height: 90px; right: auto; left: 90px; }
+    .home-shapes .shape-yellow { top: 40px; width: 100px; height: 100px; }
+    .home-shapes .shape-blue { width: 170px; height: 24px; right: auto; left: 20px; }
+}
+
+/* ------------------------------------------------------------ dividers */
+
+body.manuscript .ornament {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    margin: 3rem 0 0.5rem;
+    animation: none !important;
+}
+.ornament-disc   { width: 18px; height: 18px; border-radius: 50%; background: var(--sw-red); }
+.ornament-bar    { width: 56px; height: 10px; background: var(--sw-blue); }
+.ornament-square { width: 18px; height: 18px; background: var(--sw-yellow); }
+
+/* ------------------------------------------------------ section heads */
+
+body.manuscript .manuscript-numbered .section-heading,
+body.manuscript .mini-feed-head h5 {
+    display: flex;
+    align-items: baseline;
+    gap: 0.9rem;
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(2.2rem, 5vw, 3.4rem);
+    font-weight: 800;
+    letter-spacing: -0.05em;
+    line-height: 1;
+    text-transform: lowercase;
+    color: var(--sw-red);
+    border-bottom: none;
+    margin: 1.2rem 0 1.6rem;
+    padding: 0;
+}
+body.manuscript .manuscript-numbered .section-heading::before {
+    content: counter(mschapter, decimal-leading-zero);
+    font-size: 0.9rem;
+    font-weight: 800;
+    letter-spacing: 0;
+    color: var(--sw-blue-text);
+    align-self: flex-start;
+    margin-top: 0.35rem;
+}
+body.manuscript .manuscript-numbered .section-heading::after,
+body.manuscript .mini-feed-head h5::after {
+    content: ".";
+    margin-left: -0.9rem;
+}
+body.manuscript .mini-feed-head h5 { gap: 0.9rem; }
+
+body.manuscript .mini-feed-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    border-bottom: none;
+    margin-bottom: 0;
+}
+body.manuscript .mini-feed-more {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0;
+    text-transform: lowercase;
+    color: var(--sw-ink);
+    border-bottom: 2px solid currentColor;
+}
+body.manuscript .mini-feed-more:hover { color: var(--sw-red); }
+body.manuscript .mini-feed { animation: none; }
+
+/* --------------------------------------------------------------- cards
+   Every feed row becomes a deck "item-box": white, 3px ink border,
+   hard offset shadow; on hover it lifts and the shadow turns red. */
+
+body.manuscript .section-feed {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+}
+
+body.manuscript .section-feed-row,
+body.manuscript .mini-feed-row,
+body.manuscript .notelist-feed,
+body.manuscript .list-feed {
+    background: var(--sw-card);
+    border: 3px solid var(--sw-line);
+    border-radius: 0;
+    box-shadow: 6px 6px 0 var(--sw-line);
+    margin: 0;
+    padding: 1.2rem 1.4rem;
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s;
+}
+body.manuscript .section-feed-row:last-child { border-bottom: 3px solid var(--sw-line); }
+body.manuscript .section-feed-row.hackathon-row {
+    padding: 1.2rem 1.4rem;
+    gap: 1rem;
+}
+body.manuscript .section-feed-main > :last-child { margin-bottom: 0; }
+/* style.css puts an external-link icon on every http link; on whole-card
+   links and buttons it just floats beside the box. */
+body.manuscript a.book-card,
+body.manuscript a.section-feed-row,
+body.manuscript a.sponsor-chip,
+body.manuscript a.mini-feed-row,
+body.manuscript .home-social a {
+    background-image: none;
+}
+body.manuscript a.book-card { padding-right: 0; }
+body.manuscript a.section-feed-row::after,
+body.manuscript a.book-card::after { display: none; }
+body.manuscript .mini-feed-row + .mini-feed-row { margin-top: 1rem; }
+
+body.manuscript a.section-feed-row:hover,
+body.manuscript .mini-feed-row:hover,
+body.manuscript .notelist-feed:hover,
+body.manuscript .list-feed:hover,
+body.manuscript .section-feed-row.with-emblem:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 9px 9px 0 var(--sw-red);
+    border-color: var(--sw-red);
+    background: var(--sw-card);
+}
+body.manuscript .section-feed-row:hover,
+body.manuscript .section-feed-row.hackathon-row:hover {
+    background: var(--sw-card);
+    padding-left: 1.4rem;
+}
+body.manuscript .section-feed-row:not(a):not(.with-emblem):hover {
+    transform: none;
+}
+body.manuscript a.section-feed-row:hover .section-feed-title,
+body.manuscript .mini-feed-row:hover .mini-feed-title {
+    color: var(--sw-red);
+}
+body.manuscript .section-feed-row:active,
+body.manuscript .mini-feed-row:active {
+    transform: translate(0, 0);
+    box-shadow: 3px 3px 0 var(--sw-line);
+}
+
+body.manuscript .section-feed-title,
+body.manuscript .mini-feed-row .mini-feed-title,
+body.manuscript .writinglist-title,
+body.manuscript .notelist-feed h6 {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.35rem;
+    font-weight: 800;
+    letter-spacing: -0.035em;
+    line-height: 1.15;
+    color: var(--sw-ink);
+    transition: color 0.15s;
+}
+
+body.manuscript .section-feed-meta,
+body.manuscript .mini-feed-row .mini-feed-meta,
+body.manuscript .section-feed-aside {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--sw-faint);
+}
+body.manuscript .section-feed-aside {
+    text-align: right;
+    white-space: nowrap;
+    padding-top: 0.3rem;
+}
+
+body.manuscript .section-feed-project {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--sw-sub);
+}
+body.manuscript .section-feed-blurb {
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    line-height: 1.55;
+    color: var(--sw-sub);
+    opacity: 1;
+    max-width: 42rem;
+}
+
+/* Square bullet (RingMarker.html). */
+.ring-marker {
+    display: inline-block;
+    flex: 0 0 auto;
+    width: 12px;
+    height: 12px;
+    margin-top: 0.45rem;
+    background: var(--sw-red);
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s;
+}
+.mini-feed-row .ring-marker { margin-top: 0; }
+.mini-feed-row:hover .ring-marker,
+.section-feed-row:hover .ring-marker {
+    transform: rotate(45deg);
+    background: var(--sw-blue);
+}
+
+/* Logos: square tiles with a hard border. */
+body.manuscript .row-emblem {
+    width: 56px;
+    height: 56px;
+    border: 2px solid var(--sw-line);
+    border-radius: 0;
+    background: #fff;
+}
+body.manuscript .row-emblem img { mix-blend-mode: normal; filter: none; }
+body.manuscript .section-feed-row:hover .row-emblem { box-shadow: none; transform: none; }
+body.manuscript .row-emblem.monogram {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    color: #fff;
+    background: var(--sw-red);
+}
+
+/* --------------------------------------------------------------- chips */
+
+body.manuscript .sponsor-chips { gap: 0.4rem; }
+body.manuscript .sponsor-chip {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    text-transform: lowercase;
+    border: 2px solid var(--sw-line);
+    border-radius: 0;
+    padding: 0.12rem 0.5rem;
+    color: var(--sw-ink);
+    background: transparent;
+}
+body.manuscript .sponsor-chip--prize {
+    display: inline-flex;
+    align-items: stretch;
+    padding-left: 0;
+    background: var(--sw-yellow);
+    color: #111;
+    border-color: var(--sw-yellow);
+}
+/* The gold medal vanishes on yellow, so it sits on its own ink block. */
+body.manuscript .prize-medal {
+    display: inline-flex;
+    align-items: center;
+    margin: -0.12rem 0.45rem -0.12rem 0;
+    padding: 0 0.3rem;
+    background: #111;
+    font-size: 0.85rem;
+    line-height: 1;
+}
+body.manuscript .sponsor-chip--link,
+body.manuscript a.sponsor-chip--link {
+    background: var(--sw-blue);
+    border-color: var(--sw-blue);
+    color: #fff;
+    letter-spacing: 0.02em;
+}
+body.manuscript .sponsor-chip--link:hover {
+    background: var(--sw-red);
+    border-color: var(--sw-red);
+    color: #fff;
+}
+body.manuscript .sponsor-chip--uniswap {
+    background: #ff007a;
+    border-color: #ff007a;
+    color: #fff;
+    text-transform: none;
+}
+
+/* Hackathon photos: square-cornered, bordered. */
+body.manuscript .hackathon-gallery-thumb {
+    border: 2px solid var(--sw-line);
+    border-radius: 0;
+}
+body.manuscript .hackathon-gallery-thumb img { border-radius: 0; }
+
+/* ---------------------------------------------------- notes & search */
+
+body.manuscript #search-input,
+body.manuscript .input {
+    border: 3px solid var(--sw-line);
+    border-radius: 0;
+    box-shadow: 4px 4px 0 var(--sw-line);
+    background: var(--sw-card);
+    color: var(--sw-ink);
+    font-weight: 600;
+}
+body.manuscript .related,
+body.manuscript .tooltip .right {
+    background: var(--sw-card);
+    border: 3px solid var(--sw-line);
+    border-radius: 0;
+}
+body.manuscript .note-page-section h1 {
+    font-size: clamp(2.4rem, 6vw, 4rem);
+    text-transform: lowercase;
+}
+
+/* Book covers: hard edges to match the cards. */
+body.manuscript .book-cover-wrap {
+    border-radius: 0;
+    border: 3px solid var(--sw-line);
+    box-shadow: 6px 6px 0 var(--sw-line);
+}
+/* Books with no cover image get a typographic one. */
+body.manuscript .book-cover--text {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    padding: 0.8rem;
+    background: var(--sw-red);
+    color: #fff;
+    font-weight: 800;
+    font-size: 1rem;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    text-transform: lowercase;
+}
+body.manuscript .book-cover--text .book-cover-author {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0;
+    opacity: 0.85;
+}
+body.manuscript .book-card:hover .book-cover-wrap {
+    box-shadow: 9px 9px 0 var(--sw-red);
+    border-color: var(--sw-red);
+}
+
+/* -------------------------------------------------------------- footer */
+
+body.manuscript #copyright {
+    border-top: 4px solid var(--sw-line);
+    margin-top: 4rem;
+    padding: 1.6rem 0 2.4rem;
+}
+body.manuscript #copyright-notice {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: lowercase;
+    color: var(--sw-sub);
+}
+
+/* -------------------------------------------------------------- mobile */
+
+@media screen and (max-width: 1023px) {
+    body.manuscript .navbar-menu {
+        background: var(--sw-bg);
+        border-bottom: 4px solid var(--sw-line);
+    }
+}
+@media (max-width: 768px) {
+    body.manuscript .manuscript-page {
+        padding-left: 16px;
+        padding-right: 22px; /* room for the card shadow */
+    }
+    body.manuscript .section-feed-row,
+    body.manuscript .section-feed-row.hackathon-row,
+    body.manuscript .mini-feed-row {
+        padding: 1rem;
+        box-shadow: 4px 4px 0 var(--sw-line);
+    }
+    /* Date sits under the text as a small label, not floating above it. */
+    body.manuscript .section-feed-aside {
+        order: 2;
+        text-align: left;
+        margin: 0.4rem 0 0;
+        padding-top: 0;
+    }
+    body.manuscript .section-feed-row.hackathon-row .ring-marker { display: none; }
+    body.manuscript .section-feed-row.with-emblem {
+        grid-template-columns: 44px 1fr;
+        align-items: start;
+        column-gap: 0.9rem;
+    }
+    body.manuscript .section-feed-row.with-emblem .section-feed-aside {
+        grid-column: 2;
+    }
+    body.manuscript .row-emblem { width: 44px; height: 44px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .home-shapes .shape,
+    body.manuscript .section-feed-row,
+    body.manuscript .mini-feed-row { transition: none; }
+}

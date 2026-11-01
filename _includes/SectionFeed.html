@@ -6,6 +6,7 @@
     {% include SectionFeed.html data=site.data.hacker_houses kind="hacker_house" %}
     {% include SectionFeed.html data=site.data.work kind="work" %}
     {% include SectionFeed.html data=site.data.volunteering kind="volunteering" %}
+    {% include SectionFeed.html data=site.data.projects kind="project" %}
 {%- endcomment -%}
 
 <div class="section-feed">
@@ -69,6 +70,29 @@
             </div>
         </div>
 
+    {%- when "project" -%}
+        <a class="section-feed-row project-row" href="{{ entry.url | relative_url }}">
+            {% include RingMarker.html %}
+            <div class="section-feed-main">
+                <span class="section-feed-title">{{ entry.name }}</span>
+                {%- if entry.tags -%}
+                    <span class="section-feed-meta">{{ entry.tags | join: " · " }}</span>
+                {%- endif -%}
+                {%- if entry.blurb -%}
+                    <p class="section-feed-blurb">{{ entry.blurb }}</p>
+                {%- endif -%}
+                <span class="sponsor-chips">
+                    <span class="sponsor-chip sponsor-chip--link">▶ play</span>
+                    {%- if entry.source -%}
+                        <span class="sponsor-chip sponsor-chip--link" onclick="window.open('{{ entry.source }}', '_blank'); event.preventDefault(); event.stopPropagation()">↗ source</span>
+                    {%- endif -%}
+                </span>
+            </div>
+            {%- if entry.date -%}
+                <div class="section-feed-aside">{{ entry.date }}</div>
+            {%- endif -%}
+        </a>
+
     {%- when "volunteering" -%}
         <div class="section-feed-row with-emblem">
             {%- if entry.logo -%}
@@ -84,14 +108,30 @@
                 {%- if entry.blurb -%}
                     <p class="section-feed-blurb">{{ entry.blurb }}</p>
                 {%- endif -%}
-                {%- if entry.certificate -%}
+                {%- if entry.cohorts -%}
+                    <span class="sponsor-chips">
+                        {%- for c in entry.cohorts -%}
+                            {%- if c.certificate -%}
+                                <a class="sponsor-chip sponsor-chip--link" href="{{ c.certificate }}" title="{{ c.dates }} · certificate">↗ {{ c.year }}</a>
+                            {%- else -%}
+                                <span class="sponsor-chip" title="{{ c.dates }}">{{ c.year }}</span>
+                            {%- endif -%}
+                        {%- endfor -%}
+                    </span>
+                {%- elsif entry.certificate -%}
                     <span class="sponsor-chips">
                         <a class="sponsor-chip sponsor-chip--link" href="{{ entry.certificate }}">↗ certificate</a>
+                    </span>
+                {%- endif -%}
+                {%- if entry.url -%}
+                    <span class="sponsor-chips">
+                        <a class="sponsor-chip sponsor-chip--link" href="{{ entry.url }}">↗ profile</a>
                     </span>
                 {%- endif -%}
             </div>
             <div class="section-feed-aside">
                 {{ entry.start }}{% if entry.end and entry.end != entry.start %} – {{ entry.end }}{% endif %}
+                {%- if entry.cohorts -%}<br>{{ entry.cohorts.size }} cohorts{%- endif -%}
             </div>
         </div>
 

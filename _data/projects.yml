@@ -1,0 +1,26 @@
+# Side projects, newest first. Rendered on /projects.
+# Fields: name, url (where the card links), date, blurb, tags (optional list),
+#         source (optional repo URL — renders a "↗ source" chip)
+- name: Passbook
+  url: /projects/passbook/
+  date: Jul 2026
+  blurb: >-
+    Turns any Ethereum or Base address (or ENS / Basename) into a vintage
+    State Bank of India-style passbook: transactions printed as ledger rows,
+    balances in ETH, USD or INR, with page-flip and a dot-matrix printer sound.
+  tags:
+    - ethereum
+    - base
+    - ens
+
+- name: The Winner's Curse
+  url: /projects/winners-curse/
+  date: Jul 2026
+  blurb: >-
+    A 20-round auction game about bidding on items whose true value you can't see.
+    Winning pays 150% of the value, yet bidding to win loses money on average.
+    Play it, then read the math on the results screen.
+  tags:
+    - game
+    - auction theory
+    - probability

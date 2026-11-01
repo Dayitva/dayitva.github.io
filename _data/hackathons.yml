@@ -17,6 +17,15 @@
 #   note         (optional) — e.g. "Finalist"
 
 # ---- BUILT ------------------------------------------------------------------
+- name: Lifeline
+  event: ETHGlobal Tokyo
+  date: Sep 2026
+  role: built
+  url: https://ethglobal.com/showcase/lifeline-mygz6
+  sponsors:
+    - Sui
+    - World
+
 - name: Cleverly Using Money
   event: ETHGlobal Buenos Aires
   date: Nov 2025
@@ -136,29 +145,41 @@
 # No `name:` needed — the label is derived from `role` (and prefixed with the
 # affiliation when set).  e.g. role: both + affiliation: Uniswap Foundation
 # renders as "Uniswap Foundation Mentor & Judge".
+- event: ETHGlobal Mumbai
+  date: Nov 2026
+  role: both
+  url: https://ethglobal.com/events/mumbai
+  affiliation: Uniswap
+
+- event: ETHGlobal Tokyo
+  date: Sep 2026
+  role: both
+  url: https://ethglobal.com/events/tokyo2026
+  affiliation: Uniswap
+
 - event: ETHGlobal Cannes
   date: Apr 2026
   role: mentored
   url: https://ethglobal.com/events/cannes2026
-  affiliation: Uniswap Labs
+  affiliation: Uniswap
 
 - event: HackMoney 2026
   date: Feb 2026
   role: both
   url: https://ethglobal.com/events/hackmoney2026
-  affiliation: Uniswap Labs
+  affiliation: Uniswap
 
 - event: Octant DeFi Hackathon 
   date: Nov 2025
   role: both
   url: https://octant.devfolio.co/
-  affiliation: Uniswap Foundation
+  affiliation: Uniswap
 
 - event: ETHGlobal New Delhi
   date: Sep 2025
   role: both
   url: https://ethglobal.com/events/newdelhi
-  affiliation: Uniswap Foundation
+  affiliation: Uniswap
   workshop_title: "Uniswap v4: Exploring New Possibilities"
   workshop_youtube: https://www.youtube.com/watch?v=wcKtMV8Ek_c
   photos:
@@ -172,7 +193,7 @@
   date: Aug 2025
   role: mentored
   url: https://ethglobal.com/events/newyork2025
-  affiliation: Uniswap Foundation
+  affiliation: Uniswap
   photos:
     - assets/img/ETHGlobalPics/ETHGlobal New York 2025/Judge/Me at regs.jpg
     - assets/img/ETHGlobalPics/ETHGlobal New York 2025/Judge/Talking at booth.jpg
@@ -182,25 +203,25 @@
   date: Apr 2025
   role: mentored
   url: https://eulerswap.encode.club/
-  affiliation: Uniswap Foundation
+  affiliation: Uniswap
 
 - event: Zora Coinathon
   date: June 2025
   role: mentored
   url: https://coinathon.encode.club/
-  affiliation: Uniswap Foundation
+  affiliation: Uniswap
 
 - event: Base Batches 001
   date: May 2025
   role: both
   url: https://basebatches.xyz/
-  affiliation: Uniswap Foundation
+  affiliation: Uniswap
 
 - event: ETHGlobal Taipei
   date: Apr 2025
   role: both
   url: https://ethglobal.com/events/taipei
-  affiliation: Uniswap Foundation
+  affiliation: Uniswap
 
 - event: Core Nexus Hackathon, Bhopal
   date: Apr 2025
@@ -216,7 +237,7 @@
   date: Feb 2025
   role: both
   url: https://x.com/eigencloud/status/1879936715470602725
-  affiliation: Uniswap Foundation
+  affiliation: Uniswap
 
 - event: ETHIndia 2024
   date: Dec 2024

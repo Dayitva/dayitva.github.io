@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Winner's Curse</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+    <a id="back-link" href="/projects/">&larr; Back</a>
+    <button id="theme-toggle">Light Mode</button>
+    <div id="app">
+        <!-- Screens will be managed by JS -->
+        
+        <!-- Intro Screen -->
+        <div id="intro-screen" class="screen active">
+            <h1>The Winner's Curse</h1>
+            <div class="card">
+                <h2>How to Play</h2>
+                <p>Welcome to the ultimate test of bidding strategy.</p>
+                <ul>
+                    <li>You will bid on <strong>20 items</strong> with unknown true values.</li>
+                    <li>The true value of each item is randomly chosen between <strong>$0 and $100</strong>.</li>
+                    <li>If your bid is <strong>greater than or equal to</strong> the true value, you win the item!</li>
+                    <li>When you win, you immediately sell the item for <strong>150% of its true value</strong>.</li>
+                    <li>If you bid too low, you lose nothing and win nothing.</li>
+                    <li>You start with a bankroll of <strong>$500</strong>.</li>
+                </ul>
+                <p class="warning">Beware: The highest bidder often loses money. Can you beat the math?</p>
+                <button id="start-btn" class="btn primary">Start Game</button>
+            </div>
+        </div>
+
+        <!-- Game Screen -->
+        <div id="game-screen" class="screen">
+            <header>
+                <div class="stat">Round <span id="round-display">1</span>/20</div>
+                <div class="stat">Balance: <span id="balance-display" class="balance">$500.00</span></div>
+            </header>
+
+            
+            <div class="gauge-container">
+                <svg class="gauge" viewBox="0 0 250 125" shape-rendering="crispEdges">
+                    <path class="gauge-bg" d="M 25 125 A 100 100 0 0 1 225 125" />
+                    <g class="gauge-needle" id="gauge-needle">
+                        <line class="gauge-needle-line" x1="125" y1="125" x2="125" y2="25" />
+                        <circle class="gauge-needle-circle" cx="125" cy="125" r="8" />
+                    </g>
+                </svg>
+                <div class="gauge-labels">
+                    <span>$0</span>
+                    <span id="gauge-val-display">$??</span>
+                    <span>$100</span>
+                </div>
+            </div>
+            
+            <div class="game-container">
+                <div class="left-column" style="display: flex; flex-direction: column; gap: 2rem;">
+                    <div class="bidding-panel card">
+                        <h2>Place Your Bid</h2>
+                        <p class="subtitle">Item value is between $0 and $100.</p>
+                        
+                        <div class="input-group">
+                            <span class="currency" style="font-size: 2rem;">$</span>
+                            <input type="number" id="bid-input" min="0" max="100" step="1" value="50">
+                        </div>
+                        
+                        <div class="actions">
+                            <button id="bid-btn" class="btn primary">Place Bid</button>
+                            <button id="view-results-btn" class="btn primary" style="display: none;">View Final Results</button>
+                            
+                            <label class="auto-bet-label">
+                                <input type="checkbox" id="auto-bet-toggle">
+                                <span>Auto-Bet remaining rounds</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-panel card" style="padding: 1.5rem; flex-grow: 1;">
+                        <h3 style="margin-bottom: 0.5rem; font-size: 1.1rem;">Balance Trend</h3>
+                        <div class="chart-wrapper" style="height: 160px; width: 100%;">
+                            <canvas id="balance-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="history-panel card" style="height: 100%;">
+                    <h3>Auction History</h3>
+                    <div id="history-log" class="log-container">
+                        <!-- Log items injected here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- End Screen -->
+        <div id="end-screen" class="screen">
+            <h1>Game Over</h1>
+            <div class="card results-card">
+                <h2>Final Balance</h2>
+                <div id="final-balance-display" class="final-balance">$500.00</div>
+                <div id="performance-msg" class="performance-msg"></div>
+                
+                <div class="explanation">
+                    <h3>The Math Behind The Curse</h3>
+                    <p>In an auction where the true value is unknown (e.g. 0 to 100), the expected true value of an item given that you win (i.e. your bid B >= true value V) is roughly <strong>B/2</strong>.</p>
+                    <p>Even though you can sell it for a 50% premium (1.5 * V), your expected resale value is 1.5 * (B/2) = <strong>0.75 * B</strong>.</p>
+                    <p>So, on average, winning a bid of B earns you 0.75B. Your profit is 0.75B - B = <strong>-0.25B</strong>.</p>
+                    <p>This is the <em>Winner's Curse</em>: winning the auction often means you overpaid!</p>
+                </div>
+                <p id="end-message"></p>
+                <div style="margin-top: 1.5rem;">
+                    <button id="restart-btn" class="btn primary">Play Again</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
